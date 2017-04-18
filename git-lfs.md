@@ -1,7 +1,5 @@
 # [Git Large File Storage](https://git-lfs.github.com/)
 
-## [Github Tutorial](https://github.com/git-lfs/git-lfs/wiki/Tutorial)
-
 git에 업로드 파일 용량 제한이 있는 경우 사용하게 된다.
 git-lfs client를 설치한 후,
 ```
@@ -23,3 +21,5 @@ git config --local lfs.url [LFS_URL]
 ```
 git config -f .lfsconfig lfs.url [LFS_URL]
 ```
+
+## [Github Tutorial](https://github.com/git-lfs/git-lfs/wiki/Tutorial)
