@@ -1,16 +1,25 @@
-## Google Keynote
+## [Google Keynote](https://youtu.be/lyRPyRKHO8M)
 - Building a more helpful Google for everyone. 일관된 메시지. 일부가 되어 일하는 게 무척 자랑스러울 것 같다.
 - 이미지에서 텍스트를 뽑아내고 번역하고 읽어주고.
 - 'Hey Google' 없이 연속된 명령 가능.
 - 동영상에서 나오는 말소리를 실시간으로 STT. 2G짜리 모델을 80MB로 만들었고, 덕분에 네트워킹 없이 로컬에서 사용 가능한 수준.
 
-## Developer Keynote
+## [Developer Keynote](https://youtu.be/LoLqSbV1ELU)
 - Android에서 입앱업데이트 기능을 지원. 업데이트 하라며 팝업을 띄우는 건데, 업데이트를 하러 구글플레이로 가지 않고, 앱을 그대로 사용하면서 다운로드 진행. 설치도 나중에 함.
 - ML Kit을 Firebase를 통해서 제공하기 때문에 iOS에서도 사용 가능.
 - 학습된 모델을 앱이 다운로드 받아서 온디바이스로 동작하게 해줌.
 - Flutter가 웹을 대응함으로써 모든 플랫폼에서 사용 가능. NewYorkTimes에서 퍼즐앱을 이 방식으로 구현했다고. 애니메이션 같은 게 없고 UX가 단순한 기능성 앱에 유용할 거란 생각은 개인적인 편견이었던 것으로.
 
-## Beyond Mobile: Material Design, Adaptable UIs, and Flutter
+## [Beyond Mobile: Material Design, Adaptable UIs, and Flutter](https://youtu.be/YSULAJf6R6M)
+- Material Design을 채용하니 앱들이 다 비슷비슷하지 않은가에 대한 대답...을 하겠다고 했지만 신통치는 않음.
+- DarkTheme 제공. 설정에서 바꿀 수 있는 건가?
+- Slider를 SliderTheme으로 wrapping 하면 된다고.
+- Semantic이라는 Widget이 추가되었고, 이전 위젯들은 semanticLabel이 추가됨. 이게 이제 나오다니 그 전에는 accessibility를 지원하지 않았던 건가.
+- Widget에 .adaptive()를 붙이면, Material/Cupertino를 런타임에 결정해준다. 사실 점점 한물간 이야기처럼 들린다. 회사에 디자인 리소스가 부족해서 이런 생각을 하게 된 것인지. 둘을 각각 디자인할 리소스도 없고, 각각 디자인한다고 하면 .adaptive() 정도로 넘어갈 수 있는 정도가 아닐 것이다.
+- Interactive/Passive experience. TV App 이야기를 하면서.
+- Relative Text Size. 어느 디바이스에 봐도 비슷한 크기로 보이도록 하겠다는 건 안드로이드의 그것인데, 디바이스에 따라 디바이스와 사용자간의 거리가 또 다르기 때문에 그것만으로는 부족하다는 이야기. _isPassive로 분기.
+- 패드의 경우, Firebase ML 기능을 이용해, 카메라에서 사용자가 가까우면 Interactive 모드, 멀면 Passive 모드로 바꿔준다고. 와 정말 생각 많이한다.
+- Phone, Web 뿐 아니라 각종 디바이스(Digital Wall이 나옴)에도 가능.
 
 ## Building for iOS with Flutter
 
