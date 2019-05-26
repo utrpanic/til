@@ -21,7 +21,13 @@
 - 패드의 경우, Firebase ML 기능을 이용해, 카메라에서 사용자가 가까우면 Interactive 모드, 멀면 Passive 모드로 바꿔준다고. 와 정말 생각 많이한다.
 - Phone, Web 뿐 아니라 각종 디바이스(Digital Wall이 나옴)에도 가능.
 
-## Building for iOS with Flutter
+## [Building for iOS with Flutter](https://youtu.be/ZBJa-xjZl3w)
+- Cupertino package 소개. 새삼스러울 것도 없는 세션으로 플랫폼을 보고 Material과 Cupertino를 일일이 분기하는 코드를 선보임.
+- 플랫폼별로 아예 디자인을 달리하는 경우는 논외고, 하단탭 스타일을 햄버거 스타일을 한 코드로 제공하는 것은 가능.
+- 그외에 플랫폼의 기본 위젯을 그대로 사용하는 경우가 잘 없어서, 개인 프로젝트에서 재미로 구현하는 정도가 될 듯.
+- Material에서는 shadow를 Cupertino에서는 flat design.
+- Native Code의 함수를 호출하거나 Event Channel을 여는 것이 가능. 소셜 로그인 같은 걸 구현할 때 쓸 수 있을 듯.
+- Dart 패키지 중에 path_provider. 구글 플러터팀에서 유지보수하는 패키지로, 플랫폼 별로 로컬 디렉토리를 얻어낼 때 사용할 수 있음.
 
 ## Beyond Mobile: Building Flutter Apps for iOS, Android, Chrome OS, and Web
 
