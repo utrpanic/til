@@ -40,7 +40,16 @@
 - Web의 경우, DartDevTool을 이용해서 Inspector를 사용하는 것을 보여줌.
 - (이런 류의 기술은 기술 자체의 서포트보다 멀티 플랫폼을 개발자가 동시에 고려하면서 일하는 게 더 어려워보임. 게다가 Web은 한참 멀리 가버린 듯한 느낌.)
 
-## Dart: Productive, Fast, Multi-Platform - Pick 3
+## [Dart: Productive, Fast, Multi-Platform - Pick 3](https://youtu.be/J5DQRPRBiFI)
+- Flutter는 왜 Dart를 선택했나. Productive, Fast, Multi-platform. 다 좋은 말이지만 음...
+- UI를 code만으로 구성하는 것을 장점으로 말하고 있다. 장단이 너무 뚜렷한데...
+- (Type inference도 다들 너무 파워풀. optional이 없는 게 더 문제 아닌지.)
+- Fast는 결국 Hot reload 얘기. IDE의 일이라고 생각했는데 language가 지원하는 부분인 듯.
+- User Performance. (Small code size, Fast startup, High throughput, Low latency)
+- Dart와 Flutter의 이야기가 뒤섞이고 있는 느낌. Web개발이 가능해졌고 hot reload는 아직 지원하지 않지만 여전히 쓸만하다는 이야기. Dart to JS 방식.
+- Chrome OS, Google Home Hub, Raspberry Pi, CLI, Cloud 앱을 개발할 수 있다고.
+- Non-nullable types 개발 중. Migration에 엄청 신경쓰고 있다고. 프로젝트의 일부만 migration하는 것도 가능하고, automation도 제공하고.
+- Extension method 개발 중.
 
 ## Pragmatic State Management in Flutter
 
