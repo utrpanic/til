@@ -27,9 +27,18 @@
 - 그외에 플랫폼의 기본 위젯을 그대로 사용하는 경우가 잘 없어서, 개인 프로젝트에서 재미로 구현하는 정도가 될 듯.
 - Material에서는 shadow를 Cupertino에서는 flat design.
 - Native Code의 함수를 호출하거나 Event Channel을 여는 것이 가능. 소셜 로그인 같은 걸 구현할 때 쓸 수 있을 듯.
-- Dart 패키지 중에 path_provider. 구글 플러터팀에서 유지보수하는 패키지로, 플랫폼 별로 로컬 디렉토리를 얻어낼 때 사용할 수 있음.
+- Dart 패키지 중에 path_provider. Flutter팀에서 유지보수하는 패키지로, 플랫폼 별로 로컬 디렉토리를 얻어낼 때 사용할 수 있음.
 
-## Beyond Mobile: Building Flutter Apps for iOS, Android, Chrome OS, and Web
+## [Beyond Mobile: Building Flutter Apps for iOS, Android, Chrome OS, and Web](https://youtu.be/IyFZznAk69U)
+- Android Studio를 쓸것인지 VS Code를 쓸 것인지. 다른 영상에선 VS Code를 쓰던데, 여기선 Android Studio를 쓰고, View Hierarchy Inspector를 사용하는 것을 보여줌.
+- 애니메이션은 60frame이라고.
+- 다양한 스크린 사이즈에 대응하는 방법은, 가로 길이를 보고 분기. 좀 하찮아보이긴 하지만 별다른 방법이 없는 것도 사실.
+- logicalKeyId라는 게 있어서, 키보드 타입이나 언어와 상관없이 특수키들을 처리할 수 있음. (KeyCode.backspace 등)
+- 크롬OS의 경우, Android Runner를 돌리고 그 위에 Flutter를 돌림.
+- C++ Flutter engine 그 위에 Flutter framework in Dart 그 위에 앱 코드.
+- Flutter for web은 technical preview 상태. Browser 위에 Dart2js compiler 위에 Flutter Web engine 위에 Flutter framework in Dart. 결국 JavaScript로 변환해서 브라우저에 돌리는 방식. 다른 플랫폼과는 확연히 다름. 괜찮은 건지 잘 모르겠음.
+- Web의 경우, DartDevTool을 이용해서 Inspector를 사용하는 것을 보여줌.
+- (이런 류의 기술은 기술 자체의 서포트보다 멀티 플랫폼을 개발자가 동시에 고려하면서 일하는 게 더 어려워보임. 게다가 Web은 한참 멀리 가버린 듯한 느낌.)
 
 ## Dart: Productive, Fast, Multi-Platform - Pick 3
 
