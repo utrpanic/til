@@ -33,3 +33,15 @@
 - Re-factoring. 의미를 유지하며 코드베이스를 정리.
 - 많은 프로그래머들이 의미가 유지되는 것을 확인하지 않고 고칩니다.
 - 수동 테스트와 단위 테스트를 통한 의미 유지 비교.
+### 7. 테스트 주도 개발
+- 테스트 주도 개발은 테스트 우선 개발과 유사하지만 작은 차이가 있습니다.
+- RED(테스트 실패): 실패하는 것을 확인해야 테스트가 동작함을 믿을 수 있다.
+- GREEN(테스트 성공): 테스트 성공을 위한 최소한의 변경. 바로 이어서 추가 구현을 하고 싶은 유혹에 빠지면, 테스트되지 않은 코드를 추가하게 된다.
+- REFACTOR(리팩터링): 코드베이스 정리. 구현 설계 개선. 인터페이스 설계를 변경해서는 안된다(테스트가 깨짐).
+- TDD는 불안함을 지루함으로 바꾸는 작업.
+- [켄트 벡의 설계 규칙](https://martinfowler.com/bliki/BeckDesignRules.html)
+  - Passes the tests
+  - Reveals intention
+  - No duplication
+  - Fewest elements
+  - (Reveals intention과 No duplication은 서로 충돌할 수 있으며, 상황에 따라 선택해야 한다.)
