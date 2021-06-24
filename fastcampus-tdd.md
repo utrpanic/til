@@ -40,8 +40,16 @@
 - REFACTOR(리팩터링): 코드베이스 정리. 구현 설계 개선. 인터페이스 설계를 변경해서는 안된다(테스트가 깨짐).
 - TDD는 불안함을 지루함으로 바꾸는 작업.
 - [켄트 벡의 설계 규칙](https://martinfowler.com/bliki/BeckDesignRules.html)
-  - Passes the tests
-  - Reveals intention
-  - No duplication
-  - Fewest elements
-  - (Reveals intention과 No duplication은 서로 충돌할 수 있으며, 상황에 따라 선택해야 한다.)
+ - Passes the tests
+ - Reveals intention
+ - No duplication
+ - Fewest elements
+ - (Reveals intention과 No duplic ation은 서로 충돌할 수 있으며, 상황에 따라 선택해야 한다.)
+### 8. 프로그래머 피드백
+- 피드백: 코딩과 종료 사이에 있는, 원하는 결과물이었는지 확인하는 과정.
+- 사용자 피드백: 가장 충격이 큰.
+- Quality Assurance: 전문 인적 자원에 의한 인수 테스트.
+- 프로그래머 테스트: 프로그래미가 직접 피드백 장치를 준비. 자동화된 테스트.
+- 도구 피드백: 컴파일 오류, 정적 검사 등.
+- "모든 테스트가 성공했습니다."
+- 테스트 주도 개발의 핵심은 짧은 주기로 지속되는 피드백.
