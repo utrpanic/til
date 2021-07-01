@@ -72,3 +72,9 @@
 ### 1. 인터페이스와 구현
 - 협력과 계약. 대부분의 코드는 다른 코드와 협력.
 - 인터페이스와 구현의 분리, 정보 숨김, 모듈화.
+### 2. 환경 변화와 적응력
+- 코드는 수명이 다할 때까지 많은 변화를 겪게 됩니다.
+- Object-oriented(개체 지향). OOP to me means only messaging, local retention and protection and hiding of state-process, and extreme late-binding of all things. Alan Kay.
+- 개방-폐쇄 원칙(Open-closed principle). 소프트웨어 엔터티(클래스, 모듈, 함수 등)는 확장에 열리고 수정에 닫혀야 한다.
+- 다형성, Composite 패턴 등을 사용.
+- 적응력과 testablity. 적응력이 높은 코드는 다른 코드로부터 떼어내기 쉽고, 그만큼 testablilty가 높아진다.
