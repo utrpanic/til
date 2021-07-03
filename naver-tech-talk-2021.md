@@ -1,5 +1,5 @@
 ## [SwiftUI + UIKit + RxSwift + Combine + DDD = ?](https://tv.naver.com/v/19397822)
-- 21.04.05. 최종민님. 클로바노트.
+- 2021.04. 최종민님. 클로바노트.
 ### 1. 클로바노트?
 - NEST(Nearest End-to-end Speech Transcriber)를 이용한 음성 기록 서비스. 듣고 스크립트화 해주는 서비스.
 ### 2. DDD(Domain Driven Design)
