@@ -1,0 +1,13 @@
+## [From MVVM to Clean Architecture: Core Data Transaction Consistency](https://www.youtube.com/watch?v=5MCNR4u12k8)
+- MVVM에서 Clean Architecture로 가려고 결정한 이유가 무엇인가.
+- CoreDataChannelRepository: ChannelRepository
+- CoreDataChannel: Channel 
+- Business logic과 Infrastructure를 분리. Business logic은 Channel과 ChannelRepository만 다룸.
+- Channel protocol이 필요한 이유는 아마도 CoreDataChannel이 NSManagedObject를 상속해야 해서.
+- 그럼 이제! How to implement transaction consistency. 
+- TransactionDecorator와 UseCase가 모두 SendMessageInput을 conform. Decorator가 UserCase를 decoratee로 들고 있으면서 SendMessageInput 인터페이스 호출 시 decoratee의 동일 인터페이스 호출.
+- 구현체가 NSManagedObjectContext를 받아서, failure 상황에서 rollback() 호출.
+- Frameworks(Like CoreData) -> Infrastructure Adapters -> Application Login -> Domain
+- Clean Architecture, Domain-Driven Design, Implementing Domain-Driven Design, Dependency Injection
+- https://www.essentialdeveloper.com/book-suggestions
+- 
