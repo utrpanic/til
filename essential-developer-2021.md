@@ -10,4 +10,17 @@
 - Frameworks(Like CoreData) -> Infrastructure Adapters -> Application Login -> Domain
 - Clean Architecture, Domain-Driven Design, Implementing Domain-Driven Design, Dependency Injection
 - https://www.essentialdeveloper.com/book-suggestions
-- 
+
+## [Chaining dependent network requests in Swift with Combine](https://www.youtube.com/watch?v=fCuBe6T6sK0)
+- Combine을 쓰면 되지 않겠는가.
+- 첫 request의 결과에 따라 다음 request를 분기하게 되는 경우.
+```Swift
+func loadUser() -> AnyPublisher<User, Error>
+func loadDetails(user: User) -> AnyPublisher<User, Error>
+func loadFriends(user: User) -> AnyPublisher<[Friend], Error>
+func loadUserDetails() -> AnyPublisher<(UserDetails, [Friend]), Error> {
+    loadUser().flatMap { user in 
+        Publishers.Zip(loadDetails(user: user), loadFriends(user, user))
+    }.eraseToAnyPublisher()
+}
+```
