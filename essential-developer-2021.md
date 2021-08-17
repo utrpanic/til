@@ -1,3 +1,10 @@
+## [Architecting for Analytics, Remote Config, DTOs, Custom vs Primitive Types](https://www.youtube.com/watch?v=s3crpkXI4vA)
+- Cross-cutting concern. Decorators in the Composition Root.
+- 일단 ViewController에서 직접 analytics를 호출하는 것을 피하고.
+- DelegateComposite. 생성자로 [Delegate]를 받는다. Interception!
+- Remote Config. 값을 가져올 때까지 사용자를 기다리게 할 것인지 cache를 일단 사용할 것인지는 비즈니스 상의 중요도에 따라 결정한다.
+- Custom vs Primitive Types. 필요하다면 Custom Type으로 감싸고, 그를 초기화할 때 방어 코드 처리 같은 걸 하면 된다.
+
 ## [Chaining dependent network requests in Swift with Combine](https://www.youtube.com/watch?v=fCuBe6T6sK0)
 - Combine을 쓰면 되지 않겠는가.
 - 첫 request의 결과에 따라 다음 request를 분기하게 되는 경우.
