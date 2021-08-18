@@ -29,3 +29,42 @@
 - UseCase가 셋 다 UserCaseOutput 타입으로 주입받고, 각각 타이밍에 맞춰서 호출.
 - (그럼 UseCase는 누가 들고 있는 거지?)
 - 그리고 UseCaseOutputComposer와 UseCaseFactory에 대한 테스트 작성. 아 진짜 근사하다.
+
+# [Clean iOS Architecture pt.4: Clean Memory Management in Swift with WeakRef](https://www.youtube.com/watch?v=3XAdFuwHgew)
+- weak property 없이 구현하는 법?
+- Presenter가 output으로 ViewController를 갖고, UseCase가 output으로 Presenter를 가짐. 그리고 UseCase의 fetchData를 ViewController의 reloadData closure에 넣어줌. 결국 retain cycle.
+- 그리고 실패하는 테스트 작성. 와 이런 것도 테스트로 작성할 수 있다니! 확인하고 싶은 객체를 weak으로 복사해놓고, tearDown에서 nil 체크.
+- Memory Management 역시 responsibility. Presenter가 output을 weak으로 가져야한 다는 것을 알 필요는 없다. output에 ViewController 말고 다른 게 올 수도 있고.
+- Presenter에 넣을 때 ViewController를 weak reference로 감싸서 넣자. 이거 그때 본 WeakObject 같은 것.
+```Swift
+final class WeakRef: WeatherDataPresenterOutput {
+
+    weak var object: (AnyObject & WeatherDataPresenterOutput)?
+
+    init(_ object: (AnyObject & WeatherDataPresenterOutput)) {
+        self.object = object
+    }
+
+    func present(_ weather: WeatherViewModel) {
+        object?.present(weather)
+    }
+}
+```
+- 그리고 다시 제네릭을 한숟갈 넣으면..
+```Swift
+final class WeakRef<T: AnyObject> {
+
+    weak var object: T?
+
+    init(_ object: T) {
+        self.object = object
+    }
+}
+
+extension WeakRef: WeatherDataPresenterOutput where T: WeatherDataPresenterOutput {
+
+    func present(_ weather: WeatherViewModel) {
+        object?.present(weather)
+    }
+}
+```
