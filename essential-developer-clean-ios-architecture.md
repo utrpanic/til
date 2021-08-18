@@ -21,3 +21,11 @@
 - ViewController가 log 타이밍이나 log 내용을 지정하는 상황을 해결해보자.
 - 많은 사람들이 architectural decision을 느낌적인 느낌으로...
 - 코딩하기 전에 설계를 하라. 오래 걸리지 않는다.
+
+# [Clean iOS Architecture pt.3: Composing types in Swift](https://www.youtube.com/watch?v=GzFD7R_CI04)
+- Presenter가 UseCaseOutput protocol을 conform.
+- CrashlyticsLoginTracker도 UseCaseOutput protocol을 conform.
+- FirebaseAnalyticsLoginTracker도... 와...
+- UseCase가 셋 다 UserCaseOutput 타입으로 주입받고, 각각 타이밍에 맞춰서 호출.
+- (그럼 UseCase는 누가 들고 있는 거지?)
+- 그리고 UseCaseOutputComposer와 UseCaseFactory에 대한 테스트 작성. 아 진짜 근사하다.
