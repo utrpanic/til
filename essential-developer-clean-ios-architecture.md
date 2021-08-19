@@ -68,3 +68,33 @@ extension WeakRef: WeatherDataPresenterOutput where T: WeatherDataPresenterOutpu
     }
 }
 ```
+
+# [Clean iOS Architecture pt.5: MVC, MVVM, and MVP (UI Design Patterns)](https://www.youtube.com/watch?v=qzTeyxIW_ow)
+- MVC, MVVM, MVP 모두 아키텍쳐는 아니다. UI 디자인 패턴이다.
+## MVC(1979)
+- MVC도 View가 Model을 observing 하는 것은 동일.
+- Controller와 View 모두 Model에 의존하고 있음. Model은 다른 모듈에 의존하지 않음.
+- DB나 Network에 접근한다거나 하는 것은 어플리케이션의 몫이다. MVC에는 없는 개념이며, 이를 아키텍쳐가 아니라 UI 디자인 패턴이라고 부르는 이유.
+## MVC(Apple)
+- Controller가 Model과 View에 의존하고 있음. Controller가 Model과 View를 observing함. Notification이나 Callback, Delegate 모두 observing의 방법들.
+- Model: Business Logic, Storage(DB), Networking, Parsing
+- Controller: User Event Handling, Routing
+- View: Formatting(Presentation), Rendering
+- 개발자에 따라 Model과 Controller가 역할을 나눠갖는 방식에 조금 차이가  있지만, 여튼 누군가 너무 많은 역할을 한다는 뜻.
+## MVVM
+- Controller renamed ViewModel but...
+- ViewModel은 Model에 의존할 뿐, View에는 의존하지 않는다.
+- Binder가 차이점. View가 ViewModel의 변화에 맞춰 변경되도록.
+- Model: Business Logic
+- ViewModel: User Event Handling, Formatting(Presentation)
+- View: Rendering
+- Storage(DB), Networking, Parsing, Routing이 없는데... MVVM은 이를 해결하지 않았다.
+- 이들을 결국 어딘가에 집어넣는 것이 개발자들이 해온 일.
+## MVP
+- Controller renamed Presenter
+- Presenter는 ModelLayer의 인터페이스에 의존해서 ViewData를 만들어냄.
+- Presenter는 ViewData를 View의 protocol을 통해 넘겨줌. View 구현체의 존재는 모른다.
+- MVVM과 마찬가지로 Storage(DB), Networking, Parsing, Routing를 어디에서 구현해야하는가를 정의하지 않고 있다.
+## with UIKit
+- MVVM을 구현해도 UIViewController가 여전히 존재한다. Binder에 해당하는 기능이 없기 때문에, UIViewController가 View에 ViewModel을 binding한다. 그러다보니 MVC와 다를게 별로 없지 않은가. 결국 MVC in MVVM.
+- MVP. 비슷한 상황. Presenter와 View 사이에 UIViewController. MVC embeded in MVP라고.
