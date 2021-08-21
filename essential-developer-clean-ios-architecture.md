@@ -98,3 +98,10 @@ extension WeakRef: WeatherDataPresenterOutput where T: WeatherDataPresenterOutpu
 ## with UIKit
 - MVVM을 구현해도 UIViewController가 여전히 존재한다. Binder에 해당하는 기능이 없기 때문에, UIViewController가 View에 ViewModel을 binding한다. 그러다보니 MVC와 다를게 별로 없지 않은가. 결국 MVC in MVVM.
 - MVP. 비슷한 상황. Presenter와 View 사이에 UIViewController. MVC embeded in MVP라고.
+
+# [Clean iOS Architecture pt.6: VIPER – Design Pattern or Architecture?](https://www.youtube.com/watch?v=CkylrfKvf1A)
+- https://www.objc.io/issues/13-architecture/viper/
+- Architecture인가 Design Pattern인가. 각 Part들이 모든 요소들을 포함하지 못하고, 개발자들이 구현 시점에 이건 여기에 이건 저기에 둬야한다는 판단을 해야하는 게 여전히 문제다. More like architectural design pattern.
+- Software Architecture is less about responsibilities and more about component communication.
+- (언제 구현체가 아닌 프로토콜에 의존할 것인가. 1. 모듈/레이어가 다르다면 프로토콜에 의존. 2. 테스트가 불가능하면 프로토콜에 의존. 같은 모듈/레이어인데 테스트가 가능하다면 프로토콜에 의존할 이유가 없다. 해당 요소는 이미 테스팅되었으니까 의존하는 컴포넌트도 주입없이 테스트를 작성할 수 있지 않나?)
+- VIPER. Good one. 하지만 아키텍쳐는 아니다. 
