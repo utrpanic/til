@@ -105,3 +105,12 @@ extension WeakRef: WeatherDataPresenterOutput where T: WeatherDataPresenterOutpu
 - Software Architecture is less about responsibilities and more about component communication.
 - (언제 구현체가 아닌 프로토콜에 의존할 것인가. 1. 모듈/레이어가 다르다면 프로토콜에 의존. 2. 테스트가 불가능하면 프로토콜에 의존. 같은 모듈/레이어인데 테스트가 가능하다면 프로토콜에 의존할 이유가 없다. 해당 요소는 이미 테스팅되었으니까 의존하는 컴포넌트도 주입없이 테스트를 작성할 수 있지 않나?)
 - VIPER. Good one. 하지만 아키텍쳐는 아니다. 
+
+# [Clean iOS Architecture pt.7: VIP (Clean Swift) – Design Pattern or Architecture?](https://www.youtube.com/watch?v=AnUcZUMGVBI)
+- https://clean-swift.com/
+- Clean Swift fixes that flow of control problem in VIPER by introducing the VIP cycle.
+- VIP != VIPER
+- VIP is based on Uncle Bob's Clean Architecture.
+- VIP cycle is a variation of the MVP design pattern.
+- ViewController -> Interactor -> Presenter -> ViewController
+- Software Architecture is less about responsibilities and more about component communication.
