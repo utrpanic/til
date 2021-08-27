@@ -11,3 +11,8 @@
 - Class, Initializer, State
 - class 키워드 없이 상속을 구현하는 방법.
 - 필요한 인터페이스를 closure property로 정의하고, 객체 생성 시 바꿔넣는 방법.
+
+# [#1 Reason Why You Don’t Improve As a Software Developer](https://www.youtube.com/watch?v=csm6kK8jUkY)
+- 시간과 성장그래프에서 Plateau에 도달한다. 뭘 모르는지 아는 단계와 뭘 모르는지 모르는 단계가 사이의 어디쯤. 여기서 정체가 온다.
+- Comfort zone(Good enough). 대부분이 여기에서 더 성장하지 못하는.
+- Uncomfortable zone에 왜 들어가는가. 자전거를 처음 배울 때, 걷는 것보다 느린데 왜 배우느냐고 말하는 사람이 있는가.
