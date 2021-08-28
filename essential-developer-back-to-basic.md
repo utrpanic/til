@@ -16,3 +16,12 @@
 - 시간과 성장그래프에서 Plateau에 도달한다. 뭘 모르는지 아는 단계와 뭘 모르는지 모르는 단계가 사이의 어디쯤. 여기서 정체가 온다.
 - Comfort zone(Good enough). 대부분이 여기에서 더 성장하지 못하는.
 - Uncomfortable zone에 왜 들어가는가. 자전거를 처음 배울 때, 걷는 것보다 느린데 왜 배우느냐고 말하는 사람이 있는가.
+
+# [“How do you think when writing tests?” – It’s simpler than you may think](https://www.youtube.com/watch?v=9CyIrbCNWPs)
+- 생각나는 모든 것을 커버하려고 하나요? 아니면 우선순위 리스트가 있나요? 혹은 그냥 가능한한 커버를 하려고 하는 건가요?
+- Writing a failing test -> Make the test pass -> Refactor
+- 실패한 테스트를 성공시키기 위해 너무 많은 코드를 작성하는 것은 문제.
+- 테스트를 성공하면 리팩토링하기 전에 커밋하세요. 필요할 경우 revert가 쉬워집니다.
+- 테스트 대상을 sut로 이름 붙이기.
+- 테스트는 디자인을 결정하지 않는다. 개발자가 해야 한다.
+- 문제를 더 작은 문제로 쪼개는 것.
