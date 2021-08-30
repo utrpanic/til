@@ -25,3 +25,13 @@
 - 테스트 대상을 sut로 이름 붙이기.
 - 테스트는 디자인을 결정하지 않는다. 개발자가 해야 한다.
 - 문제를 더 작은 문제로 쪼개는 것.
+
+# [Careful With “Singleton” Lookalikes (WAY TOO COMMON)](https://www.youtube.com/watch?v=YrLzLiAoOnY)
+- Singleton. Network Layer를 Singleton으로 구성하면 어떻게 되는가.
+- Swift의 static let은 lazy loading 된다고.
+- ApiClient가 login(), loadFeed(), loadFollowers()를 갖고, 각 UI들이 모두 여기에 의존하는 게 맞는가. 모듈이 늘어날 수록 의존도 늘어남.
+- Stage 1: ApiClient를 basic function만 갖도록 하고, 각 모듈에서 extension으로 자기가 필요로 하는 함수를 추가. 데이터 타입도 함께 모듈로 옮길 수 있음.
+- Stage 2: 모듈들이 ApiClient에 의존하는 것이 아니라 ApiClient가 모듈들에 의존하도록 만든다. 
+- Level 3: ApiClient를 protocol로 변경한 후에, 각 모듈에서 이를 conform하는 타입 정의.
+- Level 4: ApiClient와 LoginClient 사이에 LoginClientAdapter를 정의. 다이어그램만 보면 over engineering 같아보이지만. 각 모듈에서는 closure property를 갖고, 메인 모듈에서 ApiClient의 구현을 주입한다.
+- 여기까지 오고 나면 singleton이냐 아니냐는 의미가 없어진다.
