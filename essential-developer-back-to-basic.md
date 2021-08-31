@@ -35,3 +35,9 @@
 - Level 3: ApiClient를 protocol로 변경한 후에, 각 모듈에서 이를 conform하는 타입 정의.
 - Level 4: ApiClient와 LoginClient 사이에 LoginClientAdapter를 정의. 다이어그램만 보면 over engineering 같아보이지만. 각 모듈에서는 closure property를 갖고, 메인 모듈에서 ApiClient의 구현을 주입한다.
 - 여기까지 오고 나면 singleton이냐 아니냐는 의미가 없어진다.
+
+# [Composable Code Can Be Simple – Intro to dependency diagrams and composition](https://www.youtube.com/watch?v=Mk34R-Q9-RE)
+- 다이어그램을 그리면 뭐가 좋은가. 
+- retain cycle을 쉽게 알아볼 수 있고, 디자인을 검증하거나 공유하는데에도...
+- 프로토콜과 구현체를 구분.
+- 상속, 의존(레퍼런스), conform 등을 각기 다른 화살표로 표시.
