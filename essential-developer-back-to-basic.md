@@ -41,3 +41,12 @@
 - retain cycle을 쉽게 알아볼 수 있고, 디자인을 검증하거나 공유하는데에도...
 - 프로토콜과 구현체를 구분.
 - 상속, 의존(레퍼런스), conform 등을 각기 다른 화살표로 표시.
+
+# [Decomposing Swift code into modules – Intro to modular design](https://www.youtube.com/watch?v=E0_3uTdCVew)
+- UIViewController -> UIKit
+- FeedViewController -> UI
+- <FeedLoader> -> Feed Feature (모든 화살표가 향하는 곳. 나가는 화살표는 없다.)
+- RemoteFeedLoader -> API
+- LocalFeedLoader -> Database
+- RemoteWithLocalFallbackFeedLoader -> Main (또는 Adapter 또는 Composer)
+- 모듈로 나누지 않는다고 하더라도 분리만 잘 되어 있으면 큰 문제는 없다. 스타팅 포인트로 적합하다.
