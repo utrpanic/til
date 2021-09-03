@@ -55,3 +55,10 @@ String(2.incr().square())
 - Reference type을 사용하면, mutation의 내부 구현을 알아야만 한다.
 - Value type을 사용하면 이를 통제할 수 있고, value type의 mutation이 필요한 경우, inout 키워드를 사용하는 것도 가능. 이 때 &를 사용해야 함.
 - Function Composition을 위해 operator를 계속 정의해나가는.
+
+# [Episode #3 UIKit Styling with Functions](https://www.pointfree.co/episodes/ep3-uikit-styling-with-functions)
+- More real world example.
+- UIAppearance. 자신의 style만 변경 가능하지, child view의 appearance를 함께 수정할 수는 없음.
+- BaseButton, FilledButton, RoundedButton으로 상속 구조를 구현했을 때, Filled와 Rounded를 함께 적용하고 싶은 경우 어떻게 해야 하는가.
+- UIButton을 파라미터로 받는 함수를 스타일별로 만들어서 필요에 따라 호출을 이어가는 방법.
+- 각 스타일을 변경하는 함수를 리턴하는 함수를 만든 후, Function Composition하는 방법.
