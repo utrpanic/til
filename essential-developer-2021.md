@@ -52,3 +52,15 @@ private class ValueSpy {
 - Frameworks(Like CoreData) -> Infrastructure Adapters -> Application Login -> Domain
 - Clean Architecture, Domain-Driven Design, Implementing Domain-Driven Design, Dependency Injection
 - https://www.essentialdeveloper.com/book-suggestions
+
+## [Multithreading and Concurrency in iOS apps](https://youtu.be/G6cVUcHre8Y)
+### Threads and Concurrency. 
+- 명시적으로 multi-threading 구현을 하지 않더라도, 내부적으로 multi-thread 환경에서 개발하고 있다.
+```Swift
+Thread.detachNewThread { } // 이런 게  있었다고;;;
+```
+- What's the enemy of concurrency?
+  - Mutable shared state
+### Delegate / Closure
+- Caller와 handler를 decouple하고 싶다면 delegate를 사용할 수도 있다.
+- UITableViewDiffableDataSource는 closure 기반 인터페이스. 이런 게 또 있었네(iOS 13이상).
