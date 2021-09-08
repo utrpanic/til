@@ -74,3 +74,24 @@ product([1, 2]) * product([]) == product([1, 2])
 ```
 - URLSession의 completionHandler. (Data?, URLSession?, Error?). 불가능한 조합이 존재한다. 예를 들어 셋다 non-optional 일 수는 없는.
 - Either<Pair<Data, URLResponse>, Error> 또는 Result<(Data, URLResponse), Error>
+
+# [Episode #5 Higher-Order Functions](https://www.pointfree.co/episodes/ep5-higher-order-functions)
+```Swift
+func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
+    return { a in { b in f(a, b) } }
+}
+
+func flip<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (B) -> (A) -> C {
+    return { b in { a in f(a)(b) } }
+}
+
+let stringWithEncoding = flip(curry(String.init(data:encoding:)))
+let utf8String = stringWithEncoding(.utf8)
+```
+- 잘 이해가 안되는데... 이걸 해서 얻을 수 있는 효과가 무엇일까?
+- 모든 instance 함수에 숨겨진 static 함수가 있다고.
+```Swift
+"Hello".uppercased(with: Locale.init(identifier: "en"))
+String.uppercased(with:)("Hello")(Locale.init(identifier: "en"))
+```
+- 데이터 파이프라인 이야기가 나오는데, 하나를 받고 하나를 리턴하는 것인가. 함수 컴포지션이 더 자유로워진다?
