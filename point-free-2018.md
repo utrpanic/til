@@ -95,3 +95,20 @@ let utf8String = stringWithEncoding(.utf8)
 String.uppercased(with:)("Hello")(Locale.init(identifier: "en"))
 ```
 - 데이터 파이프라인 이야기가 나오는데, 하나를 받고 하나를 리턴하는 것인가. 함수 컴포지션이 더 자유로워진다?
+
+# [Episode #6 Functional Setters](https://www.pointfree.co/episodes/ep6-functional-setters)
+- Complicated, deeply nested data structure가 있을 때, 그 일부를 변경하고 싶다면. Simple, clean, composable way는 어떤 것이 있는가?
+```Swift
+precedencegroup BackwardsComposition {
+    associativity: left
+}
+
+infix operator <<<: BackwardsComposition
+
+func <<< <A, B, C>(f: @escaping (B) -> C, g: @escaping (A) -> B) -> ((A) -> C) {
+    return { a in 
+        f(g(a))
+    }
+}
+```
+- What's the point? 잘 모르겠는데! Imperative data transforming?
