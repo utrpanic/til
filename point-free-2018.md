@@ -112,3 +112,9 @@ func <<< <A, B, C>(f: @escaping (B) -> C, g: @escaping (A) -> B) -> ((A) -> C) {
 }
 ```
 - What's the point? 잘 모르겠는데! Imperative data transforming?
+
+# [Episode #7 Setters and Key Paths](https://www.pointfree.co/episodes/ep7-setters-and-key-paths)
+- Key Path는 다른 언어와 비교해봐도 Swift의 독특한 부분이라고.
+- Composable Setter World!
+- 봐도 이해가 잘;;; 몇 번 더 봐야할 듯. 그리고... global 함수만 다루고 있는데, instance 함수도 동일하게 넘기면 되는가.
+- Exercise가 따로 추가로 있는 줄은 몰랐네. 더 해봐야할 듯.
