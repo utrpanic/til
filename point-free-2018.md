@@ -118,3 +118,8 @@ func <<< <A, B, C>(f: @escaping (B) -> C, g: @escaping (A) -> B) -> ((A) -> C) {
 - Composable Setter World!
 - 봐도 이해가 잘;;; 몇 번 더 봐야할 듯. 그리고... global 함수만 다루고 있는데, instance 함수도 동일하게 넘기면 되는가.
 - Exercise가 따로 추가로 있는 줄은 몰랐네. 더 해봐야할 듯.
+
+# [Episode #8 Getters and Key Paths](https://www.pointfree.co/episodes/ep8-getters-and-key-paths)
+- KeyPath를 사용하는 higher order function을 일일이 정의하기보다는 KeyPath를 받는 function을 만들어서 넘긴다면 기존의 map, filter 등을 그대로 사용할 수 있다.
+- KeyPath를 사용하면 nested structure에 대해서도 쉽게 함수를 만들어낼 수 있음.
+- Function composition이 왜 좋은지 여전히 이해 못한.
