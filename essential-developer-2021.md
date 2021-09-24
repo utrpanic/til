@@ -1,3 +1,9 @@
+## [Understand & choose between MVC, MVVM, and MVP pattern variations](https://www.youtube.com/watch?v=nBU3cKbJsa0)
+- 왜 MVC나 MVVM, MVP에 correct implementation을 찾기 어려운가.
+- Clean iOS Architecture playlist에서 많이 들었던 이야기들. 듣다보니 멍해진다. 혼자만의 생각에 빠져드는...
+- 오래 전에는 ObjC에도 block이나 closure가 없었다고. 대박;;;
+- Professional iOS Engineering Serise를 들어보라고.
+
 ## [Architecting for Analytics, Remote Config, DTOs, Custom vs Primitive Types](https://www.youtube.com/watch?v=s3crpkXI4vA)
 - Cross-cutting concern. Decorators in the Composition Root.
 - 일단 ViewController에서 직접 analytics를 호출하는 것을 피하고.
