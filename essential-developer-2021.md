@@ -1,3 +1,10 @@
+## [Understanding Swift closures and pros/cons over protocols & delegates](https://youtu.be/fs1_s39pMZc)
+- Closure는 input과 ouput의 타입을 명시할 뿐 이름은 없는 것이다.
+- Delegate과 closure를 사용할 때의 차이점이 무엇인가.
+- 어느 쪽이든 누가 구현할지는 알 수 없다.
+- typealias로 function tuple을 delegate으로 정의하면, 사용하는 쪽에서는 closure 인지 delegate인지 구별할 수 없게 된다. function을 property로 갖는 struct를 정의해도 동일함.
+- Delegate이든 closure든 Implementation을 추상화한다는 관점에서는 동일하다.
+
 ## [Understand & choose between MVC, MVVM, and MVP pattern variations](https://www.youtube.com/watch?v=nBU3cKbJsa0)
 - 왜 MVC나 MVVM, MVP에 correct implementation을 찾기 어려운가.
 - Clean iOS Architecture playlist에서 많이 들었던 이야기들. 듣다보니 멍해진다. 혼자만의 생각에 빠져드는...
