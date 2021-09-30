@@ -123,3 +123,10 @@ func <<< <A, B, C>(f: @escaping (B) -> C, g: @escaping (A) -> B) -> ((A) -> C) {
 - KeyPath를 사용하는 higher order function을 일일이 정의하기보다는 KeyPath를 받는 function을 만들어서 넘긴다면 기존의 map, filter 등을 그대로 사용할 수 있다.
 - KeyPath를 사용하면 nested structure에 대해서도 쉽게 함수를 만들어낼 수 있음.
 - Function composition이 왜 좋은지 여전히 이해 못한.
+
+# [Episode #9 Algebraic Data Types: Exponents](https://www.pointfree.co/episodes/ep9-algebraic-data-types-exponents)
+- URLSession의 completionHandler. 그 조합을 보면 얼마나 이상한가. Data와 Error는 mutually exclusive.
+- Result<Data, Error>를 사용하면? 타입이 곧 문서나 다름없다.
+- Never도 enum이라구! switch에 넣어보면 case를 정의하지 않아도 컴파일이 된다. -> 황당하게도... never를 switch에 넣으면 리턴을 하지 않아도 함수가 컴파일된다. 신기...
+- What makes your functions more complicated.
+- 하지만 pow 함수를 이용한 공식을 type으로 맵핑했다가 함수로 변경하면서 설명하고자하는 부분을 이해하지 못하고 있음. 재미야 있지만...
