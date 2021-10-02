@@ -130,3 +130,30 @@ func <<< <A, B, C>(f: @escaping (B) -> C, g: @escaping (A) -> B) -> ((A) -> C) {
 - Never도 enum이라구! switch에 넣어보면 case를 정의하지 않아도 컴파일이 된다. -> 황당하게도... never를 switch에 넣으면 리턴을 하지 않아도 함수가 컴파일된다. 신기...
 - What makes your functions more complicated.
 - 하지만 pow 함수를 이용한 공식을 type으로 맵핑했다가 함수로 변경하면서 설명하고자하는 부분을 이해하지 못하고 있음. 재미야 있지만...
+
+# [Episode #10 A Tale of Two Flat‑Maps](https://www.pointfree.co/episodes/ep10-a-tale-of-two-flat-maps)
+- 중첩된 배열을 flatten. compactMap은 왜 나왔는가. 동작이 다른가.
+```Swift
+struct User {
+  let name: String?
+}
+let users = [User(name: "Blob"), User(name: "Math")]
+users
+  .map { $0.name }
+// [{some "Blob"}, {some "Math"}]
+users
+  .flatMap { $0.name }
+// ["Blob", "Math"]
+
+struct NamedUser {
+  let name: String
+}
+let namedUsers = [NamedUser(name: "Blob"), NamedUser(name: "Math")]
+namedUsers
+  .map { $0.name }
+// ["Blob", "Math"]
+namedUsers
+  .flatMap { $0.name }
+// ["B", "l", "o", "b", "M", "a", "t", "h"]
+```
+- What's the point? 영상 말미마다 계속 이야기하는데 제대로 이해를 못하고 있는 것 같음. 좀 더 참고 계속 진도를 나가야할까.
