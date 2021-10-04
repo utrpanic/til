@@ -157,3 +157,16 @@ namedUsers
 // ["B", "l", "o", "b", "M", "a", "t", "h"]
 ```
 - What's the point? 영상 말미마다 계속 이야기하는데 제대로 이해를 못하고 있는 것 같음. 좀 더 참고 계속 진도를 나가야할까.
+
+# [Episode #11 Composition without Operators](https://www.pointfree.co/episodes/ep11-composition-without-operators)
+- func으로 custom operator를 대신하려고 해도, 파라미터를 갯수를 동적으로 늘릴 수 없는 문제가 있다. overload로 대응할 수는 있겠지만...
+```Swift 
+func with<A, B>(_ a: A, _ f: (A) -> B) -> B {
+  return f(a)
+}
+func pipe<A, B, C>(_ f: @escaping (A) -> B, _ g: @escaping (B) -> C) -> (A) -> C {
+  return { g(f($0)) }
+}
+```
+- VArgs를 사용하면 가능. 그런데... generic에도 vargs 사용 가능한건가?
+- What's the point? Composition이 중요하다. 우린 이 custom operator들을 사랑하지만 그것들을 코드 베이스에 갑자기 도입하는 게 어려울 수도 있기 때문에 human name을 지은 것이다.
