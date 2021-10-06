@@ -170,3 +170,40 @@ func pipe<A, B, C>(_ f: @escaping (A) -> B, _ g: @escaping (B) -> C) -> (A) -> C
 ```
 - VArgs를 사용하면 가능. 그런데... generic에도 vargs 사용 가능한건가?
 - What's the point? Composition이 중요하다. 우린 이 custom operator들을 사랑하지만 그것들을 코드 베이스에 갑자기 도입하는 게 어려울 수도 있기 때문에 human name을 지은 것이다.
+
+# [Episode #12 Tagged](https://www.pointfree.co/episodes/ep12-tagged)
+- Email이나 ID 같은 프로퍼티를 무조건 String으로만 정의할 것인가.
+- RawRepresentable을 conform하면, singleValueContainer를 통한 decode를 기본으로 제공함.
+```Swift
+struct Email: Decodable, RawRepresentable {
+  let rawValue: String
+}
+```
+- 여기에 Equatable을 conform하면, value와 optional을 ==로 비교할 수 있다?
+- 그럼 Decodable, RawRepresentable, Equatable을 매번 conform해야하는가.
+```Swift
+struct Tagged<Tag, RawValue> {
+  let rawValue: RawValue
+}
+extension Tagged: Decodable where RawValue: Decodable {
+  init(from decoder: Decoder) throws {
+    let container = try decoder.singleValueContainer()
+    self.init(rawValue: try container.decode(RawValue.self))
+  }
+}
+extension Tagged: Equatable where RawValue: Equatable {
+  static func == (lhs: Tagged, rhs: Tagged) -> Bool {
+    return lhs.rawValue == rhs.rawValue
+  }
+}
+```
+- 하지만 매번 해당 객체를 생성하는 것도 너무 번거롭기 때문에... 와 진짜 근사하다.
+```Swift
+extension Tagged: ExpressibleByIntegerLiteral where RawValue: ExpressibleByIntegerLiteral {
+  typealias IntegerLiteralType = RawValue.IntegerLiteralType
+  init(integerLiteral value: IntegerLiteralType) {
+    self.init(rawValue: RawValue(integerLiteral: value))
+  }
+}
+```
+- What's the point? 훨씬 type safe하고 readable. 그동안 못해서 안한 거지... Swift 4.1이 이정도로 지원해주는데, 사용하지 않을 이유가 있는가.
