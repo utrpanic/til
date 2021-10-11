@@ -213,3 +213,21 @@ extension Tagged: ExpressibleByIntegerLiteral where RawValue: ExpressibleByInteg
 - map()을 다양하게 구현하는데, 각 구현체들이 unique map 인지를 판단하는 것은 무엇을 위한 것인가. (파라미터로 identity 함수를 넣을 경우, map이 자신을 그대로 리턴하는가. map(id) == id)
 - Map means a Functor!
 - 우리가 정의한 타입에 대해 map을 작성하는 것을 두려워하지 말아야한다.
+
+# [Episode #14 Contravariance](https://www.pointfree.co/episodes/ep14-contravariance)
+- Other side of map()
+- NSObject > UIResponder > UIView > UIControl > UIButton
+- (UIView) -> UIView as (UIButton) -> UIView
+- (UIView) -> UIView as (UIView) -> UIResponder
+- Subtyping a function by its output is a *covariant* relationship, and subtyping a function by its input is a *contravariant* relationship.
+```
+// (A) -> ((B) -> C) -> D)
+//         |_|   |_|
+//         -1    +1
+//         |_______|   |_|
+//            -1       +1
+// |_|    |______________|
+// -1           +1
+// A와 C는 -1(contravariant), B와 D는 +1(covariant).
+```
+- 하지만 이게 여전히 무슨 의미인지 모르겠네.
