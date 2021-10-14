@@ -1,3 +1,16 @@
+## [Understanding Swift closures and pros/cons over protocols & delegates](https://youtu.be/fs1_s39pMZc)
+- Closure는 input과 ouput의 타입을 명시할 뿐 이름은 없는 것이다.
+- Delegate과 closure를 사용할 때의 차이점이 무엇인가.
+- 어느 쪽이든 누가 구현할지는 알 수 없다.
+- typealias로 function tuple을 delegate으로 정의하면, 사용하는 쪽에서는 closure 인지 delegate인지 구별할 수 없게 된다. function을 property로 갖는 struct를 정의해도 동일함.
+- Delegate이든 closure든 Implementation을 추상화한다는 관점에서는 동일하다.
+
+## [Understand & choose between MVC, MVVM, and MVP pattern variations](https://www.youtube.com/watch?v=nBU3cKbJsa0)
+- 왜 MVC나 MVVM, MVP에 correct implementation을 찾기 어려운가.
+- Clean iOS Architecture playlist에서 많이 들었던 이야기들. 듣다보니 멍해진다. 혼자만의 생각에 빠져드는...
+- 오래 전에는 ObjC에도 block이나 closure가 없었다고. 대박;;;
+- Professional iOS Engineering Serise를 들어보라고.
+
 ## [Architecting for Analytics, Remote Config, DTOs, Custom vs Primitive Types](https://www.youtube.com/watch?v=s3crpkXI4vA)
 - Cross-cutting concern. Decorators in the Composition Root.
 - 일단 ViewController에서 직접 analytics를 호출하는 것을 피하고.
@@ -52,3 +65,15 @@ private class ValueSpy {
 - Frameworks(Like CoreData) -> Infrastructure Adapters -> Application Login -> Domain
 - Clean Architecture, Domain-Driven Design, Implementing Domain-Driven Design, Dependency Injection
 - https://www.essentialdeveloper.com/book-suggestions
+
+## [Multithreading and Concurrency in iOS apps](https://youtu.be/G6cVUcHre8Y)
+### Threads and Concurrency. 
+- 명시적으로 multi-threading 구현을 하지 않더라도, 내부적으로 multi-thread 환경에서 개발하고 있다.
+```Swift
+Thread.detachNewThread { } // 이런 게  있었다고;;;
+```
+- What's the enemy of concurrency?
+  - Mutable shared state
+### Delegate / Closure
+- Caller와 handler를 decouple하고 싶다면 delegate를 사용할 수도 있다.
+- UITableViewDiffableDataSource는 closure 기반 인터페이스. 이런 게 또 있었네(iOS 13이상).
