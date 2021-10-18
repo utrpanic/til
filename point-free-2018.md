@@ -231,3 +231,44 @@ extension Tagged: ExpressibleByIntegerLiteral where RawValue: ExpressibleByInteg
 // A와 C는 -1(contravariant), B와 D는 +1(covariant).
 ```
 - 하지만 이게 여전히 무슨 의미인지 모르겠네.
+
+# [Episode #15 Setters: Ergonomics & Performance](https://www.pointfree.co/episodes/ep15-setters-ergonomics-performance)
+```Swift
+func prop<Root, Value>(_ kp: WritableKeyPath<Root, Value>)
+  -> (@escaping (Value) -> Value)
+  -> (Root) -> Root {
+    return { update in
+      { root in
+        var copy = root
+        copy[keyPath: kp] = update(copy[keyPath: kp])
+        return copy
+      }
+    }
+}
+
+func prop<Root, Value>(
+  _ kp: WritableKeyPath<Root, Value>,
+  _ f: @escaping (Value) -> Value
+  )
+  -> (Root) -> Root {
+    return prop(kp)(f)
+}
+
+func over<Root, Value>(
+  _ setter: (@escaping (Value) -> Value) -> (Root) -> Root,
+  _ f: @escaping (Value) -> Value
+  ) -> (Root) -> Root {
+    return setter(f)
+  }
+)
+
+func set<Root, Value>(
+  _ setter: (@escaping (Value) -> Value) -> (Root) -> Root,
+  _ f: @escaping (Root) -> Root
+  ) -> (Root) -> Root {
+    return over(setter, { _ in value })
+  }
+)
+```
+- 점점 모르게 되는 느낌.
+- |>, <>, >>>, <<<의 의미를 다시 짚어봐야할 것 같다.
