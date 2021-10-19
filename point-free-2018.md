@@ -272,3 +272,9 @@ func set<Root, Value>(
 ```
 - 점점 모르게 되는 느낌.
 - |>, <>, >>>, <<<의 의미를 다시 짚어봐야할 것 같다.
+
+# [Episode #16 Dependency Injection Made Easy](https://www.pointfree.co/episodes/ep16-dependency-injection-made-easy)
+- 설명을 쉽게 위해서 PlaygroundSupport를 사용하는 것 같기도 한데, 실제로 View 구현할 때 사용하는 것도 좋을 것 같다.
+- Mock을 사용하면 많은 boilerplate가 필요하다. 생성자, 프로토콜, 주입 코드 등.
+- Current라는 global variable을 정의하고, 여기에 실제 구현체와 mock을 바꿔넣는 방법으로 생성자 관련 코드를 생략할 수 있다.
+- protocol의 function을 function variable로 변경하면 프로토콜 관련 코드를 생략할 수 있다.
