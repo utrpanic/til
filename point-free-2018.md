@@ -278,3 +278,7 @@ func set<Root, Value>(
 - Mock을 사용하면 많은 boilerplate가 필요하다. 생성자, 프로토콜, 주입 코드 등.
 - Current라는 global variable을 정의하고, 여기에 실제 구현체와 mock을 바꿔넣는 방법으로 생성자 관련 코드를 생략할 수 있다.
 - protocol의 function을 function variable로 변경하면 프로토콜 관련 코드를 생략할 수 있다.
+
+# [Episode #17 Styling with Overture](https://www.pointfree.co/episodes/ep17-styling-with-overture)
+- https://github.com/pointfreeco/swift-overture
+- Overture: 1. 서곡 2. 제의하다 3. ...을 말을 꺼내다.
