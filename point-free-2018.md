@@ -282,3 +282,8 @@ func set<Root, Value>(
 # [Episode #17 Styling with Overture](https://www.pointfree.co/episodes/ep17-styling-with-overture)
 - https://github.com/pointfreeco/swift-overture
 - Overture: 1. 서곡 2. 제의하다 3. ...을 말을 꺼내다.
+
+# [Episode #18 Dependency Injection Made Comfortable](https://www.pointfree.co/episodes/ep18-dependency-injection-made-comfortable)
+- A lot of boilerplate.
+- `Current`라는 Environment 객체를 global singleton으로 정의해서 개선해보았다. Global singleton에 마음이 불편할 수 있다고.
+- Mock 객체를 변형하는데 Overture도 사용하고...
