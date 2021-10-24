@@ -287,3 +287,48 @@ func set<Root, Value>(
 - A lot of boilerplate.
 - `Current`라는 Environment 객체를 global singleton으로 정의해서 개선해보았다. Global singleton에 마음이 불편할 수 있다고.
 - Mock 객체를 변형하는데 Overture도 사용하고...
+
+# [Episode #19 Algebraic Data Types: Generics and Recursion](https://www.pointfree.co/episodes/ep19-algebraic-data-types-generics-and-recursion)
+- Recursive data type. Swift에서는 이를 위해 indirect 키워드를 사용해야 한다.
+```Swift
+enum List<A> {
+  case empty
+  indirect case cons(A, List<A>)
+}
+enum AlgebraicList<A> {
+  case empty
+  case one(A)
+  case two(A, A)
+  case three(A, A, A)
+  case four(A, A, A, A)
+  // ...
+}
+struct NonEmptyArray<A> {
+  private let values: [A]
+  init?(_ values: [A]) {
+    guard !values.isEmpty else { return nil }
+    self.values = values
+  }
+  init(values: A...) {
+    self.values = values
+  }
+  var first: A {
+    return self.values.first!
+  }
+}
+// struct NonEmptyList<A> {
+//   let head: A
+//   let tail: List<A>
+// }
+enum NonEmptyList<A> {
+  case singleton(A)
+  indirect case cons(A, NonEmptyList<A>)
+  var first: A {
+    switch self {
+      case let .singleton(first): return first
+      case let .cons(head, _): return head
+    }
+  }
+}
+```
+- first를 non-optional로 받기 위한 긴 여정. Algebraic Data Type을 정의.
