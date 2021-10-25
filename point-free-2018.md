@@ -332,3 +332,16 @@ enum NonEmptyList<A> {
 }
 ```
 - first를 non-optional로 받기 위한 긴 여정. Algebraic Data Type을 정의.
+
+# [Episode #20 NonEmpty](https://www.pointfree.co/episodes/ep20-nonempty)
+- first를 non-optiona로. Collection protocol을 conform할 때, optional property를 override할 때 non-optional로 override하는 것이 가능하다.
+- NonEmpty를 만드는 데 언급된 protocol/generic 들.
+  - CustomStringConvertible
+  - Collection
+  - BidirectionalCollection
+  - Collection.Element
+  - Collection.Index
+  - RangeReplaceableCollection
+  - Comparable
+  - MutableCollection
+  - SetAlgebra
