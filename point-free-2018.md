@@ -345,3 +345,9 @@ enum NonEmptyList<A> {
   - Comparable
   - MutableCollection
   - SetAlgebra
+
+# [Episode #21 Playground Driven Development](https://www.pointfree.co/episodes/ep21-playground-driven-development)
+- Playground를 이용해서 ViewControllerf를 작성하는 방법. 하지만 App에 정의한 ViewController를 Playground로 불러들이는 것이 안된다. Framework을 생성해서 거기에 포함시킨 후, playground에서 import 한다.
+- (ViewController가 Swift Package에 있으면 Playground에서 바로 부를 수 있을 것 같다.)
+- StyleGuide.swift를 만들어서, Overture를 통해 적용할 수 있는 style들을 한 곳에 모은다.
+- 
