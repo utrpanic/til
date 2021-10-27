@@ -350,4 +350,10 @@ enum NonEmptyList<A> {
 - Playground를 이용해서 ViewControllerf를 작성하는 방법. 하지만 App에 정의한 ViewController를 Playground로 불러들이는 것이 안된다. Framework을 생성해서 거기에 포함시킨 후, playground에서 import 한다.
 - (ViewController가 Swift Package에 있으면 Playground에서 바로 부를 수 있을 것 같다.)
 - StyleGuide.swift를 만들어서, Overture를 통해 적용할 수 있는 style들을 한 곳에 모은다.
-- 
+
+# [Episode #22 A Tour of Point-Free](https://www.pointfree.co/episodes/ep22-a-tour-of-point-free)
+- Server-side Swift로 구현한 pointfree.com 웹페이지. https://github.com/pointfreeco/pointfreeco
+- Repo clone 이후에 로컬에서 그렇게 바로 돌려볼 수 있다는 건 정말 인상적이지만... 너무 옛날 영상이라 그런가;;; 영상처럼 안됨;;;
+- assertSnapshot으로 desktop/mobile 버전을 각각 테스트.
+- (내용을 거의 못 따라감.)
+- 많은 사람들이 웹을 위해 dynamic language나 rails 같은 게 필요하다고 하지만, Swift같은 strongly-typed language로도 충분히 가능하다.
