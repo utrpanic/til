@@ -357,3 +357,20 @@ enum NonEmptyList<A> {
 - assertSnapshot으로 desktop/mobile 버전을 각각 테스트.
 - (내용을 거의 못 따라감.)
 - 많은 사람들이 웹을 위해 dynamic language나 rails 같은 게 필요하다고 하지만, Swift같은 strongly-typed language로도 충분히 가능하다.
+
+# [Episode #23 The Many Faces of Zip: Part 1](https://www.pointfree.co/episodes/ep23-the-many-faces-of-zip-part-1)
+```Swift
+let xs = [2, 3, 5, 7, 11]
+Array(zip(xs.indices, xs)) // [(0, 2), (1, 3), (2, 5), (3, 7), (4, 11)]
+Array(xs.enumerated())     // [(0, 2), (1, 3), (2, 5), (3, 7), (4, 11)]
+let ys = xs.suffix(2)      // [7, 11]
+Array(zip(ys.indices, ys)) // [(3, 7), (4, 11)]
+Array(ys.enumerated())     // [(0, 7), (1, 11)]
+```
+- Zip as a generalization of map.
+```Swift
+func zip2<A, B, C>(with f: @escaping (A, B) -> C) -> (A?, B?) -> C? 
+let a: Int? = 1
+let b: Int? = 2
+zip2(with: +)(a, b) // 3
+```
