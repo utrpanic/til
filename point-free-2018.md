@@ -374,3 +374,8 @@ let a: Int? = 1
 let b: Int? = 2
 zip2(with: +)(a, b) // 3
 ```
+
+# [Episode #24 The Many Faces of Zip: Part 2](https://www.pointfree.co/episodes/ep24-the-many-faces-of-zip-part-2)
+- `zip` is just a generalization of `map`: where `map` allows us to transform a function `(A) -> B` into a function `([A]) -> [B]`, `zip` allowed us to transform a function `(A, B) -> C` into a function `([A], [B]) -> [C]`.
+- 여러 타입을 다루는 zip에 대한 설명들은 정말 신기방기지만;;; 썩 와닿지는 않음. 이전 에피소드의 optional argument들 받아내는 건 좋았지만...
+- `What's the point?`는 다음 시간에 모아서! 어서 이들의 큰 그림을 이해하고 받아들이고 싶다!!!
