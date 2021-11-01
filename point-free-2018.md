@@ -379,3 +379,9 @@ zip2(with: +)(a, b) // 3
 - `zip` is just a generalization of `map`: where `map` allows us to transform a function `(A) -> B` into a function `([A]) -> [B]`, `zip` allowed us to transform a function `(A, B) -> C` into a function `([A], [B]) -> [C]`.
 - 여러 타입을 다루는 zip에 대한 설명들은 정말 신기방기지만;;; 썩 와닿지는 않음. 이전 에피소드의 optional argument들 받아내는 건 좋았지만...
 - `What's the point?`는 다음 시간에 모아서! 어서 이들의 큰 그림을 이해하고 받아들이고 싶다!!!
+
+# [Episode #25 The Many Faces of Zip: Part 3](https://www.pointfree.co/episodes/ep25-the-many-faces-of-zip-part-3)
+- Validated 타입. Swift의 에러 핸들링은 throw 뿐이고, 그 순간 실행을 중단시킬 한 가지 이유가 있을 뿐인데, Validated를 사용하면 발생한 모든 Error들을 받아볼 수 있다.
+- Func 타입. zip()을 마친 후에 apply()를 호출하는 방식으로 lazy execution을 구현할 수 있다.
+- F3 타입. 생성 시에 받은 callback을 zip()을 마친 후에 run()을 통해 호출해서  Async 함수들에 대한 lazy execution을 구현한다.
+- F3 타입의 이름을 Parallel로 변경하겠다. Concurrency를 지원하는. 아직 충분히 성숙하지는 않았으니 따라 쓰지는 말라고.
