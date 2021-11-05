@@ -385,3 +385,22 @@ zip2(with: +)(a, b) // 3
 - Func 타입. zip()을 마친 후에 apply()를 호출하는 방식으로 lazy execution을 구현할 수 있다.
 - F3 타입. 생성 시에 받은 callback을 zip()을 마친 후에 run()을 통해 호출해서  Async 함수들에 대한 lazy execution을 구현한다.
 - F3 타입의 이름을 Parallel로 변경하겠다. Concurrency를 지원하는. 아직 충분히 성숙하지는 않았으니 따라 쓰지는 말라고.
+
+# [Episode #26 Domain‑Specific Languages: Part 1](https://www.pointfree.co/episodes/ep26-domain-specific-languages-part-1)
+- 'domain-specific languages'와 'embedded domain-specific languages'.
+- SQL도 HTML도, Cocoapods이나 Carthage의 file들도 모두 DSL 혹은 EDSL. 
+- Embedded in some other language. Cocoapods나 Carthage의 경우, Ruby에 embed.
+- 결국... 특정 용도를 위한 언어를 Swift에 hosting해서 만들겠다?
+```Swift
+enum Expr {
+  case int(Int)
+  indirect case add(Expr, Expr)
+  indirect case mul(Expr, Expr)
+  case `var`
+}
+func eval(_ expr: Expr) -> Int
+func print(_ expr: Expr)
+func swap(_ expr: Expr) -> Expr // add <-> mul
+func simplify(_ expr: Expr) -> Expr // (2 * 3) + (2 * 4) <-> (2 * (3 + 4))
+```
+- var가 어떻게 variable로 동작할지 아직은 알 수 없음.
