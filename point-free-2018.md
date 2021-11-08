@@ -404,3 +404,18 @@ func swap(_ expr: Expr) -> Expr // add <-> mul
 func simplify(_ expr: Expr) -> Expr // (2 * 3) + (2 * 4) <-> (2 * (3 + 4))
 ```
 - var가 어떻게 variable로 동작할지 아직은 알 수 없음.
+
+# [Episode #27 Domain‑Specific Languages: Part 2](https://www.pointfree.co/episodes/ep27-domain-specific-languages-part-2)
+```Swift
+enum Expr {
+  case int(Int)
+  indirect case add(Expr, Expr)
+  indirect case mul(Expr, Expr)
+  case `var`(String)
+  indirect case bind(String, to: Expr, in: Expr)
+}
+func eval(_ expr: Expr, with env: [String: Int]) -> Int
+```
+- env를 통해서 var에 값을 런타임에 넣을 수 있음. 하지만 정의해둔 var가 env에 없을 경우, 에러 처리가 필요하다.
+- bind를 통해서 변수에 Expr을 대입한 후, 다른 Expr에 사용할 수 있다. 점점 무슨 마법 같다.
+- 업무에 실제로 사용하고 있는 DSL을 소개할 것이다!
