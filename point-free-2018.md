@@ -419,3 +419,12 @@ func eval(_ expr: Expr, with env: [String: Int]) -> Int
 - env를 통해서 var에 값을 런타임에 넣을 수 있음. 하지만 정의해둔 var가 env에 없을 경우, 에러 처리가 필요하다.
 - bind를 통해서 변수에 Expr을 대입한 후, 다른 Expr에 사용할 수 있다. 점점 무슨 마법 같다.
 - 업무에 실제로 사용하고 있는 DSL을 소개할 것이다!
+
+# [Episode #28 An HTML DSL](https://www.pointfree.co/episodes/ep28-an-html-dsl)
+- HTML을 표현하는 DSL을 정의.
+```Swift
+enum Node {
+  indirect case el(String, [(String, String)], [Node])
+  case text(String)
+}
+```
