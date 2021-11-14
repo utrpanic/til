@@ -428,3 +428,13 @@ enum Node {
   case text(String)
 }
 ```
+
+# [Episode #29 DSLs vs. Templating Languages](https://www.pointfree.co/episodes/ep29-dsls-vs-templating-languages)
+- View Rendering에 Templating language를 많이들 채용하고 있지만, DSL이 더 낫다고 생각한다.
+- Templating Language. Plain text file이지만, 일종의 interpolation token을 갖고 있는..
+- 예를 들어, Stencil.
+- Typed 언어는 아니다. 오타에 취약. (그래도 함수에 대해서는 에러로 처리해주긴 하는)
+- Logic을 문자열로 코딩해야하는 것도 문제.
+- HTML을 표현하기 위해 작성한 DSL은 결국 Swift이기 때문에, IDE의 지원을 동일하게 받을 수 있다.
+- We're just living in the world of Swift. 컴파일 타임 에러를 받을 수 있다는 뜻이죠.
+- 
