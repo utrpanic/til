@@ -437,4 +437,34 @@ enum Node {
 - Logic을 문자열로 코딩해야하는 것도 문제.
 - HTML을 표현하기 위해 작성한 DSL은 결국 Swift이기 때문에, IDE의 지원을 동일하게 받을 수 있다.
 - We're just living in the world of Swift. 컴파일 타임 에러를 받을 수 있다는 뜻이죠.
-- 
+
+# [Episode #30 Composable Randomness](https://www.pointfree.co/episodes/ep30-composable-randomness)
+- Randomness API using Functional Composition.
+```Swift
+import Darwin
+arc4random() // UInt32
+arc4random() % 6 + 1
+arc4random_uniform(6) + 1
+```
+- modulo bias problem이 과연 큰 문제인지 잘 이해가 안 가는데...
+- 여튼 Swift는 Collection에 `func randomElement() -> UInt?`를 제공.
+- Double, Bool 등 primitive type들도 다 random()을 갖고 있음.
+```Swift
+struct Gen<A> {
+  let run: () -> A
+}
+```
+- Swift는 제공하지 못하는 random에는 또 어떤 게 있는가.
+```Swift
+extension Gen {
+  func array(count: Int) -> Gen<[A]> {
+    return Gen<[A]> {
+      Array(repeating: (), count: count).map(self.run)
+    }
+  }
+  func array(count: Gen<Int>) -> Gen<[A]> {
+    return count.map { self.array(count: $0).run() }
+  }
+}
+```
+- 6글자의 랜덤 스트링 3개로 만들어진 Password Gen. 와 진짜 근사하다.
