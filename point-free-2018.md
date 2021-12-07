@@ -468,3 +468,12 @@ extension Gen {
 }
 ```
 - 6글자의 랜덤 스트링 3개로 만들어진 Password Gen. 와 진짜 근사하다.
+
+# [Episode #31 Decodable Randomness: Part 1](https://www.pointfree.co/episodes/ep31-decodable-randomness-part-1)
+- Generate random values from any data type.
+- 각 타입에 대해 random value를 리턴하는 Decoder를 직접 구현해서 생성자에 넣어줌.
+```Swift
+try Bool(from: ArbitraryDecoder())
+try Int(from: ArbitraryDecoder())
+try Date(from: ArbitraryDecoder())
+```
