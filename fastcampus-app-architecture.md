@@ -16,3 +16,11 @@
 
 ### 02. 앱 비즈니스와 로직
 - Redux Architecture. RIBs, VIPER 등
+
+### 03. 복잡한 뷰 만들기
+- 일단 RIBs의 동작 방식에 대한 설명.
+- 화면 단위 이상으로 ViewController를 나눠서, ViewController가 너무 커지는 것을 방지하고, composite하게.
+- View와 ViewController는 테스트 작성이 어렵기 때문에, 가능한 한 멍청하게 만든다.
+- (결국 snapshot test로 보완할거라면, 약간은 View와 ViewController에게 부담을 줘도 되지 않을까.)
+- (하지만 '약간'의 경계가 사람마다 다르니, 팀에서는 원칙을 좀 보수적으로 적용하는 것도 좋은 것 같다.)
+- sink할 때마다 weak self를 쓰는 것이 불편하면, willResignActive에서 cancellables를 직접 cancel 해주는 것도 방법!!!
