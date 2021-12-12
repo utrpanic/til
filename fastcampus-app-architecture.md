@@ -13,3 +13,6 @@
 - 객체를 조립해서 쓰는 방식을 Composition이라고 합니다.
 - Favor object composition over class inheritance. - Gang of Four, Design Patterns(1994)
 - map, flatmap을 이용한 compostion 실습.
+
+### 02. 앱 비즈니스와 로직
+- Redux Architecture. RIBs, VIPER 등
