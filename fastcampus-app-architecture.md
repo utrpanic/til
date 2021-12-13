@@ -24,3 +24,8 @@
 - (결국 snapshot test로 보완할거라면, 약간은 View와 ViewController에게 부담을 줘도 되지 않을까.)
 - (하지만 '약간'의 경계가 사람마다 다르니, 팀에서는 원칙을 좀 보수적으로 적용하는 것도 좋은 것 같다.)
 - sink할 때마다 weak self를 쓰는 것이 불편하면, willResignActive에서 cancellables를 직접 cancel 해주는 것도 방법!!!
+
+### 04. 복잡한 플로우 만들기 - 1
+- 뷰에 얽매이지 않고 비즈니스 로직을 구현해봅시다.
+- 하나의 riblet을 플로우에 따라 여러 곳에서 진입.
+- (Parent가 child의 life cycle을 관리해야하는 것은 장점이 아니라, router를 통해 tree를 관리함으로써 어쩔 수 없이 하게 된 것이라고 봐야하지 않을까?)
