@@ -29,3 +29,14 @@
 - 뷰에 얽매이지 않고 비즈니스 로직을 구현해봅시다.
 - 하나의 riblet을 플로우에 따라 여러 곳에서 진입.
 - (Parent가 child의 life cycle을 관리해야하는 것은 장점이 아니라, router를 통해 tree를 관리함으로써 어쩔 수 없이 하게 된 것이라고 봐야하지 않을까?)
+
+### 05. 복잡한 플로우 만들기 - 2
+- Viewless Riblet.
+- ViewControllable을 만드는 대신에 dependency로 주입받는다.
+- Interactor.didBecomeActive에서 하위 riblet으로 분기.
+- Viewless Riblet을 만든 김에 로직을 더 부여하자. 
+  - child riblet이 하위 화면으로 이동해야할 때, listner를 통해 Viewless Riblet에게 알리고
+  - Sibling으로 child riblet을 추가한다. View Hierarchy 상으로는 손자이지만 router는 자식.
+- Parent와 Child의 값 교환. 
+  - Parent -> Child 는 ReadOnlyCurrentValuePublisher를 넘겨주는 방식으로.
+  - Child - > Parent 는 CurrentValuePublisher를 넘겨주면, child가 send().
