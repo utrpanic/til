@@ -40,3 +40,7 @@
 - Parent와 Child의 값 교환. 
   - Parent -> Child 는 ReadOnlyCurrentValuePublisher를 넘겨주는 방식으로.
   - Child - > Parent 는 CurrentValuePublisher를 넘겨주면, child가 send().
+
+### 06. 복잡한 플로우 만들기 - 3
+- TopupInteractor에서 EnterAmountRoot 여부를 관리해야 한다. Card가 있으면 true, 없으면 false.
+- AddPaymentMethod riblet을 parent에 따라 다르게 동작하도록 수정.
