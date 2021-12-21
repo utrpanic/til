@@ -44,3 +44,9 @@
 ### 06. 복잡한 플로우 만들기 - 3
 - TopupInteractor에서 EnterAmountRoot 여부를 관리해야 한다. Card가 있으면 true, 없으면 false.
 - AddPaymentMethod riblet을 parent에 따라 다르게 동작하도록 수정.
+
+## 2부. 모듈 레벨 아키텍처. 유지 보수와 개발 속도를 고려하는 모듈화
+
+### 01. 모듈화(Modularization)
+- 모노리틱 앱 구조.
+- 모듈간 뿐 아니라 객체간 단방향 참조만 잘 해도.
