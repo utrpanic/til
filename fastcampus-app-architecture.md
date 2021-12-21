@@ -50,3 +50,9 @@
 ### 01. 모듈화(Modularization)
 - 모노리틱 앱 구조.
 - 모듈간 뿐 아니라 객체간 단방향 참조만 잘 해도.
+
+### 02. 느슨한 결합
+- 객체지향 프로그래밍 이전에는 컴파일 타임 의존성과 빌드 타임 의존성이 동일.
+- The power of OO comes from safe, convenient polymorphism. With OO, you have absolute control over the every single source code dependency in your system. - Robert C. Martin, The Future of Programming Languages
+- 다형성을 이용해 의존성을 역전.
+- 의존성 역전을 남발하면 코드를 이해하기 어려워질 수도 있다.
