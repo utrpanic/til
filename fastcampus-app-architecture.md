@@ -56,3 +56,16 @@
 - The power of OO comes from safe, convenient polymorphism. With OO, you have absolute control over the every single source code dependency in your system. - Robert C. Martin, The Future of Programming Languages
 - 다형성을 이용해 의존성을 역전.
 - 의존성 역전을 남발하면 코드를 이해하기 어려워질 수도 있다.
+
+### 03. 의존성 주입 패턴
+- Composition Root. 
+- Ribs의 Builder가 생성자 주입 / 메서드 주입 / 프로퍼티 주입.
+- 하위의 의존성을 상위 화면들이 모두 챙겨서 주입해줘야하는 상황을 피하는 
+- Volatile Dependency
+  - Runtime에 초기화가 필요한 것. ex) 데이터베이스
+  - 아직 존재하지 않거나 개발 중인 것.
+  - 비결정론적 동작/알고리즘.
+- Stable Dependency
+  - 결정론적 동작/알고리즘.
+  - 신뢰할만한 하위호환성.
+  - Volatile 의존성을 제외한 모든 것.
