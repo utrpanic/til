@@ -73,3 +73,8 @@
 ### 04. 리팩토링
 - Local Swift Package를 이용한 모듈 분리.
 - Interface용 모듈의 별도 정의.
+
+### 05. 잘못 설계된 모듈 고치기
+- Network 모듈을 적용.
+- URLSessionConfiguration.protocolClasses를 통해, response mock을 작성할 수 있다.
+- 변경에는 닫혀있고 확장에는 열려있는.
