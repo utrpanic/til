@@ -88,3 +88,12 @@
 - 프로젝트 전체 현황과 정보 공유.
   - 모듈별 커버리지를 랭킹화한다던가...
 - 아키텍처 유지, 보수 및 개선을 통한 개발자 경험 향상.
+
+## 3부. 자동화 테스팅
+
+### 01. 테스트의 종류
+- Test Pyramid.
+  - Manual Tests
+  - E2E Tests (End to End. UI Testing)
+  - Integration Tests
+  - Unit Tests (Include Snapshot Tests)
