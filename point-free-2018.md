@@ -477,3 +477,9 @@ try Bool(from: ArbitraryDecoder())
 try Int(from: ArbitraryDecoder())
 try Date(from: ArbitraryDecoder())
 ```
+
+# [Episode #32 Decodable Randomness: Part 2](https://www.pointfree.co/episodes/ep32-decodable-randomness-part-2)
+- Randomness는 달성했지만, 그저 random string일 뿐 random email 같은 건 구현하지 못했다.
+``` Swift
+let alpha = element(of: Array("abcdefghijklmnopqrstuvwxyz")).map { $0! }
+```
