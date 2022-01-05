@@ -488,3 +488,21 @@ let alpha = element(of: Array("abcdefghijklmnopqrstuvwxyz")).map { $0! }
 - protocol을 사용할 경우 겪을 수 있는 문제점들.
 - You can only conform your types to them a single time.
 - Flexibility와 Composability를 위해, 평소에는 compiler가 담당하는 일부 작업들을 직접 구현해볼 예정이다.
+
+# [Episode #34 Protocol Witnesses: Part 2](https://www.pointfree.co/episodes/ep34-protocol-witnesses-part-2)
+- Converting protocol to struct. Less protocol-oriented.
+```Swift
+protocol Describable {
+  var describe: String { get }
+}
+struct Describing<A> {
+  let describe: (A) -> String
+}
+protocol Combinable {
+  func combine(with other: Self) -> Self
+}
+struct Combining<A> {
+  let combine: (A, A) -> A
+}
+```
+- 신기방기!!!!! 거기에 Overture를 또!!!!!
