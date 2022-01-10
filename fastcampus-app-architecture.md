@@ -103,3 +103,8 @@
 - Async 동작을 테스트할 경우, XCAssert를 그냥 사용하는 것은 어렵다. XCTwaiter.wait()를 사용.
 - 핵심 로직과 비동기적 특성을 분리하여, 테스트는 가능한 한 동기적으로 작동하게 만들기.
 - Secheduler를 주입 받도록 수정하고, 테스트에서는 Combine.ImmediateScheduler를 사용.
+
+### 03. Snapshot Testing
+- Uber와 PointFree 정도의 선택지가 있음.
+- https://github.com/pointfreeco/swift-snapshot-testing
+- 스냅샷을 생성해야하기 때문에, 첫 테스트 실행은 무조건 실패.
