@@ -108,3 +108,11 @@
 - Uber와 PointFree 정도의 선택지가 있음.
 - https://github.com/pointfreeco/swift-snapshot-testing
 - 스냅샷을 생성해야하기 때문에, 첫 테스트 실행은 무조건 실패.
+
+### 04. UI Testing
+- AccessibilityIdentifier를 이용해 UI 요소를 찾아냄.
+- 테스트가 실제 서버를 사용할 수는 없으니 mocking이 필요한데...
+- https://github.com/httpswift/swifter
+- 로컬 서버를 돌려주는 방식이기 때문에, 앱에서 분기가 필요.
+- (endpoint가 하나 뿐인 GraphQL 서버는 어떻게 해야하는지 확인 필요.)
+- 기기의 화면만으로 결과 검증을 해야 함.
