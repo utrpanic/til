@@ -116,3 +116,7 @@
 - 로컬 서버를 돌려주는 방식이기 때문에, 앱에서 분기가 필요.
 - (endpoint가 하나 뿐인 GraphQL 서버는 어떻게 해야하는지 확인 필요.)
 - 기기의 화면만으로 결과 검증을 해야 함.
+
+### 05. Integration Testing
+- 유닛테스트보다는 비싸지만 신뢰도는 더 높은.
+- https://github.com/lyft/Hammer
