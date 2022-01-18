@@ -506,3 +506,17 @@ struct Combining<A> {
 }
 ```
 - 신기방기!!!!! 거기에 Overture를 또!!!!!
+
+# [Episode #35 Advanced Protocol Witnesses: Part 1](https://www.pointfree.co/episodes/ep35-advanced-protocol-witnesses-part-1)
+- 왜 이들을 Witness라고 부르는 걸까. 어딜 놓친 걸까.
+- contramap 대신에 pullback이란 수학 용어를 사용.
+```Swift
+struct Equating<A> {
+  let equals: (A, A) -> Bool
+}
+extension Equation {}
+  func pullback<B>(_ f: @escaping (B) -> A) -> Equating<B>
+}
+```
+- extension에 static property를 선언하는 방법으로 global variable 문제도 회피.
+- Conditional conformance를 통해 generic type을 static property 또는 function에 사용하는 것이 가능.
