@@ -520,3 +520,27 @@ extension Equation {}
 ```
 - extension에 static property를 선언하는 방법으로 global variable 문제도 회피.
 - Conditional conformance를 통해 generic type을 static property 또는 function에 사용하는 것이 가능.
+
+# [Episode #36 Advanced Protocol Witnesses: Part 2](https://www.pointfree.co/episodes/ep36-advanced-protocol-witnesses-part-2)
+- We can't extend tuples.
+- We can't extend the `Void` type. (Non-nominal type cannot be extended.)
+- 대박... conditional conformance를 통해 함수 타입도 extend 할 수 있다.
+```Swift
+// extension (A) -> A: Combinable {
+//   func combine(other f: @escaping (A) -> A) -> (A) -> A {
+//     return { a in other(self(a)) }
+//   }
+// }
+extension Combining {
+  static var endo: Combining<(A) -> A> {
+//    return Combining<(A) -> A> { f, g in
+//      { a in g(f(a)) }
+//    }
+    return Combining<(A) -> A>(combine: >>>)
+  }
+}
+```
+- pullback을 통해 조합해보면, 사실상 protocol inheritance를 구현한 것이 된다는.
+- 이 모든 게 Protocol을 concrete type으로 구현함으로써...
+- Protocol에 associatedtype 쓰기 시작하면 여러가지 제약이 발생.
+- Conditional conformance을 동일하게 응용할 수 있음.
