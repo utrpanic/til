@@ -544,3 +544,13 @@ extension Combining {
 - 이 모든 게 Protocol을 concrete type으로 구현함으로써...
 - Protocol에 associatedtype 쓰기 시작하면 여러가지 제약이 발생.
 - Conditional conformance을 동일하게 응용할 수 있음.
+
+# [Episode #37 Protocol-Oriented Library Design: Part 1](https://www.pointfree.co/episodes/ep37-protocol-oriented-library-design-part-1)
+- Snapshot testing library를 만들겠다. 이미 잘 쓰고 있는.
+- https://github.com/pointfreeco/swift-snapshot-testing
+- Reference data를 생성하는 첫 테스트는 일단 실패.
+- Xcode의 Navigator에서 직접 스냅샷을 열어볼 수 있음.
+- Snapshottable protocol을 이용해 generalize 하겠다. (View만 하는 게 아니라)
+- associatedtype을 사용하니 Snapshottable을 더이상 타입으로 사용할 수 없게 된다.
+- Protocol의 문제점 또 하나. Naming collisions. 같은 인터페이스를 가진 서로 다른 protocol을 동시에 conform할 때.
+- 목표는 달성했지만, 너무 복잡하다. 이렇게까지 하면서 쓸 이유가 있겠는가...
