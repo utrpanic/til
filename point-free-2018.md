@@ -554,3 +554,8 @@ extension Combining {
 - associatedtype을 사용하니 Snapshottable을 더이상 타입으로 사용할 수 없게 된다.
 - Protocol의 문제점 또 하나. Naming collisions. 같은 인터페이스를 가진 서로 다른 protocol을 동시에 conform할 때.
 - 목표는 달성했지만, 너무 복잡하다. 이렇게까지 하면서 쓸 이유가 있겠는가...
+
+# [Episode #38 Protocol-Oriented Library Design: Part 2](https://www.pointfree.co/episodes/ep38-protocol-oriented-library-design-part-2)
+- String이 Snapshottable을 conform하도록.
+- 아니... 폴더에 가서 파일을 지울 필요가 없었음. `record = true`를 넣으면 새로 저장.
+- View hierarchy를 String으로 출력해서 snapshot test.
