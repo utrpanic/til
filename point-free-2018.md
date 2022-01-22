@@ -559,3 +559,10 @@ extension Combining {
 - String이 Snapshottable을 conform하도록.
 - 아니... 폴더에 가서 파일을 지울 필요가 없었음. `record = true`를 넣으면 새로 저장.
 - View hierarchy를 String으로 출력해서 snapshot test.
+
+# [Episode #39 Witness-Oriented Library Design](https://www.pointfree.co/episodes/ep39-witness-oriented-library-design)
+- Witness system!?
+- Diffable protocol을 Diffing struct로 변경.
+- Diffing, Snapshotting protocol을 이용해서 CALayer, UIView, UIViewController 각각의 witness를 static stored property로 정의.
+- 그리고 다시 pullback을 통해 CALayer에 대한 Snapshotting<CALayer>에서 Snapshotting<UIView>, Snapshotting<UIViewController>를 간단히 정의.
+- 구현체가 protocol을 conform하는 대신, protocol을 concrete type으로 정의하고 conditional conformance 상황에서 static property로 정의하면, composition, transform도 쉬워지고, protocol이 갖고 있는 많은 문제점을 피해갈 수 있다?
