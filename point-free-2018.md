@@ -566,3 +566,10 @@ extension Combining {
 - Diffing, Snapshotting protocol을 이용해서 CALayer, UIView, UIViewController 각각의 witness를 static stored property로 정의.
 - 그리고 다시 pullback을 통해 CALayer에 대한 Snapshotting<CALayer>에서 Snapshotting<UIView>, Snapshotting<UIViewController>를 간단히 정의.
 - 구현체가 protocol을 conform하는 대신, protocol을 concrete type으로 정의하고 conditional conformance 상황에서 static property로 정의하면, composition, transform도 쉬워지고, protocol이 갖고 있는 많은 문제점을 피해갈 수 있다?
+
+# [Episode #40 Async Functional Refactoring](https://www.pointfree.co/episodes/ep40-async-functional-refactoring)
+- It can't snapshot values that are asynchronous.
+- snapshot 함수가 WKNavigationDelegate을 argument로 받음.
+- Snapshotting에 conditional conformance로 A == WKWebView. 미쳤나봐. 신기다.
+- Semapore를 이용해서 async를 sync로 바꿨더니 wait()에서 deadlock. expectation을 사용해야 함.
+- Small, composable, well-understood unit을 수정하고, 여전히 전체가 잘 돌아감을 확인할 수 있었다.
