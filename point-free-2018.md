@@ -573,3 +573,8 @@ extension Combining {
 - Snapshotting에 conditional conformance로 A == WKWebView. 미쳤나봐. 신기다.
 - Semapore를 이용해서 async를 sync로 바꿨더니 wait()에서 deadlock. expectation을 사용해야 함.
 - Small, composable, well-understood unit을 수정하고, 여전히 전체가 잘 돌아감을 확인할 수 있었다.
+
+# [Episode #41 A Tour of Snapshot Testing](https://www.pointfree.co/episodes/ep41-a-tour-of-snapshot-testing)
+- https://github.com/Raizlabs/BonMot 에 snapshot test를 작성.
+- NSAttributedString에 대한 snapshot test. 필드를 일일이 비교하지 말고.
+- This library is transformavale and extensable.
