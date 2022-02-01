@@ -23,3 +23,23 @@
 - map: Purely transform the underlying type of your generic container.
 - zip: Combine multiple generic container values into a single generic container.
 - flatMap: Sequence your generic containers.
+
+# [Episode #44 The Many Faces of Flat‑Map: Part 3](https://www.pointfree.co/episodes/ep44-the-many-faces-of-flat-map-part-3)
+- `zip` combine multiple independent values into single one.
+- `map` pure infailable transformation.
+- `flatMap` failable transformation.
+- nil handling, error handling, `Valided`, `Func`, `Parallel`에도 동일하게 응용 가능.
+```Swift
+zip(with: UserEnvelope.init)(
+  Result { try requireSome(Bundle.main.path(forResource: "user", ofType: "json")) }
+    .map(URL.init(fileURLWithPath:))
+    .flatMap { url in Result { try Data.init(contentsOf: url) } }
+    .flatMap { data in Result { try JSONDecoder().decode(User.self, from: data) } },
+
+  Result { try requireSome(Bundle.main.path(forResource: "invoices", ofType: "json")) }
+    .map(URL.init(fileURLWithPath:))
+    .flatMap { url in Result { try Data.init(contentsOf: url) } }
+    .flatMap { data in Result { try JSONDecoder().decode([Invoice].self, from: data) } }
+)
+// Result<UserEnvelope, Swift.Error>
+```
