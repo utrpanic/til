@@ -18,3 +18,12 @@ Task {
   print("Completed.")
 }
 ```
+
+## [3. Transforming Operators](https://www.raywenderlich.com/books/combine-asynchronous-programming-with-swift/v3.0/chapters/3-transforming-operators)
+- `collect()`: event들을 array로. count가 없으면 upstream이 끝나는 시점에, count가 있으면 해당 갯수가 채워질 때마다.
+- `map(_:)`: Key path로 바로 mapping하는 것도 가능.
+- `flatMap(maxPublishers:_:)`: Multiple upstream을 single downstream으로 바꿔줌.
+- `replaceNil(with:)`: Upstream event가 nil인 경우, 지정한 값을 방출. Optional을 리턴하는 것은 안됨.
+- `replaceEmpty(with:)`: Upstream이 event 방출 없이 종료될 경우, 지정한 값을 방출.
+- `scan(_:_:)`: 이전에 방출한 값을 closure의 parameter로 다시 받을 수 있음. Reduce와 유사한 동작.
+- `collect`나 `flatMap`처럼 buffer size를 파라미터로 받는 operator의 경우, 메모리 문제에 신경써야 함.
