@@ -27,3 +27,10 @@ Task {
 - `replaceEmpty(with:)`: Upstream이 event 방출 없이 종료될 경우, 지정한 값을 방출.
 - `scan(_:_:)`: 이전에 방출한 값을 closure의 parameter로 다시 받을 수 있음. Reduce와 유사한 동작.
 - `collect`나 `flatMap`처럼 buffer size를 파라미터로 받는 operator의 경우, 메모리 문제에 신경써야 함.
+
+## [4. Filtering Operators](https://www.raywenderlich.com/books/combine-asynchronous-programming-with-swift/v3.0/chapters/4-filtering-operators)
+- `filter`, `removeDuplicates`, `compactMap`, `ignoreOutput`
+- `first(where:)`, `last(where:)`: first는 lazy, last는 greedy.
+- `dropFirst`, `drop(while:)`, `drop(untilOutputFrom:)`
+- `prefix`, `prefix(while:)`, `prefix(untilOutputFrom:)`
+- Throwable closure를 파라미터로 받는 경우, `try` prefix 사용. Error throw 시, completion.
