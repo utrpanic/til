@@ -43,3 +43,17 @@ zip(with: UserEnvelope.init)(
 )
 // Result<UserEnvelope, Swift.Error>
 ```
+
+# [Episode #45 The Many Faces of Flat‑Map: Part 4](https://www.pointfree.co/episodes/ep45-the-many-faces-of-flat-map-part-4)
+- `Parallel`의 `flatMap`을 `then`으로 rename할 수 있다. flatMap 같은 기능이 다른 이름으로 제공되는 것은 흔한 구현이라고.
+```Swift 
+Parallel { f in f(Bundle.main.path(forResource: "user", ofType: "json")!) }
+  .then(URL.init(fileURLWithPath:))
+  .then { url in Parallel { f in f(try! Data(contentsOf: url) } }
+  .then { data in Parallel { f in f(try! JSONDecoder().decode(User.self, from: data)) } }
+```
+  - By using this alternative name we lose out on a vast body of literature that uses the term `flatMap`.
+  - And why rename `flatMap` to `then` for only `Parallel`? Should we also use it for optionals, arrays, results, validated, and func? `flatMap` works in all of those cases so is it worth using a specialized name?
+  - The biggest problem with this rename is that it is often accompanied with other renames.
+- Kotlin이나 TypeScript에서 `Optional`은 타입이 아니라 컴파일러의 기능으로 제공된다고. 즉 flatten은 자동으로 처리함. Nullability가 중첩되는 일이 없음.
+- 읽고도 알쏭달쏭... `flatMap`이라는 용어를 사용함으로써 얻어지는 직관을 포기할 수 없다고 하는 듯 한데, `then`은 어째서?
