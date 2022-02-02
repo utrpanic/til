@@ -34,3 +34,10 @@ Task {
 - `dropFirst`, `drop(while:)`, `drop(untilOutputFrom:)`
 - `prefix`, `prefix(while:)`, `prefix(untilOutputFrom:)`
 - Throwable closure를 파라미터로 받는 경우, `try` prefix 사용. Error throw 시, completion.
+
+## [5. Combining Operators](https://www.raywenderlich.com/books/combine-asynchronous-programming-with-swift/v3.0/chapters/5-combining-operators)
+- `prepend`, `append`
+- `switchToLatest`: `Publisher`를 emit하는 `Publisher`의 경우.
+- `merge(with:)`: 동일한 `Output` type을 가진 `Publisher`의 경우.
+- `combineLatest`: 어느 `Publisher`든 새로운 value가 emit될 때마다 tuple을 emit.
+- `zip`: 모든 `Publisher`가 새로운 value를 emit할 경우, 해당 tuple을 순서대로.
