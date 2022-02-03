@@ -57,3 +57,37 @@ Parallel { f in f(Bundle.main.path(forResource: "user", ofType: "json")!) }
   - The biggest problem with this rename is that it is often accompanied with other renames.
 - Kotlin이나 TypeScript에서 `Optional`은 타입이 아니라 컴파일러의 기능으로 제공된다고. 즉 flatten은 자동으로 처리함. Nullability가 중첩되는 일이 없음.
 - 읽고도 알쏭달쏭... `flatMap`이라는 용어를 사용함으로써 얻어지는 직관을 포기할 수 없다고 하는 듯 한데, `then`은 어째서?
+
+# [Episode #46 The Many Faces of Flat‑Map: Part 5](https://www.pointfree.co/episodes/ep46-the-many-faces-of-flat-map-part-5)
+- `flatMap`을 이용해서 `map`과 `zip`을 구현할 수 있는가.
+```Swift
+func map<A, B, E>(
+  _ f: @escaping (A) -> B
+  ) -> (Parallel<Result<A, E>>) -> Parallel<Result<B, E>> {
+
+  return { parallelResultA in
+    parallelResultA.map { resultA in
+      resultA.map { a in
+        f(a)
+      }
+    }
+  }
+}
+```
+- `Parallel`과 `Result`가 모두 `map`을 제공하기 때문에, general하게 구현 가능.
+```Swift
+func zip<A, B, E>(
+  _ lhs: Parallel<Result<A, E>>,
+  _ rhs: Parallel<Result<B, E>>
+  ) -> Parallel<Result<(A, B), E>> {
+
+  return zip(lhs, rhs).map { resultA, resultB in
+    zip(resultA, resultB)
+  }
+}
+```
+- `Parallel`과 `Result`가 모두 `zip`을 제공하기 때문에, general하게 구현 가능.
+- 하지만 `flatMap`은 불가능. Type specific한 구현이 반드시 필요.
+- `map`을 `flatMap`으로 구현할 수 있는가. 가능.
+- `zip`을 `flatMap`으로 구현할 수 있는가. 타입에 따라 불가능.
+- What's the point? 정말로 포인트가 뭔지 모르겠다. flatMap이 이렇게나 파워풀하면서도 한계가 있다는 걸 알면 무엇이 나아지는가.
