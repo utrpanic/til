@@ -41,3 +41,11 @@ Task {
 - `merge(with:)`: 동일한 `Output` type을 가진 `Publisher`의 경우.
 - `combineLatest`: 어느 `Publisher`든 새로운 value가 emit될 때마다 tuple을 emit.
 - `zip`: 모든 `Publisher`가 새로운 value를 emit할 경우, 해당 tuple을 순서대로.
+
+## [6. Time Manipulation Operators](https://www.raywenderlich.com/books/combine-asynchronous-programming-with-swift/v3.0/chapters/6-time-manipulation-operators)
+- `delay(for:tolerance:scheduler:options)`: Upstream의 event를 지정시간 후에 emit.
+- `collect(_:options)`: `collect`의 overload.
+- `debounce(for:scheduler:)`: Upstream에서 지정 시간 동안 새로운 event를 emit하지 않으면, 마지막 event를 downstream에 emit.
+- `throttle(for:scheduler:latest:)`: Upstream에서 event를 emit하면 downstream에 emit 후, 지정시간 동안 emit된 event 중 첫 번째 혹은 마지막 event를 지정시간이 되면 emit. (책 내용과 코드 실행 결과가 다름.)
+- `timeout(_:scheduler:customError:)`: Upstream에서 지정 시간 동안 새로운 value가 emit되지 않으면, complete.
+- `measureInterval(using:)`: RunLoop 또는 DispatchQueue를 사용할 수 있음. Event 사이의 timeInterval을 value로 emit.
