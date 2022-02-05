@@ -91,3 +91,9 @@ func zip<A, B, E>(
 - `map`을 `flatMap`으로 구현할 수 있는가. 가능.
 - `zip`을 `flatMap`으로 구현할 수 있는가. 타입에 따라 불가능.
 - What's the point? 정말로 포인트가 뭔지 모르겠다. flatMap이 이렇게나 파워풀하면서도 한계가 있다는 걸 알면 무엇이 나아지는가.
+
+# [Episode #47 Predictable Randomness: Part 1](https://www.pointfree.co/episodes/ep47-predictable-randomness-part-1)
+- Make the untestable testable.
+-  Protocols witnesses에서 사용했던, Conditional conformance를 이용한 static extension 응용.
+- Int뿐 아니라 Int32, UInt64 등을 함께 재공하려면 FixedWidthInteger protocol, Double의 경우에는 BinaryFloatingPoint protocol이 있음.
+- Swift standard library의 `random(in:using:)`은 RandomNumberGenerator를 파라미터로 받을 수 있으며, 이를 통해 결과값을 통제할 수 있음.
