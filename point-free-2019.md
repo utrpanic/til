@@ -97,3 +97,48 @@ func zip<A, B, E>(
 -  Protocols witnesses에서 사용했던, Conditional conformance를 이용한 static extension 응용.
 - Int뿐 아니라 Int32, UInt64 등을 함께 재공하려면 FixedWidthInteger protocol, Double의 경우에는 BinaryFloatingPoint protocol이 있음.
 - Swift standard library의 `random(in:using:)`은 RandomNumberGenerator를 파라미터로 받을 수 있으며, 이를 통해 결과값을 통제할 수 있음.
+
+# [Episode #48 Predictable Randomness: Part 2](https://www.pointfree.co/episodes/ep48-predictable-randomness-part-2)
+- Gen을 testable하게 만들기 위해
+  - Global `AnyRnadomNumberGenerator`를 생성하는 방법.
+  ```Swift
+  extension Gen where A: FixedWidthInteger {
+    static func int(in range: ClosedRange<A>, using rng: inout RandomNumberGenerator) -> Gen {
+      return Gen { .random(in: range, using: &rng) }
+    }
+  }
+  ```
+  - `RandomNumberGenerator`를 `AnyRandomNumberGenerator`로 감싸서 `run` function의 parameter로 받는 방법. `rng`가 mutable한 부분이 인터페이스에 표시되지 않는 문제점.
+  ```Swift
+  extension Gen where A: FixedWidthInteger {
+    static func int(in range: ClosedRange<A>) -> Gen {
+      let rng = SystemRandomNumberGenerator()
+      return int(in: range, using: rng)
+    }
+
+    static func int<RNG: RandomNumberGenerator>(in range: ClosedRange<A>, using rng: RNG = SystemRandomNumberGenerator()) -> Gen {
+      return Gen {
+        var rng = rng 
+        return .random(in: range, using: &rng)
+      }
+    }
+  }
+  ```
+- `Array`를 위한 `Gen`을 생성해보면 nested problem이 다시 나타나는데, `flatMap`을 이용해 해결.
+```Swift
+extension Gen {
+  func array(of count: Gen<Int>) -> Gen<[A]> {
+    return count.flatMap { count in
+      Gen<[A]> { rng in
+        var array: [A] = []
+        for _ in 1...count {
+          array.append(self.run(&rng))
+        }
+        return array
+      }
+    }
+  }
+}
+```
+- Swift가 제공하는 randomness API들을 보다 composable하게 바꾸기 위해 소개한 `Gen`. 여기에 이제 testablility를 부여하기 위한 여정.
+- ...인데 거듭 읽어도 잘 못따라가고 있음. 제시한 문제들을 잘 풀어낸 건 이해했는데, 이걸 어떻게 응용해야하는가.
