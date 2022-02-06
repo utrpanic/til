@@ -49,3 +49,12 @@ Task {
 - `throttle(for:scheduler:latest:)`: Upstream에서 event를 emit하면 downstream에 emit 후, 지정시간 동안 emit된 event 중 첫 번째 혹은 마지막 event를 지정시간이 되면 emit. (책 내용과 코드 실행 결과가 다름.)
 - `timeout(_:scheduler:customError:)`: Upstream에서 지정 시간 동안 새로운 value가 emit되지 않으면, complete.
 - `measureInterval(using:)`: RunLoop 또는 DispatchQueue를 사용할 수 있음. Event 사이의 timeInterval을 value로 emit.
+
+## [7. Sequence Operators](https://www.raywenderlich.com/books/combine-asynchronous-programming-with-swift/v3.0/chapters/7-sequence-operators)
+- Publisher들은 실제로도 sequence. Swift standard library가 제공하는 sequence를 위한 인터페이스들이 유사하게 제공됨.
+- `min`, `max`: 둘 다 greedy.
+- `first`, `last`, `output(at:)`: last만 greedy. 나머지는 lazy.
+- `count`: Upstream의 value가 아닌 갯수를 emit. 물론 greedy.
+- `contains`: Upstream의 value가 조건을 충족하면 true를 emit. 충족하지 못한 채로 finish되면 false를 emit.
+- `allSatisfy`: Upstream이 finish되었을 때, 모든 value가 조건을 충족하면 true를 emit. 충족하지 못하는 value를 받으면 바로 subscription을 cancel함.
+- `reduce`: Swift standard library와 동일. Upstream이 finish되었을 때, 마지막에 reduce 동작. Upstream의 value 마다 accumulated value를 emit하는 `scan`과는 다름.
