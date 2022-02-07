@@ -142,3 +142,31 @@ extension Gen {
 ```
 - Swift가 제공하는 randomness API들을 보다 composable하게 바꾸기 위해 소개한 `Gen`. 여기에 이제 testablility를 부여하기 위한 여정.
 - ...인데 거듭 읽어도 잘 못따라가고 있음. 제시한 문제들을 잘 풀어낸 건 이해했는데, 이걸 어떻게 응용해야하는가.
+
+# [Episode #49 Generative Art: Part 1](https://www.pointfree.co/episodes/ep49-generative-art-part-1)
+- Bump function을 만들어내고, 그 parameter들을 `Gen<CGFloat>`를 통해서 구현해내는 과정
+- ...인데 반포기 상태. 그저 마법 같은...
+```Swift
+func bump(
+  amplitude: CGFloat,
+  center: CGFloat,
+  plateauSize: CGFloat,
+  curveSize: CGFloat
+  ) -> (CGFloat) -> CGFloat {
+  return { x in
+    let plateauSize = plateauSize / 2
+    let curveSize = curveSize / 2
+    let size = plateauSize + curveSize
+    let x = x - center
+    return amplitude * (1 - g((x * x - plateauSize * plateauSize) / (size * size - plateauSize * plateauSize)))
+  }
+}
+ 
+let curve = zip4(with: bump(amplitude:center:plateauSize:curveSize:))(
+  Gen<CGFloat>.float(in: -20...(-1)),
+  Gen<CGFloat>.float(in: -60...60)
+    .map { $0 + canvas.width / 2 },
+  Gen<CGFloat>.float(in: 0...60),
+  Gen<CGFloat>.float(in: 10...60)
+)
+```
