@@ -170,3 +170,27 @@ let curve = zip4(with: bump(amplitude:center:plateauSize:curveSize:))(
   Gen<CGFloat>.float(in: 10...60)
 )
 ```
+
+# [Episode #50 Generative Art: Part 2](https://www.pointfree.co/episodes/ep50-generative-art-part-2)
+- `Gen` 조합을 통해 라인 별 bump 갯수도 randomize. 
+- 테스트에서 randomness를 통제하기 위해, Environment를 통해 rng 주입.
+- Singleton을 사용하던 코드들을 모두 `Current`로 교체.
+```Swift
+struct Environment {
+  var calendar = Calendar.current
+  var date = { Date() }
+  var rng = AnyRandomNumberGenerator(rng: SystemRandomNumberGenerator())
+}
+
+var Current = Environment()
+
+extension Environment {
+  static let mock = Environment(
+    calendar: Calendar(identifier: .gregorian),
+    date: { Date.init(timeIntervalSince1970: 1234567890) },
+    rng: AnyRandomNumberGenerator(rng: LCRNG(seed: 1))
+  )
+}
+```
+- `rng`를 주입함으로써, 테스트에서는 deterministic한 결과를 얻어냄.
+- `Environment`를 통한 주입이 너무 좋아서, 만나는 프로젝트마다 모두 사용한다고 하는데... 모듈화된 구조에서는 어떻게 할지 궁금하다.
