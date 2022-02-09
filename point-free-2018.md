@@ -63,16 +63,17 @@ String(2.incr().square())
 - UIButton을 파라미터로 받는 함수를 스타일별로 만들어서 필요에 따라 호출을 이어가는 방법.
 - 각 스타일을 변경하는 함수를 리턴하는 함수를 만든 후, Function Composition하는 방법.
 
-# [Episode #4 Algebraic Data Types](https://www.pointfree.co/episodes/ep4-algebraic-data-types)
+# [Episode #4 Algebraic Data Types](https://www.pointfree.co/episodes/ep4-algebraic-data-types) `+1`
 - Algebra? 너무 오랫만에 듣는 단어...
-- fatalError() returns Never. Never는 대체 무엇인가. 이름 그대로 Never.
-- Generic으로 만든 struct Pair<A, B>와 enum Either<A, B>. 해당 타입의 값의 종류는 모두 몇 개인가. (이걸 아는 게 무슨 의미인거지?)
-- Void는 실제 타입이 아닌 empty tuple의 typealise. 즉, extension 같은 것이 불가능.
+- fatalError() returns Never. Never는 case가 없는 enum.
+- Generic으로 만든 struct Pair<A, B>와 enum Either<A, B>. 해당 타입의 값의 종류는 모두 몇 개인가. What's the algebra of the type?
+- struct는 곱하기, enum은 더하기.
+- Void는 실제 타입이 아닌 empty tuple의 typealias. 즉, extension 같은 것이 불가능.
 ```Swift
 sum([1, 2]) + sum([]) == sum([1, 2])
 product([1, 2]) * product([]) == product([1, 2])
 ```
-- URLSession의 completionHandler. (Data?, URLSession?, Error?). 불가능한 조합이 존재한다. 예를 들어 셋다 non-optional 일 수는 없는.
+- URLSession의 completionHandler. (Data?, URLSession?, Error?). 불가능한 조합이 존재한다. 예를 들어, 셋다 nil이거나 non-optional인 case들.
 - Either<Pair<Data, URLResponse>, Error> 또는 Result<(Data, URLResponse), Error>
 
 # [Episode #5 Higher-Order Functions](https://www.pointfree.co/episodes/ep5-higher-order-functions)
