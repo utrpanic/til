@@ -290,7 +290,7 @@ func set<Root, Value>(
 - `Current`라는 Environment 객체를 global singleton으로 정의해서 개선해보았다. Global singleton에 마음이 불편할 수 있다고.
 - Mock 객체를 변형하는데 Overture도 사용하고...
 
-# [Episode #19 Algebraic Data Types: Generics and Recursion](https://www.pointfree.co/episodes/ep19-algebraic-data-types-generics-and-recursion)
+# [Episode #19 Algebraic Data Types: Generics and Recursion](https://www.pointfree.co/episodes/ep19-algebraic-data-types-generics-and-recursion) `+1`
 - Recursive data type. Swift에서는 이를 위해 indirect 키워드를 사용해야 한다.
 ```Swift
 enum List<A> {
