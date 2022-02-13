@@ -194,3 +194,25 @@ extension Environment {
 ```
 - `rng`를 주입함으로써, 테스트에서는 deterministic한 결과를 얻어냄.
 - `Environment`를 통한 주입이 너무 좋아서, 만나는 프로젝트마다 모두 사용한다고 하는데... 모듈화된 구조에서는 어떻게 할지 궁금하다.
+
+# [Episode #51 Structs 🤝 Enums](https://www.pointfree.co/episodes/ep51-structs-enums)
+- People sometimes call structs `product` types.
+- People sometimes call enums `sum` types.
+- struct의 member wise initializer와 유사하게, enum도 일종의 생성자에 해당하는 함수를 갖는다.
+```Swift
+Either<Int, String>.left
+// (Int) -> Either<Int, String>
+Either<Int, String>.right
+// (String) -> Either<Int, String>
+```
+- Algebra에서는 product와 sum이 똑같이 중요하다. 하지만 Swift에서는 struct를 enum보다 중요하게 여기는 듯 하다. 
+- Anonymous struct로 tuple을 지원하지만, anonymous enum이란 건 없다.
+- 상상해본다면 이런 모습일 것...
+```Swift
+let _: (Int | String)
+func render(data: (user: [User] | empty | loading)) {
+  switch data {
+
+  }
+}
+```
