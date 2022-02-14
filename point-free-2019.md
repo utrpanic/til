@@ -216,3 +216,26 @@ func render(data: (user: [User] | empty | loading)) {
   }
 }
 ```
+
+# [Episode #52 Enum Properties](https://www.pointfree.co/episodes/ep52-enum-properties)
+- `왜 우리 enum이 기를 죽이고 그래요.`
+- enum의 associated value를 얻어내는 방식은 struct에 비해 너무 불편하다.
+- Swift5에 추가된 Result.get() 함수.
+```Swift
+enum Validated<Valid, Invalid> {
+  case valid(Valid)
+  case invalid([Invalid])
+  
+  var valid: Valid? {
+    guard case let .valid(value) = self else { return nil }
+    return value
+  }
+
+  var invalid: [Invalid]? {
+    guard case let .invalid(value) = self else { return nil }
+    return value
+  }
+}
+```
+- 하지만 enum마다 일일이 직접 정의해줘야하는 것은 그대로. 
+- 그러니까 다음 episode에서 code generation에 대해 알아보자!
