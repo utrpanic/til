@@ -239,3 +239,8 @@ enum Validated<Valid, Invalid> {
 ```
 - 하지만 enum마다 일일이 직접 정의해줘야하는 것은 그대로. 
 - 그러니까 다음 episode에서 code generation에 대해 알아보자!
+
+# [Episode #53 Swift Syntax Enum Properties](https://www.pointfree.co/episodes/ep53-swift-syntax-enum-properties)
+- [SwiftSyntax](https://github.com/apple/swift-syntax)로 enum properties를 만들어내자.
+- `SyntaxVisitor` class를 상속하여, 각 요소를 방문할 때마다 호출될 코드를 작성할 수 있음.
+- 하지만 우리가 원하는 건, 이 code generation이 build system의 일부로서 동작하는 것.
