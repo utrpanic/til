@@ -244,3 +244,8 @@ enum Validated<Valid, Invalid> {
 - [SwiftSyntax](https://github.com/apple/swift-syntax)로 enum properties를 만들어내자.
 - `SyntaxVisitor` class를 상속하여, 각 요소를 방문할 때마다 호출될 코드를 작성할 수 있음.
 - 하지만 우리가 원하는 건, 이 code generation이 build system의 일부로서 동작하는 것.
+
+# [Episode #54 Advanced Swift Syntax Enum Properties](https://www.pointfree.co/episodes/ep54-advanced-swift-syntax-enum-properties)
+- SwiftSyntax를 이용해 associatedValue가 여럿이거나 없는 경우도 처리.
+- 다시 정리해보면... Swift가 struct에 기본 제공하는 인터페이스들을 enum에게 똑같이 제공하겠다.
+- Visitor 구현은 다 했지만, 아직 배포 가능한 라이브러리도 아니고, testable하지도 않다.
