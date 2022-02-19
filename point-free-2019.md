@@ -249,3 +249,14 @@ enum Validated<Valid, Invalid> {
 - SwiftSyntax를 이용해 associatedValue가 여럿이거나 없는 경우도 처리.
 - 다시 정리해보면... Swift가 struct에 기본 제공하는 인터페이스들을 enum에게 똑같이 제공하겠다.
 - Visitor 구현은 다 했지만, 아직 배포 가능한 라이브러리도 아니고, testable하지도 않다.
+
+# [Episode #55 Swift Syntax Command Line Tool](https://www.pointfree.co/episodes/ep55-swift-syntax-command-line-tool)
+- print()의 output parameter를 이용하면, 작은 수정으로도 기존 구현을 테스트할 수 있지만.
+```Swift
+public func print<Target>(_ items: Any..., separator: String = " ", terminator: String = "
+", to output: inout Target) where Target : TextOutputStream
+```
+- XCTAssertEqual()로 큰 데이터를 비교할 때, 정작 어디 부분이 다른지 파악하기 어렵다.
+- https://github.com/pointfreeco/swift-snapshot-testing
+- Code generation library들은 생성된 코드가 Swift 문법 상으로도 문제가 없는지 확인할 필요가 있다.
+- 마지막으로 Swift Package Manager의 excutable target을 이용해 command line tool 제공.
