@@ -260,3 +260,12 @@ public func print<Target>(_ items: Any..., separator: String = " ", terminator: 
 - https://github.com/pointfreeco/swift-snapshot-testing
 - Code generation library들은 생성된 코드가 Swift 문법 상으로도 문제가 없는지 확인할 필요가 있다.
 - 마지막으로 Swift Package Manager의 excutable target을 이용해 command line tool 제공.
+
+# [Episode #56 What Is a Parser?: Part 1](https://www.pointfree.co/episodes/ep56-what-is-a-parser-part-1)
+- 각 타입이 제공하는 parsing intializer. 이 경우, custom format은 사용할 수 없다. 
+- NSRegularExpress, Scanner. 조합이 불가능하고, 너무 오래되었다. Generic 같은 것조차 지원하지 않음.
+- latitude/longitiude parser를 전통적인 방법으로 일단 만들어봄.
+```Swift
+// 40.6782° N, 73.9442° W
+```
+- Edge case 처리를 위한 로직은 계속 불어나고, 구현된 코드 중에 어느 것도 외부에서 reuse할 수 없다.
