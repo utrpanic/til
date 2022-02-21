@@ -269,3 +269,31 @@ public func print<Target>(_ items: Any..., separator: String = " ", terminator: 
 // 40.6782° N, 73.9442° W
 ```
 - Edge case 처리를 위한 로직은 계속 불어나고, 구현된 코드 중에 어느 것도 외부에서 reuse할 수 없다.
+
+# [Episode #57 What Is a Parser?: Part 2](https://www.pointfree.co/episodes/ep57-what-is-a-parser-part-2)
+- Parser란 무엇인가. 결국 String을 받아서 특정 타입을 리턴하는 것.
+- Deep-link를 route enum으로 바꾼다거나, command line tool의 argument를 enum으로 바꾸기도.
+```Swift
+struct Parser<A> {
+  let run: (String) -> A?
+}
+```
+- 우리가 원하는 건 multi-step process. 
+- String의 일부를 parsing하고 나머지를 다음 parser에게 넘겨주는 방식.
+```Swift
+struct Parser<A> {
+  let run: (String) -> (match: A?, rest: String)
+}
+let int = Parser<Int> { str in
+  let prefix = str.prefix(while: { $0.isNumber })
+  guard let int = Int(prefix) else { return (nil, str) }
+  let rest = String(str[prefix.endIndex...])
+  return (int, rest)
+}
+```
+- 그리고 Substring의 신묘한 힘. startIndex를 사용함으로써 문자열 복사를 피할 수도 있다.
+```Swift
+struct Parser<A> {
+  let run: (inout Substring) -> A?
+}
+```
