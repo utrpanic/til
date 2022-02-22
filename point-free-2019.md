@@ -264,7 +264,7 @@ public func print<Target>(_ items: Any..., separator: String = " ", terminator: 
 # [Episode #56 What Is a Parser?: Part 1](https://www.pointfree.co/episodes/ep56-what-is-a-parser-part-1)
 - 각 타입이 제공하는 parsing intializer. 이 경우, custom format은 사용할 수 없다. 
 - NSRegularExpress, Scanner. 조합이 불가능하고, 너무 오래되었다. Generic 같은 것조차 지원하지 않음.
-- latitude/longitiude parser를 전통적인 방법으로 일단 만들어봄.
+- latitude/longitude parser를 전통적인 방법으로 일단 만들어봄.
 ```Swift
 // 40.6782° N, 73.9442° W
 ```
@@ -297,3 +297,39 @@ struct Parser<A> {
   let run: (inout Substring) -> A?
 }
 ```
+
+# [Episode #58 What Is a Parser?: Part 3](https://www.pointfree.co/episodes/ep58-what-is-a-parser-part-3)
+- Extensible and composable parsers.
+- Episode #56의 latitude/longitude parser를 다시 구현해보면
+```Swift
+let northSouth = Parser<Double> { str in
+  guard
+    let cardinal = str.first,
+    cardinal == "N" || cardinal == "S"
+    else { return nil }
+  str.removeFirst(1)
+  return cardinal == "N" ? 1 : -1
+}
+let eastWest = Parser<Double> { str in
+  guard
+    let cardinal = str.first,
+    cardinal == "E" || cardinal == "W"
+    else { return nil }
+  str.removeFirst(1)
+  return cardinal == "E" ? 1 : -1
+}
+func parseLatLong(_ coordString: String) -> Coordinate? {
+  var str = coordString[...]
+  guard
+    let lat = double.run(&str),
+    literal("° ").run(&str) != nil,
+    let latSign = northSouth.run(&str),
+    literal(", ").run(&str) != nil,
+    let long = double.run(&str),
+    literal("° ").run(&str) != nil,
+    let longSign = eastWest.run(&str)
+    else { return nil }
+  return Coordinate(latitude: lat * latSign, longitude: long * longSign)
+}
+```
+- 감탄. 또 감탄.
