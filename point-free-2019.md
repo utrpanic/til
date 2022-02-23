@@ -333,3 +333,35 @@ func parseLatLong(_ coordString: String) -> Coordinate? {
 }
 ```
 - 감탄. 또 감탄.
+
+# [Episode #59 Composable Parsing: Map](https://www.pointfree.co/episodes/ep59-composable-parsing-map)
+- Parser의 map을 구현하면.
+```Swift
+extension Parser {
+  func map<B>(_ f: @escaping (A)-> B) -> Parser<B> {
+    return Parser<B> { str in
+      self.run(&str).map(f)
+    }
+  }
+}
+```
+- NorthSouth를 map으로 구현해보면.
+```Swift
+let northSouth = char
+  .map {
+    $0 == "N" ? Optional(1.0)
+      : $0 == "S" ? -1
+      : nil
+}
+```
+- 이렇게 되면 Parser<Double?>이 되어버린다. 
+- N도 S도 아닌 경우 consume을 아예 하지 말아야 하기 때문에, value 대신 Parser를 return 하는 것을 생각해볼 수 있다.
+```Swift
+let northSouth = char
+  .map {
+    $0 == "N" ? always(1.0)
+      : $0 == "S" ? always(-1)
+      : .never
+}
+```
+- Parser<Parser<Double>>을 리턴하게 되기 때문에, flatMap이 필요해지게 된다.
