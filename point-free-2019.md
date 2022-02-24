@@ -365,3 +365,51 @@ let northSouth = char
 }
 ```
 - Parser<Parser<Double>>을 리턴하게 되기 때문에, flatMap이 필요해지게 된다.
+
+# [Episode #60 Composable Parsing: Flat‑Map](https://www.pointfree.co/episodes/ep60-composable-parsing-flat-map)
+- Parser type의 flatMap
+```Swift
+// flatMap: ((A) -> M<B>) -> (M<A>) -> M<B>
+extension Parser {
+  func flatMap<B>(_ f: @escaping (A) -> Parser<B>) -> Parser<B> {
+    return Parser<B> { str in
+      let original = str
+      let matchA = self.run(&str)
+      let parserB = matchA.map(f)
+      guard let matchB = parserB?.run(&str) else {
+        str = original
+        return nil
+      }
+      return matchB
+    }
+  }
+}
+let coord = double
+  .flatMap { lat in
+    literal("° ")
+      .flatMap { _ in
+        northSouth
+          .flatMap { latSign in
+            literal(", ")
+              .flatMap { _ in
+                double
+                  .flatMap { long in
+                    literal("° ")
+                      .flatMap { _ in
+                        eastWest
+                          .map { longSign in
+                            Coordinate(
+                              latitude: lat * latSign,
+                              longitude: long * longSign
+                            )
+                          }
+                      }
+                  }
+              }
+          }
+    }
+}
+// Parser<Coordinate>
+```
+- flatMap이 callback hell을 해결해준다고 했는데 어째서 이런 코드가 나왔는가.
+- 살펴보면... 이전 parser의 결과를 다음 parser가 사용하고 있지 않고, 마지막에 Coordinate 생성 시에 한꺼번에 사용됨.
