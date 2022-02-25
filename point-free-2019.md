@@ -413,3 +413,37 @@ let coord = double
 ```
 - flatMap이 callback hell을 해결해준다고 했는데 어째서 이런 코드가 나왔는가.
 - 살펴보면... 이전 parser의 결과를 다음 parser가 사용하고 있지 않고, 마지막에 Coordinate 생성 시에 한꺼번에 사용됨.
+
+# [Episode #61 Composable Parsing: Zip](https://www.pointfree.co/episodes/ep61-composable-parsing-zip)
+- Parser type의 flatMap
+```Swift
+// zip: (F<A>, F<B>) -> F<(A, B)>
+func zip<A, B>(_ a: Parser<A>, _ b: Parser<B>) -> Parser<(A, B)> {
+  return Parser<(A, B)> { str in
+    let original = str
+    guard let matchA = a.run(&str) else { return nil }
+    guard let matchB = b.run(&str) else {
+      str = original
+      return nil
+    }
+    return (matchA, matchB)
+  }
+}
+let latitude = zip(double, literal("° "), northSouth)
+  .map { lat, _, latSign in lat * latSign }
+// Parser<Double>
+let longitude = zip(double, literal("° "), eastWest)
+  .map { long, _, longSign in long * longSign }
+// Parser<Double>
+let coord2 = zip(latitude, literal(", "), longitude)
+  .map { lat, _, long in
+    Coordinate(
+      latitude: lat,
+      longitude: long
+    )
+}
+// Parser<Coordinate>
+```
+- 그리고 Combine이나 Rx처럼... zip3, zip4, zip5...
+- asking “what’s the point?” This is our chance to bring everything down to earth, and make sure we aren’t getting into the theoretical weeds too much. 재미있는 문구.
+- Parser type을 정의하고 map, flatMap, zip을 제공함으로써 작은 parser들을 compose할 수 있게 되었다.
