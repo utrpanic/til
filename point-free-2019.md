@@ -447,3 +447,40 @@ let coord2 = zip(latitude, literal(", "), longitude)
 - 그리고 Combine이나 Rx처럼... zip3, zip4, zip5...
 - asking “what’s the point?” This is our chance to bring everything down to earth, and make sure we aren’t getting into the theoretical weeds too much. 재미있는 문구.
 - Parser type을 정의하고 map, flatMap, zip을 제공함으로써 작은 parser들을 compose할 수 있게 되었다.
+
+# [Episode #62 Parser Combinators: Part 1](https://www.pointfree.co/episodes/ep62-parser-combinators-part-1)
+- 하지만 여전히 map, flatMap, zip 만으로 풀기 어려운 문제들이 있다.
+- Skipping characters.
+```Swift
+coord.run("   40.446°    N,   79.982°   W   ")
+// (nil, rest "   40.446°    N,   79.982°   W   ")
+```
+- White space를 skip하는 parser를 추가로 만들면 된다.
+```Swift
+let oneOrMoreSpaces = Parser<Void> { str in
+  let prefix = str.prefix(while: { $0 == " " })
+  guard !prefix.isEmpty else { return nil }
+  str.removeFirst(prefix.count)
+  return ()
+}
+let zeroOrMoreSpaces = Parser<Void> { str in
+  let prefix = str.prefix(while: { $0 == " " })
+  str.removeFirst(prefix.count)
+  return ()
+}
+```
+- 그리고 더 일반화된 방법은...
+```Swift
+func prefix(while p: @escaping (Character) -> Bool) -> Parser<Substring> {
+  return Parser<Substring> { str in
+    let prefix = str.prefix(while: p)
+    str.removeFirst(prefix.count)
+    return prefix
+  }
+}
+let zeroOrMoreSpaces = prefix(while: { $0 == " " })
+  .map { _ in () }
+let oneOrMoreSpaces = prefix(while: { $0 == " " })
+  .flatMap { $0.isEmpty ? .never : always(()) }
+```
+- 이처럼 Parser를 input 또는 output으로 다루는 함수들을 parser combinators 라고 부른다. `prefix`뿐 아니라 `map`, `zip`, `flatMap`, `literal` 등이 모두 포함.
