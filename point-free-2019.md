@@ -484,3 +484,29 @@ let oneOrMoreSpaces = prefix(while: { $0 == " " })
   .flatMap { $0.isEmpty ? .never : always(()) }
 ```
 - 이처럼 Parser를 input 또는 output으로 다루는 함수들을 parser combinators 라고 부른다. `prefix`뿐 아니라 `map`, `zip`, `flatMap`, `literal` 등이 모두 포함.
+
+# [Episode #63 Parser Combinators: Part 2](https://www.pointfree.co/episodes/ep63-parser-combinators-part-2)
+- Parsing multiple values. `map`, `flatMap`, `zip`만으로는 해결하기 어려움.
+```Swift
+func zeroOrMore<A>(_ p: Parser<A>, separatedBy s: Parser<Void>) -> Parser<[A]> {
+  return Parser<[A]> { str in
+    var original = str
+    var matches: [A] = []
+    while let match = p.run(&str) {
+      original = str
+      matches.append(match)
+      if s.run(&str) == nil else {
+        return matches
+      }
+    }
+    str = original
+    return matches
+  }
+}
+let commaOrNewline = char
+  .flatMap { $0 == "," || $0 == "\n" ? always(()) : .never })
+// Parser<Void>
+zeroOrMore(money, separatedBy: commaOrNewline)
+// Parser<[Money]>
+```
+- 이들을 higher-order parser라고.
