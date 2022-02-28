@@ -510,3 +510,21 @@ zeroOrMore(money, separatedBy: commaOrNewline)
 // Parser<[Money]>
 ```
 - 이들을 higher-order parser라고.
+
+# [Episode #64 Parser Combinators: Part 3](https://www.pointfree.co/episodes/ep64-parser-combinators-part-3)
+- 복수의 parser 중 하나라도 parsing에 성공할 경우.
+```Swift
+func oneOf<A>(_ ps: [Parser<A>]) -> Parser<A> {
+  return Parser<A> { str in
+    for p in ps {
+      if let match = p.run(&str) {
+        return match
+      }
+    }
+    return nil
+  }
+}
+```
+- 지금까지 소개된 parser combinators. `oneOf`, `zeroOrMore`, `prefix`
+- New line parsing `separatedBy`에 `literal("\n")`으로 간단히 처리.
+- 알고리즘 문제 풀 때, input parsing에 한 번 사용해볼 것.
