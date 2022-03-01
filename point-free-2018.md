@@ -173,7 +173,7 @@ func pipe<A, B, C>(_ f: @escaping (A) -> B, _ g: @escaping (B) -> C) -> (A) -> C
 - VArgs를 사용하면 가능. 그런데... generic에도 vargs 사용 가능한건가?
 - What's the point? Composition이 중요하다. 우린 이 custom operator들을 사랑하지만 그것들을 코드 베이스에 갑자기 도입하는 게 어려울 수도 있기 때문에 human name을 지은 것이다.
 
-# [Episode #12 Tagged](https://www.pointfree.co/episodes/ep12-tagged)
+# [Episode #12 Tagged](https://www.pointfree.co/episodes/ep12-tagged) `+1`
 - Email이나 ID 같은 프로퍼티를 무조건 String으로만 정의할 것인가.
 - RawRepresentable을 conform하면, singleValueContainer를 통한 decode를 기본으로 제공함.
 ```Swift
@@ -199,6 +199,7 @@ extension Tagged: Equatable where RawValue: Equatable {
   }
 }
 ```
+- Tagged이 특히 이상한 건 generic을 선언해놓고 사용은 하지 않는 것. Phantom type이라고 불린다.
 - 하지만 매번 해당 객체를 생성하는 것도 너무 번거롭기 때문에... 와 진짜 근사하다.
 ```Swift
 extension Tagged: ExpressibleByIntegerLiteral where RawValue: ExpressibleByIntegerLiteral {
