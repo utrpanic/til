@@ -528,3 +528,9 @@ func oneOf<A>(_ ps: [Parser<A>]) -> Parser<A> {
 - 지금까지 소개된 parser combinators. `oneOf`, `zeroOrMore`, `prefix`
 - New line parsing `separatedBy`에 `literal("\n")`으로 간단히 처리.
 - 알고리즘 문제 풀 때, input parsing에 한 번 사용해볼 것.
+
+# [Episode #65 SwiftUI and State Management: Part 1](https://www.pointfree.co/episodes/ep65-swiftui-and-state-management-part-1)
+- 드디어 SwiftUI라니...
+- 문제점들. Make applications more understandable and testable, such as pushing side effects to the boundaries, using pure functions as much as possible, and putting an emphasis on functions and composition above all other abstractions.
+- `@State`는 멋지지만, 다른 view로 변경사항을 전파하려면 추가적인 작업 필요하다.
+- `@State`로 정의된 property를 child view에 `@ObjectBinding`로 전달.
