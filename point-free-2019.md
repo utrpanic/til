@@ -534,3 +534,7 @@ func oneOf<A>(_ ps: [Parser<A>]) -> Parser<A> {
 - 문제점들. Make applications more understandable and testable, such as pushing side effects to the boundaries, using pure functions as much as possible, and putting an emphasis on functions and composition above all other abstractions.
 - `@State`는 멋지지만, 다른 view로 변경사항을 전파하려면 추가적인 작업 필요하다.
 - `@State`로 정의된 property를 child view에 `@ObjectBinding`로 전달.
+
+# [Episode #66 SwiftUI and State Management: Part 2](https://www.pointfree.co/episodes/ep66-swiftui-and-state-management-part-2)
+- 별다른 내용 없이 SwiftUI 이야기 계속.
+- $을 통해서 주입한 값은 내부에서 변경도 가동. `alert()`, `sheet()` 등.
