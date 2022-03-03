@@ -538,3 +538,19 @@ func oneOf<A>(_ ps: [Parser<A>]) -> Parser<A> {
 # [Episode #66 SwiftUI and State Management: Part 2](https://www.pointfree.co/episodes/ep66-swiftui-and-state-management-part-2)
 - 별다른 내용 없이 SwiftUI 이야기 계속.
 - $을 통해서 주입한 값은 내부에서 변경도 가동. `alert()`, `sheet()` 등.
+
+# [Episode #67 SwiftUI and State Management: Part 3](https://www.pointfree.co/episodes/ep67-swiftui-and-state-management-part-3)
+- SwiftUI의 좋은 점.
+  - 선언적 UI. `body`에서만 View를 기술할 수 있다는 점.
+  - Local state를 위한 `@State`.
+  - Multiple screens를 위한 `@ObjectBinding`.
+  - 무엇보다도 구조에 대한 string opinion.
+- SwiftUI에 더 요구되는 점.
+  - Apple has yet to give us a solution for truly modeling our global app state in a scaleable way. 하지만 `@Published`가 추가되면서 나아졌다.
+  - State mutation 코드가 view 구현부 내에 여기저기 흩어져있다.
+  - alert()에서 사용되는 것처럼 2-way binding도 마찬가지. hidden mutation.
+  - 지금으로서는 mutation을 둘 곳에 대한 team guideline 같은 걸로 해결해야 한다.
+  - Side effect를 다루는 방식에 대해서도 Apple은 특별한 가이드를 주지 않았다.
+  - State management isn't composable. 하지만 `@Binding`이 추가되면서 sub-state를 read-only로 표현할 수 있게 되었다.
+  - SwiftUI isn't testable.
+  
