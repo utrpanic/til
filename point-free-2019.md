@@ -544,7 +544,7 @@ func oneOf<A>(_ ps: [Parser<A>]) -> Parser<A> {
   - 선언적 UI. `body`에서만 View를 기술할 수 있다는 점.
   - Local state를 위한 `@State`.
   - Multiple screens를 위한 `@ObjectBinding`.
-  - 무엇보다도 구조에 대한 string opinion.
+  - 무엇보다도 구조에 대한 strong opinion.
 - SwiftUI에 더 요구되는 점.
   - Apple has yet to give us a solution for truly modeling our global app state in a scaleable way. 하지만 `@Published`가 추가되면서 나아졌다.
   - State mutation 코드가 view 구현부 내에 여기저기 흩어져있다.
@@ -553,4 +553,18 @@ func oneOf<A>(_ ps: [Parser<A>]) -> Parser<A> {
   - Side effect를 다루는 방식에 대해서도 Apple은 특별한 가이드를 주지 않았다.
   - State management isn't composable. 하지만 `@Binding`이 추가되면서 sub-state를 read-only로 표현할 수 있게 되었다.
   - SwiftUI isn't testable.
-  
+
+# [Episode #68 Composable State Management: Reducers](https://www.pointfree.co/episodes/ep68-composable-state-management-reducers)
+- `class`로 선언된 global state. `@Published`를 property 마다 써줘야하는 부분도 개선 포인트.
+- State를 `struct`로 변경하고, `ObservableObject`로 wrapping하기.
+- State 자체는 SwiftUI나 Combine에 의존하지 않게 된 것도 장점.
+```Swift
+final class Store<Value>: ObservableObject {
+  @Published var value: Value
+  init(initialValue: Value) {
+    self.value = value
+  }
+}
+```
+- State mutation 구문이 View에 여기저기 퍼져 있는 문제.
+- State에 reducer를 구현함으로써 처리. 다만 `AppReducer`가 모든 스크린의 mutation을 담당할 수는 없는 일.
