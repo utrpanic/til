@@ -173,7 +173,7 @@ func pipe<A, B, C>(_ f: @escaping (A) -> B, _ g: @escaping (B) -> C) -> (A) -> C
 - VArgs를 사용하면 가능. 그런데... generic에도 vargs 사용 가능한건가?
 - What's the point? Composition이 중요하다. 우린 이 custom operator들을 사랑하지만 그것들을 코드 베이스에 갑자기 도입하는 게 어려울 수도 있기 때문에 human name을 지은 것이다.
 
-# [Episode #12 Tagged](https://www.pointfree.co/episodes/ep12-tagged) `+1`
+# [Episode #12 Tagged](https://www.pointfree.co/episodes/ep12-tagged) `+2`
 - Email이나 ID 같은 프로퍼티를 무조건 String으로만 정의할 것인가.
 - RawRepresentable을 conform하면, singleValueContainer를 통한 decode를 기본으로 제공함.
 ```Swift
@@ -210,6 +210,7 @@ extension Tagged: ExpressibleByIntegerLiteral where RawValue: ExpressibleByInteg
 }
 ```
 - What's the point? 훨씬 type safe하고 readable. 그동안 못해서 안한 거지... Swift 4.1이 이정도로 지원해주는데, 사용하지 않을 이유가 있는가.
+- 막상 하려고 보니... 어느 모듈에 작성할 것이며, 그 모듈을 온통 import 해야하는 상황도 문제.
 
 # [Episode #13 The Many Faces of Map](https://www.pointfree.co/episodes/ep13-the-many-faces-of-map)
 - 언어에 map()만 있으면 함수형 컨셉을 지원하는 것인가.
