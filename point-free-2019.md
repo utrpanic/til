@@ -568,3 +568,39 @@ final class Store<Value>: ObservableObject {
 ```
 - State mutation 구문이 View에 여기저기 퍼져 있는 문제.
 - State에 reducer를 구현함으로써 처리. 다만 `AppReducer`가 모든 스크린의 mutation을 담당할 수는 없는 일.
+
+# [Episode #69 Composable State Management: State Pullbacks](https://www.pointfree.co/episodes/ep69-composable-state-management-state-pullbacks)
+- `appReducer`를 어떻게 더 나누고 조합할 것인가.
+```Swift 
+func combine<Value, Action>(
+  _ reducers: (inout Value, Action) -> Void...
+) -> (inout Value, Action) -> Void {
+  return { value, action in
+    for reducer in reducers {
+      reducer(&value, action)
+    }
+  }
+}
+let appReducer = combine(
+  counterReducer,
+  primeModalReducer,
+  favoritePrimesReducer
+)
+```
+- 하지만 여전히 reducer들이 불필요하게 global state를 다 알아야한다.
+- Pullback을 대체 뭐라고 이해해야할까.
+```Swift
+func pullback<LocalValue, GlobalValue, Action>(
+  _ reducer: @escaping (inout LocalValue, Action) -> Void,
+  value: WritableKeyPath<GlobalValue, LocalValue>
+) -> (inout GlobalValue, Action) -> Void {
+  return { globalValue, action in
+    reducer(&globalValue[keyPath: value], action)
+  }
+}
+let appReducer = combine(
+  pullback(counterReducer, value: \.count),
+  primeModalReducer,
+  pullback(favoritePrimesReducer, value: \.favoritePrimesState)
+)
+```
