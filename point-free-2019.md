@@ -604,3 +604,26 @@ let appReducer = combine(
   pullback(favoritePrimesReducer, value: \.favoritePrimesState)
 )
 ```
+
+# [Episode #70 Composable State Management: Action Pullbacks](https://www.pointfree.co/episodes/ep70-composable-state-management-action-pullbacks)
+- AppAction은 여전히 global action이다. State 처럼 pullback을 구현할 수 있을까.
+- enum property를 구현한다면 key path를 이용한 동일한 접근이 가능해진다.
+```Swift
+func pullback<GlobalValue, LocalValue, GlobalAction, LocalAction>(
+  _ reducer: @escaping (inout LocalValue, LocalAction) -> Void,
+  value: WritableKeyPath<GlobalValue, LocalValue>,
+  action: WritableKeyPath<GlobalAction, LocalAction?>
+) -> (inout GlobalValue, GlobalAction) -> Void {
+  return { globalValue, globalAction in
+    guard let localAction = globalAction[keyPath: action] else { return }
+    reducer(&globalValue[keyPath: value], localAction)
+  }
+}
+let _appReducer: (inout AppState, AppAction) -> Void = combine(
+  pullback(counterReducer, value: \.count, action: \.counter),
+  pullback(primeModalReducer, value: \.self, action: \.primeModal),
+  pullback(favoritePrimesReducer, value: \.favoritePrimesState, action: \.favoritePrimes)
+)
+let appReducer = pullback(_appReducer, value: \.self, action: \.self)
+```
+- `higher-order ***`란 무엇인가. `Gen`을 input으로 받아 `Gen`을 리턴하고. Reducer를 input으로 받아 reducer를 리턴하는.
