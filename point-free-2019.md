@@ -627,3 +627,75 @@ let _appReducer: (inout AppState, AppAction) -> Void = combine(
 let appReducer = pullback(_appReducer, value: \.self, action: \.self)
 ```
 - `higher-order ***`란 무엇인가. `Gen`을 input으로 받아 `Gen`을 리턴하고. Reducer를 input으로 받아 reducer를 리턴하는.
+
+# [Episode #71 Composable State Management: Higher-Order Reducers](https://www.pointfree.co/episodes/ep71-composable-state-management-higher-order-reducers)
+- 그것은 바로 higher-order constructions.
+- `combine`과 `pullback`이 higher-order reducer.
+```Swift
+func activityFeed(
+  _ reducer: @escaping (inout AppState, AppAction) -> Void
+) -> (inout AppState, AppAction) -> Void {
+
+  return { state, action in
+    switch action {
+    case .counter:
+      break
+
+    case .primeModal(.removeFavoritePrimeTapped):
+      value.activityFeed.append(
+        .init(timestamp: Date(), type: .removedFavoritePrime(value.count))
+      )
+
+    case .primeModal(.addFavoritePrime):
+      value.activityFeed.append(
+        .init(timestamp: Date(), type: .saveFavoritePrimeTapped(value.count))
+      )
+
+    case let .favoritePrimes(.deleteFavoritePrimes(indexSet)):
+      for index in indexSet {
+        value.activityFeed.append(
+          .init(timestamp: Date(), type: .removedFavoritePrime(value.favoritePrimes[index]))
+        )
+      }
+    }
+
+    reducer(&state, action)
+  }
+}
+
+ContentView(
+  store: Store(
+    initialValue: AppState(),
+    reducer: activityFeed(appReducer)
+  )
+)
+```
+- 그리고 모든 action에 logging을 달고 싶다면...
+```Swift
+func logging<Value, Action>(
+  _ reducer: @escaping (inout Value, Action) -> Void
+) -> (inout Value, Action) -> Void {
+  return { value, action in
+    reducer(&value, action)
+    print("Action: \(action)")
+    print("State:")
+    dump(value)
+    print("---")
+  }
+}
+ContentView(
+  store: Store(
+    value: AppState(),
+    reducer: with(
+      appReducer,
+      compose( // import Overture
+        logger,
+        activityFeed
+      )
+    )
+  )
+)
+```
+- View styling, randomness, snapshot testing, parsing 같은 아이디어를 반복해서 구현 중.
+- Atomic primitive를 구현하고 그를 조합해서 복잡한 기능을 구현해내는 것.
+- 이 시리즈를 시작할 때 지목한 5개의 문제점 중 2개를 풀어보았다. (그리고... Modular architecture에서 어떻게 할 것인지. Side effects를 어떻게 다룰 것인지. 어떻게 Testable하게 만들 것인지.)
