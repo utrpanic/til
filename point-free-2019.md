@@ -699,3 +699,35 @@ ContentView(
 - View styling, randomness, snapshot testing, parsing 같은 아이디어를 반복해서 구현 중.
 - Atomic primitive를 구현하고 그를 조합해서 복잡한 기능을 구현해내는 것.
 - 이 시리즈를 시작할 때 지목한 5개의 문제점 중 2개를 풀어보았다. (그리고... Modular architecture에서 어떻게 할 것인지. Side effects를 어떻게 다룰 것인지. 어떻게 Testable하게 만들 것인지.)
+
+# [Episode #72 Modular State Management: Reducers](https://www.pointfree.co/episodes/ep72-modular-state-management-reducers)
+- 5개의 문제점. 원문 그대로.
+  - Create complex app state models, ideally using simple value types.
+  - Have a consistent way to mutate the app state instead of just littering our views with mutation code.
+  - Have a way to break a large application down into small pieces that can be glued back together to form the whole.
+  - Have a well-defined mechanism for executing side effects and feeding the results back into our application.
+  - Have a story for testing our application with minimal setup and effort.
+- Modularity란 무엇인가. 단절시키는 것. 필요한 것만 사용하는 것.
+- `primeModalReducer`는 AppState를 참조하고 있기 때문에, 모듈로 이동시키기만 해서는 안된다.
+```Swift
+extension AppState {
+  var primeModal: PrimeModalState {
+    get {
+      PrimeModalState(
+        count: self.count,
+        favoritePrimes: self.favoritePrimes
+      )
+    }
+    set {
+      self.count = newValue.count
+      self.favoritePrimes = newValue.favoritePrimes
+    }
+  }
+  ...
+}
+let appReducer = combine(
+  ...
+  pullback(primeModalReducer, value: \.primeModal, action: \.primeModal),
+  ...
+}
+```
