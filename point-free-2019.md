@@ -731,3 +731,47 @@ let appReducer = combine(
   ...
 }
 ```
+
+# [Episode #73 Modular State Management: View State](https://www.pointfree.co/episodes/ep73-modular-state-management-view-state)
+- AppState도 AppAction도 분리했지만, View는 아직 그러지 못했다.
+- 코드는 이해했는데, 설명이 잘 이해되지 않는 에피소드;;;
+```Swift
+public final class Store<Value, Action>: ObservableObject {
+  private let reducer: (inout Value, Action) -> Void
+  @Published public private(set) var value: Value
+  private var cancellable: Cancellable?
+
+  public init(initialValue: Value, reducer: @escaping (inout Value, Action) -> Void) {
+    self.reducer = reducer
+    self.value = initialValue
+  }
+
+  public func send(_ action: Action) {
+    self.reducer(&self.value, action)
+  }
+
+  // ((Value) -> LocalValue) -> ((Store<Value, _>) -> Store<LocalValue, _>
+  // ((A) -> B) -> ((Store<A, _>) -> Store<B, _>
+  // map: ((A) -> B) -> ((F<A>) -> F<B>
+
+  func view<LocalValue>(
+    _ f: @escaping (Value) -> LocalValue
+  ) -> Store<LocalValue, Action> {
+    let localStore = Store<LocalValue, Action>(
+      initialValue: f(self.value),
+      reducer: { localValue, action in
+        self.send(action)
+        localValue = f(self.value)
+    }
+    )
+    localStore.cancellable = self.$value.sink { [weak localStore] newValue in
+      localStore?.value = f(newValue)
+    }
+    return localStore
+  }
+}
+IsPrimeModalView(
+  store: self.store.view { ($0.count, $0.favoritePrimes) }
+)
+```
+- 여튼! LocalStore의 mutation이 GlobalStore로 전달되고, 다시 다른 LocalStore로 퍼져나가는.
