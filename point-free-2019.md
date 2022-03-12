@@ -775,3 +775,26 @@ IsPrimeModalView(
 )
 ```
 - 여튼! LocalStore의 mutation이 GlobalStore로 전달되고, 다시 다른 LocalStore로 퍼져나가는.
+
+# [Episode #74 Modular State Management: View Actions](https://www.pointfree.co/episodes/ep74-modular-state-management-view-actions)
+- Store.view()의 Action을 LocalAction으로 바꿀 수 있으면, View를 아예 모듈로 보내는 것이 가능해짐.
+- Action에 대해서도 LocalValue와 동일한 접근이 가능하고... 둘을 한꺼번에 하는 것도 자연스럽다.
+```Swift
+public func view<LocalValue, LocalAction>(
+  value toLocalValue: @escaping (Value) -> LocalValue,
+  action toGlobalAction: @escaping (LocalAction) -> Action
+) -> Store<LocalValue, LocalAction> {
+  let localStore = Store<LocalValue, LocalAction>(
+    initialValue: toLocalValue(self.value)
+    reducer: { localValue, localAction in
+      self.send(toGlobalAction(localAction))
+      localValue = toLocalValue(self.value)
+  }
+  )
+  localStore.cancellable = self.$value.sink { [weak localStore] newValue in
+    localStore?.value = toLocalValue(newValue)
+  }
+  return localStore
+}
+```
+- 여기까지 되고 나면 각 View는 LocalValue와 LocalAction만 사용하기 때문에, 모듈화가 가능해진다.
