@@ -798,3 +798,25 @@ public func view<LocalValue, LocalAction>(
 }
 ```
 - 여기까지 되고 나면 각 View는 LocalValue와 LocalAction만 사용하기 때문에, 모듈화가 가능해진다.
+
+# [Episode #75 Modular State Management: The Point](https://www.pointfree.co/episodes/ep75-modular-state-management-the-point)
+- Module이 제대로 분리되어 있다면 Playground를 이용해 각 모듈의 View를 앱 실행 없이 확인할 수 있다.
+```Swift
+import ComposableArchitecture
+import FavoritePrimes
+import SwiftUI
+import PlaygroundSupport
+PlaygroundPage.current.liveView = UIHostingController(
+  rootView: FavoritePrimesView(
+    store: Store<[Int], FavoritePrimesAction>(
+      initialValue: [2, 3, 5, 7, 11],
+      reducer: favoritePrimesReducer
+    )
+  )
+)
+```
+- CounterView의 경우, 대응하는 reducer가 아직 없기 때문에...
+- 코드를 좀 더 살펴볼 것. 
+- https://github.com/pointfreeco/episode-code-samples/tree/main/0075-modular-state-management-wtp
+- Exercise가 흥미로움. 우리는 모든 mutation이 store와 reducer를 통하길 바라지만, 2-way binding은 그에 적합하지 않음.
+ 
