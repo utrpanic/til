@@ -819,4 +819,14 @@ PlaygroundPage.current.liveView = UIHostingController(
 - 코드를 좀 더 살펴볼 것. 
 - https://github.com/pointfreeco/episode-code-samples/tree/main/0075-modular-state-management-wtp
 - Exercise가 흥미로움. 우리는 모든 mutation이 store와 reducer를 통하길 바라지만, 2-way binding은 그에 적합하지 않음.
- 
+
+# [Episode #76 Effectful State Management: Synchronous Effects](https://www.pointfree.co/episodes/ep76-effectful-state-management-synchronous-effects)
+- This means that side-effects are nothing more than hidden inputs or outputs of a function.
+- 결국... argument로 전달받거나 return하지 않는 무언가를 변경한다면 그것이 side-effects.
+- 함수 내의 print() 호출도 역시 side-effects.
+- Side-effects란 무엇인가...
+```Swift
+public typealias Effect = () -> Void
+```
+- Side-effects를 유발하는 구현을 `Effect`타입으로 return하도록 바꾼다면...
+- 그건 누가 호출할거지?
