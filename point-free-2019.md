@@ -830,3 +830,14 @@ public typealias Effect = () -> Void
 ```
 - Side-effects를 유발하는 구현을 `Effect`타입으로 return하도록 바꾼다면...
 - 그건 누가 호출할거지?
+
+# [Episode #77 Effectful State Management: Unidirectional Effects](https://www.pointfree.co/episodes/ep77-effectful-state-management-unidirectional-effects)
+- Push effects to the boundary of a function.
+- Saving의 경우 실행하면 그만이지만(fire-and-forget operation), loading 같은 경우에는 결과를 이용해서 다음 작업을 해야한다.
+- Synchronous한 경우 먼저 해결.
+- Effect의 정의를 바꿔서, return된 Action을 caller가 send하도록 한다.
+```Swift
+public typealias Effect<Action> = () -> Action?
+public typealias Reducer<Value, Action> = (inout Value, Action) -> Effect<Action>
+```
+- 무엇이 Unidirectional인가. Mutation을 하고 싶다면 Action을 정의한 후, store에서만 수행하도록 해야한다.
