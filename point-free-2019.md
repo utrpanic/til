@@ -841,3 +841,25 @@ public typealias Effect<Action> = () -> Action?
 public typealias Reducer<Value, Action> = (inout Value, Action) -> Effect<Action>
 ```
 - 무엇이 Unidirectional인가. Mutation을 하고 싶다면 Action을 정의한 후, store에서만 수행하도록 해야한다.
+
+# [Episode #78 Effectful State Management: Asynchronous Effects](https://www.pointfree.co/episodes/ep78-effectful-state-management-asynchronous-effects)
+- Async side-effects를 위해 Effect의 정의를 다시 바꾼다.
+```Swift
+typealias Effect<Action> = (@escaping (Action) -> Void) -> Void
+```
+- 그리고 Unidirectional data flow를 위해, 2-way binding도 사용하지 않는다.
+- Value를 Binding으로 감싸던가, Binding.constant()를 사용.
+```Swift
+.alert(
+  item: Binding(
+    get: { self.store.value.alertNthPrime },
+    set: { _ in }
+  )
+) { alert in
+```
+```Swift
+.alert(
+  item: Binding.constant(self.store.value.alertNthPrime)
+) { alert in
+```
+- 이런 게 있는 줄도 모르고!!!
