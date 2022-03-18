@@ -863,3 +863,32 @@ typealias Effect<Action> = (@escaping (Action) -> Void) -> Void
 ) { alert in
 ```
 - 이런 게 있는 줄도 모르고!!!
+
+# [Episode #79 Effectful State Management: The Point](https://www.pointfree.co/episodes/ep79-effectful-state-management-the-point)
+- 단순히 code reshuffling한 것은 아닌가. What's the point?
+- Effect를 typealias가 아닌 struct로 구현해보자.
+```Swift
+public struct Effect<A> {
+  public let run: (@escaping (A) -> Void) -> Void
+
+  public init(run: @escaping (@escaping (A) -> Void) -> Void) {
+    self.run = run
+  }
+
+  public func map<B>(_ f: @escaping (A) -> B) -> Effect<B> {
+    return Effect<B> { callback in self.run { a in callback(f(a)) }
+  }
+}
+```
+- Thread도 처리해보자. 어디서 많이 본 인터페이스...
+```Swift
+extension Effect {
+  func receive(on queue: DispatchQueue) -> Effect {
+    return Effect { callback in
+      self.run { a in
+        queue.async { callback(a) }
+      }
+    }
+  }
+}
+```
