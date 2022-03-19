@@ -892,3 +892,20 @@ extension Effect {
   }
 }
 ```
+
+# [Episode #80 The Combine Framework and Effects: Part 1](https://www.pointfree.co/episodes/ep80-the-combine-framework-and-effects-part-1)
+- `Effect`가 가리키는 것은 무엇인가. 바로 reactive streams.
+- Combine, ReactiveSwift, RxSwift 무엇이든 `Effect`를 대체할 수 있다.
+```Swift
+public struct Effect<A> {
+  public let run: (@escaping (A) -> Void) -> Void
+  public func map<B>(_ f: @escaping (A) -> B) -> Effect<B> {
+    return Effect<B> { callback in self.run { a in callback(f(a)) } }
+  }
+}
+```
+- The work is done only when requested.
+- Publisher는 `Effect` type, subscriber는 `run`을 실행했을 때.
+- `Future`는 생성과 동시에 실행됨. `Effect`처럼 laziness를 원한다면 `Deferred`가 필요.
+- 게다가 `Future`는 값을 방출하면 stream이 종료됨. `Effect`와 다르다.
+- 여러 개의 값을 방출해야하는 경우라면 어떤가. `Effect`는 callback을 계속 호출하고, Combine은 Subject를 사용.
