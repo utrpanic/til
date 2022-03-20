@@ -909,3 +909,18 @@ public struct Effect<A> {
 - `Future`는 생성과 동시에 실행됨. `Effect`처럼 laziness를 원한다면 `Deferred`가 필요.
 - 게다가 `Future`는 값을 방출하면 stream이 종료됨. `Effect`와 다르다.
 - 여러 개의 값을 방출해야하는 경우라면 어떤가. `Effect`는 callback을 계속 호출하고, Combine은 Subject를 사용.
+
+# [Episode #81 The Combine Framework and Effects: Part 2](https://www.pointfree.co/episodes/ep81-the-combine-framework-and-effects-part-2)
+- `Effect`가 `Publisher`를 conform 하면?
+- 왜 아예 `Effect`를 `AnyPublisher`로 대체하지 않고, wrapping하도록 구현하는가. Helper를 추가적으로 구현할 수 있다는 장점이 있다.
+```Swift
+extension Effect {
+  public static func fireAndForget(work: @escaping () -> Void) -> Effect {
+    return Deferred { () -> Empty<Output, Never> in
+      work()
+      return Empty(completeImmediately: true)
+    }
+    .eraseToEffect()
+  }
+}
+```
