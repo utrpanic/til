@@ -924,3 +924,38 @@ extension Effect {
   }
 }
 ```
+
+# [Episode #87 The Case for Case Paths: Introduction](https://www.pointfree.co/episodes/ep87-the-case-for-case-paths-introduction)
+- KeyPath. enum은 그에 준하는 무언가가 있는가.
+- 없으니까! 일단 `CasePath` struct를 정의해봅니다.
+```Swift
+struct CasePath<Root, Value> {
+  let extract: (Root) -> Value?
+  let embed: (Value) -> Root
+}
+extension Result {
+  static var successCasePath: CasePath<Result, Success> {
+    CasePath<Result, Success>(
+      extract: { result in
+        if case let .success(success) = result {
+          return success
+        }
+        return nil
+    },
+      embed: Result.success
+    )
+  }
+  static var failureCasePath: CasePath<Result, Failure> {
+    CasePath<Result, Failure>(
+      extract: { result in
+        if case let .failure(failure) = result {
+          return failure
+        }
+        return nil
+    },
+      embed: Result.failure
+    )
+  }
+}
+```
+- 하지만 `Result`의 static var인 것도 이상하고, boilerplate라던가... 
