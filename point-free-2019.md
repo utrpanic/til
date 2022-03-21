@@ -959,3 +959,41 @@ extension Result {
 }
 ```
 - 하지만 `Result`의 static var인 것도 이상하고, boilerplate라던가... 
+
+# [Episode #88 The Case for Case Paths: Properties](https://www.pointfree.co/episodes/ep88-the-case-for-case-paths-properties)
+- KeyPath가 제공하는 것 중, `appending(path:)`를 CasePath도 제공하고자 한다.
+```Swift
+struct User {
+  var id: Int
+  var isAdmin: Bool
+  var location: Location
+  var name: String
+}
+struct Location {
+  var city: String
+  var country: String
+}
+(\User.location).appending(path: \Location.city)
+\User.location.city
+```
+```Swift
+extension CasePath/*<Root, Value>*/ {
+  func appending<AppendedValue>(
+    path: CasePath<Value, AppendedValue>
+  ) -> CasePath<Root, AppendedValue> {
+    CasePath<Root, AppendedValue>(
+      extract: { root in
+        self.extract(root).flatMap(path.extract)
+    },
+      embed: { appendedValue in
+        self.embed(path.embed(appendedValue))
+    })
+  }
+}
+func .. <A, B, C>(
+  lhs: CasePath<A, B>,
+  rhs: CasePath<B, C>
+) -> CasePath<A, C> {
+  return lhs.appending(path: rhs)
+}
+```
