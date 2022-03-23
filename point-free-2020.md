@@ -98,3 +98,26 @@ extract(case: Result<Int, Error>.success, from: .success(42)) // 42
 ```
 - `..`, `^`, `/` operator들을 추가로 정의해서, `if case let`이 필요한 많은 부분들을 더 정리하였다.
 - 새 operator들이나 `CasePath`를 사용한 인터페이스들을 보면, 코드 가독성 관점에서는 code generation이 더 나을지도 모르겠다는 생각이 슬몃 드는데... 일단 다음 에피소드에서 더 확인해볼 것.
+
+# [Episode #90 Composing Architecture with Case Paths](https://www.pointfree.co/episodes/ep90-composing-architecture-with-case-paths)
+- Enum property를 code generation해서 사용하고 있는데, 그러면...
+  1. Code generation CLI tool을 코드 수정 시 마다 돌려야 함.
+  2. Code generation을 Build process에 포함시킨다면, 빌드가 느려질 수 있음.
+  3. `pullback()`의 `localEffect.map`의 내부 구현을 보면, globalAction을 복사해서 리턴하고 있음. key path가 없어서!
+- 그래서!
+```Swift
+public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
+  _ reducer: @escaping Reducer<LocalValue, LocalAction>,
+  value: WritableKeyPath<GlobalValue, LocalValue>,
+  action: CasePath<GlobalAction, LocalAction>
+) -> Reducer<GlobalValue, GlobalAction> {
+  return { globalValue, globalAction in
+    guard let localAction = action.extract(globalAction) else { return [] }
+    let localEffects = reducer(&globalValue[keyPath: value], localAction)
+    return localEffects.map { localEffect in
+      localEffect.map(action.embed)
+        .eraseToEffect()
+    }
+  }
+}
+```
