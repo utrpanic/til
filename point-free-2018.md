@@ -424,7 +424,7 @@ func eval(_ expr: Expr, with env: [String: Int]) -> Int
 - bind를 통해서 변수에 Expr을 대입한 후, 다른 Expr에 사용할 수 있다. 점점 무슨 마법 같다.
 - 업무에 실제로 사용하고 있는 DSL을 소개할 것이다!
 
-# [Episode #28 An HTML DSL](https://www.pointfree.co/episodes/ep28-an-html-dsl)
+# [Episode #28 An HTML DSL](https://www.pointfree.co/episodes/ep28-an-html-dsl) `+1`
 - HTML을 표현하는 DSL을 정의.
 ```Swift
 enum Node {
@@ -432,6 +432,22 @@ enum Node {
   case text(String)
 }
 ```
+- 각 element나 tag를 상수로 정의하지 않고, function으로 정의한 것은 흥미롭다. 더 깔끔해짐.
+```Swift
+func img(_ attrs: [(String, String), _ children: [Node]) -> Node {
+  return .el("img", attrs, children)
+}
+func src(_ value: String) -> (String, String) {
+  return ("src", value)
+}
+func width(_ value: Int) -> (String, String) {
+  return ("width", "\(value)")
+}
+func height(_ value: Int) -> (String, String) {
+  return ("height", "\(value)")
+}
+```
+- Point는... Swift compiler의 지원을 받으면서, HTML을 작성하거나 rendering하는 것으로부터 관심사를 분리할 수 있다?
 
 # [Episode #29 DSLs vs. Templating Languages](https://www.pointfree.co/episodes/ep29-dsls-vs-templating-languages)
 - View Rendering에 Templating language를 많이들 채용하고 있지만, DSL이 더 낫다고 생각한다.
