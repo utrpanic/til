@@ -449,7 +449,7 @@ func height(_ value: Int) -> (String, String) {
 ```
 - Point는... Swift compiler의 지원을 받으면서, HTML을 작성하거나 rendering하는 것으로부터 관심사를 분리할 수 있다?
 
-# [Episode #29 DSLs vs. Templating Languages](https://www.pointfree.co/episodes/ep29-dsls-vs-templating-languages)
+# [Episode #29 DSLs vs. Templating Languages](https://www.pointfree.co/episodes/ep29-dsls-vs-templating-languages) `+1`
 - View Rendering에 Templating language를 많이들 채용하고 있지만, DSL이 더 낫다고 생각한다.
 - Templating Language. Plain text file이지만, 일종의 interpolation token을 갖고 있는..
 - 예를 들어, Stencil.
