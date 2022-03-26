@@ -924,3 +924,9 @@ extension Effect {
   }
 }
 ```
+
+# [Episode #82 Testable State Management: Reducers](https://www.pointfree.co/episodes/ep82-testable-state-management-reducers)
+- Ruby나 JavaScript 커뮤니티에 비해 testing culture가 강하지 않은데, 그 이유들로...
+  - type system 덕분에 많은 것들을 컴파일 타임에 잡아낼 수 있기 때문에.
+  - UIKit이 test하기에 쉽지 않아서.
+- Reducer들에 대한 테스트들은 작성할 수 있지만, 그 결과값인 Effect는 여전히 테스트가 쉽지 않다.
