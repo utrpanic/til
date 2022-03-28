@@ -212,11 +212,13 @@ extension Tagged: ExpressibleByIntegerLiteral where RawValue: ExpressibleByInteg
 - What's the point? 훨씬 type safe하고 readable. 그동안 못해서 안한 거지... Swift 4.1이 이정도로 지원해주는데, 사용하지 않을 이유가 있는가.
 - 막상 하려고 보니... 어느 모듈에 작성할 것이며, 그 모듈을 온통 import 해야하는 상황도 문제.
 
-# [Episode #13 The Many Faces of Map](https://www.pointfree.co/episodes/ep13-the-many-faces-of-map)
+# [Episode #13 The Many Faces of Map](https://www.pointfree.co/episodes/ep13-the-many-faces-of-map) `+1`
 - 언어에 map()만 있으면 함수형 컨셉을 지원하는 것인가.
 - map()을 다양하게 구현하는데, 각 구현체들이 unique map 인지를 판단하는 것은 무엇을 위한 것인가. (파라미터로 identity 함수를 넣을 경우, map이 자신을 그대로 리턴하는가. map(id) == id)
-- Map means a Functor!
+- Map means a Functor! 
+- `map(id) == id`를 충족하는 map()을 가졌다면 functor이다. 
 - 우리가 정의한 타입에 대해 map을 작성하는 것을 두려워하지 말아야한다.
+- 그럼... 우리가 정의한 타입을 functor로 만든다는 건 무슨 뜻인가. 아직 모르겠네;;;
 
 # [Episode #14 Contravariance](https://www.pointfree.co/episodes/ep14-contravariance)
 - Other side of map()
