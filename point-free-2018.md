@@ -220,12 +220,23 @@ extension Tagged: ExpressibleByIntegerLiteral where RawValue: ExpressibleByInteg
 - 우리가 정의한 타입에 대해 map을 작성하는 것을 두려워하지 말아야한다.
 - 그럼... 우리가 정의한 타입을 functor로 만든다는 건 무슨 뜻인가. 아직 모르겠네;;;
 
-# [Episode #14 Contravariance](https://www.pointfree.co/episodes/ep14-contravariance)
+# [Episode #14 Contravariance](https://www.pointfree.co/episodes/ep14-contravariance) `+1`
 - Other side of map()
 - NSObject > UIResponder > UIView > UIControl > UIButton
 - (UIView) -> UIView as (UIButton) -> UIView
 - (UIView) -> UIView as (UIView) -> UIResponder
 - Subtyping a function by its output is a *covariant* relationship, and subtyping a function by its input is a *contravariant* relationship.
+- `map`은 covariant. 왜?
+- 다른 언어에는 많이 있는 `contramap`. 더 적합한 이름은 `pullback`이며, contravariant.
+```Swift
+func contramap<A, B, C>(_ f: @escaping (B) -> A) -> ((Func<A, C>) -> Func<B, C>) {
+  return { g in
+    // Func(apply: f >>> g.call)
+    Func(apply: g.apply <<< f)
+  }
+}
+```
+- `map`은 output via post-composition, `contramap`은 input via pre-composition.
 ```
 // (A) -> ((B) -> C) -> D)
 //         |_|   |_|
@@ -236,7 +247,7 @@ extension Tagged: ExpressibleByIntegerLiteral where RawValue: ExpressibleByInteg
 // -1           +1
 // A와 C는 -1(contravariant), B와 D는 +1(covariant).
 ```
-- 하지만 이게 여전히 무슨 의미인지 모르겠네.
+- 하지만 이걸 판정하는 게 무슨 의미인지 잘 모르겠네.
 
 # [Episode #15 Setters: Ergonomics & Performance](https://www.pointfree.co/episodes/ep15-setters-ergonomics-performance)
 ```Swift
