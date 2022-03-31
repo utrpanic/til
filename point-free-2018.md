@@ -249,7 +249,7 @@ func contramap<A, B, C>(_ f: @escaping (B) -> A) -> ((Func<A, C>) -> Func<B, C>)
 ```
 - 하지만 이걸 판정하는 게 무슨 의미인지 잘 모르겠네.
 
-# [Episode #15 Setters: Ergonomics & Performance](https://www.pointfree.co/episodes/ep15-setters-ergonomics-performance)
+# [Episode #15 Setters: Ergonomics & Performance](https://www.pointfree.co/episodes/ep15-setters-ergonomics-performance) `+1`
 ```Swift
 func prop<Root, Value>(_ kp: WritableKeyPath<Root, Value>)
   -> (@escaping (Value) -> Value)
