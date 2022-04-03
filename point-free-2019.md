@@ -930,3 +930,11 @@ extension Effect {
   - type system 덕분에 많은 것들을 컴파일 타임에 잡아낼 수 있기 때문에.
   - UIKit이 test하기에 쉽지 않아서.
 - Reducer들에 대한 테스트들은 작성할 수 있지만, 그 결과값인 Effect는 여전히 테스트가 쉽지 않다.
+
+# [Episode #83 Testable State Management: Effects](https://www.pointfree.co/episodes/ep83-testable-state-management-effects)
+- Effect는 원래 테스트하기 쉽지 않다. 
+- Environment를 이용해서 치환할 것.
+- `FileClient.save()`, `FileClient.load()`을 주입한 후, Effect가 실행되었는지를 테스트. Call count 확인과 유사.
+- 실제 effect... 실행만 제대로 된다면 동작은 믿고 넘어갈 수 있도록 아주 단순해야 함. JSON decoding 조차도 별도로.
+- This style of testing works best when your dependencies are as simple as possible. So simple that you can just simply trust they will do the right thing as long as you give them the right data. And so simple that they contain very little logic on their own.
+- 아직 풀어야할 문제는... Environment의 모듈간 공유 문제, 그리고 너무 많은 boilerplate. Init state, provide reducer, feed action, setup expectation, then assert.
