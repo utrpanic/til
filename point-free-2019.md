@@ -938,3 +938,10 @@ extension Effect {
 - 실제 effect... 실행만 제대로 된다면 동작은 믿고 넘어갈 수 있도록 아주 단순해야 함. JSON decoding 조차도 별도로.
 - This style of testing works best when your dependencies are as simple as possible. So simple that you can just simply trust they will do the right thing as long as you give them the right data. And so simple that they contain very little logic on their own.
 - 아직 풀어야할 문제는... Environment의 모듈간 공유 문제, 그리고 너무 많은 boilerplate. Init state, provide reducer, feed action, setup expectation, then assert.
+
+# [Episode #84 Testable State Management: Ergonomics](https://www.pointfree.co/episodes/ep84-testable-state-management-ergonomics)
+- 모듈간 공유는 이번에 다루지 않음.
+- `assert` helper를 통해 너무 많은 boilerplate 문제를 해결.
+- [ComposableArchitectureTestSupport.swift](https://github.com/pointfreeco/episode-code-samples/blob/main/0084-testable-state-management-ergonomics/PrimeTime/CounterTests/ComposableArchitectureTestSupport.swift)
+- [CounterTests.swift](https://github.com/pointfreeco/episode-code-samples/blob/main/0084-testable-state-management-ergonomics/PrimeTime/CounterTests/CounterTests.swift)
+- 또! 마법같다. 처음부터 이렇게 할 수 있을 거라고 생각하고 디자인 된걸까? 문제에 봉착해서 풀어간 게 아니라?
