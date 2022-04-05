@@ -945,3 +945,9 @@ extension Effect {
 - [ComposableArchitectureTestSupport.swift](https://github.com/pointfreeco/episode-code-samples/blob/main/0084-testable-state-management-ergonomics/PrimeTime/CounterTests/ComposableArchitectureTestSupport.swift)
 - [CounterTests.swift](https://github.com/pointfreeco/episode-code-samples/blob/main/0084-testable-state-management-ergonomics/PrimeTime/CounterTests/CounterTests.swift)
 - 또! 마법같다. 처음부터 이렇게 할 수 있을 거라고 생각하고 디자인 된걸까? 문제에 봉착해서 풀어간 게 아니라?
+
+# [Episode #85 Testable State Management: The Point](https://www.pointfree.co/episodes/ep85-testable-state-management-the-point)
+- Vanilla SwiftUI 앱을 테스트하고 싶다면... 적어도 body 안에 직접 구현된 로직들은 추출되어야 함.
+- `@State` 필드도 directly testable 하지 않아서, 추출이 필요.
+- `UIHostingController` 같은 context 내에서만 정상적으로 동작한다고.
+- SwiftUI 앱을 testable하게 만들기 위해 진행한 작업들이... 결국 Composable Architecture에서 해온 것들...
