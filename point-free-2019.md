@@ -951,3 +951,8 @@ extension Effect {
 - `@State` 필드도 directly testable 하지 않아서, 추출이 필요.
 - `UIHostingController` 같은 context 내에서만 정상적으로 동작한다고.
 - SwiftUI 앱을 testable하게 만들기 위해 진행한 작업들이... 결국 Composable Architecture에서 해온 것들...
+
+# [Episode #86 SwiftUI Snapshot Testing](https://www.pointfree.co/episodes/ep86-swiftui-snapshot-testing)
+- UIHostingController로 감싼 후, UIViewController strategy를 사용하면 간단.
+- SnapshotTesting과 XCUITest. 목적은 같지만, XCUITest는 훨씬 더 어려운 문제를 풀기 위해 디자인된 듯 하다. 다시 말해, 작성하기도 더 어렵고 깨지기도 쉽다.
+- TCA를 사용하면 모든 의존성이 통제되는 가운데, store를 통해 모든 시나리오를 테스트할 수 있다.
