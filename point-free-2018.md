@@ -220,7 +220,7 @@ extension Tagged: ExpressibleByIntegerLiteral where RawValue: ExpressibleByInteg
 - 우리가 정의한 타입에 대해 map을 작성하는 것을 두려워하지 말아야한다.
 - 그럼... 우리가 정의한 타입을 functor로 만든다는 건 무슨 뜻인가. 아직 모르겠네;;;
 
-# [Episode #14 Contravariance](https://www.pointfree.co/episodes/ep14-contravariance) `+2`
+# [Episode #14 Contravariance](https://www.pointfree.co/episodes/ep14-contravariance) `+3`
 - Other side of map()
 - NSObject > UIResponder > UIView > UIControl > UIButton
 - (UIView) -> UIView as (UIButton) -> UIView
