@@ -121,3 +121,23 @@ public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
   }
 }
 ```
+
+# [Episode #91 Dependency Injection Made Composable](https://www.pointfree.co/episodes/ep91-dependency-injection-made-composable)
+- 무엇이 문제인가.
+  - `Environment`를 모듈 별로 정의하고 있기 때문에, 테스트에서 mock으로의 변경도 각각 해줘야 한다.
+  - `FileClient`를 여러 모듈의 `Environment`에서 사용하고 싶다면, 코드를 중복시키거나, 주입 시점에서 추가적인 작업이 필요하다.
+  - And finally, another problem that this form of the environment technique has is that all instances of the things inside a module can only use the one true environment in that environment.
+  - 여튼 이 문제들을 해결할 건데, 해결이 쉽지 않은 이유로 'You could have legacy code that makes it difficult, or you could have layers of abstraction that prevent you from doing what you want.'
+  - `Environment`가 이같은 어려움에 대한 답이 될 수 있다고. (오랫동안 OOP를 해와서 그런지 글로벌 변수가 그냥 왠지 불편한 느낌.)
+- `Reducer`가 `Environment`를 주입받도록 변경해보자. 
+```Swift
+public typealias Reducer<Value, Action, Environment> = (inout Value, Action, Environment) -> [Effect<Action>]
+```
+- `Store`가 `Environment`를 받아서 reducer 생성 시 전달해야하지만, `Environment`의 실제 타입은 몰라도 좋다.
+```Swift
+public final class Store<Value, Action>: ObservableObject {
+  private let reducer: Reducer<Value, Action, Any>
+  private let environment: Any
+  ...
+}
+```
