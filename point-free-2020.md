@@ -141,3 +141,6 @@ public final class Store<Value, Action>: ObservableObject {
   ...
 }
 ```
+
+# [Episode #92 Dependency Injection Made Modular](https://www.pointfree.co/episodes/ep92-dependency-injection-made-modular)
+- 결국 `Current`를 모두 제거하고, environment를 주입 받아서 해결.
