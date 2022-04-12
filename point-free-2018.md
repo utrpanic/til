@@ -255,7 +255,7 @@ func contramap<A, B, C>(_ f: @escaping (B) -> A) -> ((Func<A, C>) -> Func<B, C>)
 // A와 C는 -1(contravariant), B와 D는 +1(covariant).
 ```
 - ~하지만 이걸 판정하는 게 무슨 의미인지 잘 모르겠네.~
-- contravariant 타입에 대해서는 `contraMap`을 convariant 타입에 대해서는 `map`을 작성할 수 있다.
+- contravariant 타입에 대해서는 `contraMap`을 covariant 타입에 대해서는 `map`을 작성할 수 있다.
 
 # [Episode #15 Setters: Ergonomics & Performance](https://www.pointfree.co/episodes/ep15-setters-ergonomics-performance) `+1`
 ```Swift
