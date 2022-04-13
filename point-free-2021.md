@@ -29,3 +29,7 @@ struct AnalyticsClient {
 }
 ```
 - 동일하게 `Environment`에 주입하고, `AnalyticsClient.unimplemented`도 구현.
+
+# [Episode #139 Better Test Dependencies: Failability](https://www.pointfree.co/collections/dependencies/better-test-dependencies/ep139-better-test-dependencies-failability)
+- `fatalError()`로 `.unimplemented`를 구현하니, 주입을 빠뜨린 경우 테스트 전체가 중단된다.
+- Exhaustivity라는 건... 테스트에 사용되는 의존성만 정확하게 주입하는 걸 말하는 걸까?
