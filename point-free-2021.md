@@ -33,3 +33,9 @@ struct AnalyticsClient {
 # [Episode #139 Better Test Dependencies: Failability](https://www.pointfree.co/collections/dependencies/better-test-dependencies/ep139-better-test-dependencies-failability)
 - `fatalError()`로 `.unimplemented`를 구현하니, 주입을 빠뜨린 경우 테스트 전체가 중단된다.
 - Exhaustivity라는 건... 테스트에 사용되는 의존성만 정확하게 주입하는 걸 말하는 걸까?
+
+# [Episode #140 Better Test Dependencies: Immediacy](https://www.pointfree.co/collections/dependencies/better-test-dependencies/ep140-better-test-dependencies-immediacy)
+- `combine-schedulers`를 이용해 async 동작을 제어하려고 한다.
+- https://github.com/pointfreeco/combine-schedulers
+- `Scheduler`는 associated type을 갖기 때문에, 한번 사용하기 시작하면 generic 선언이 연쇄적으로 필요. Type erase를 이용하자!
+- `delay`, `debounce`, `timeout` 같은 것들은 어떻게 테스트할 수 있는가. `ImmediateScheduler`를 사용하면 즉시 실행하는데다... 명시적인 `Scheduler.advance` 호출도 생략할 수 있다.
