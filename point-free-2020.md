@@ -144,3 +144,9 @@ public final class Store<Value, Action>: ObservableObject {
 
 # [Episode #92 Dependency Injection Made Modular](https://www.pointfree.co/episodes/ep92-dependency-injection-made-modular)
 - 결국 `Current`를 모두 제거하고, environment를 주입 받아서 해결.
+
+# [Episode #93 Modular Dependency Injection: The Point](https://www.pointfree.co/episodes/ep93-modular-dependency-injection-the-point)
+- 풀어낸 3가지 문제점.
+  - We can succinctly unite the environments from many different feature modules at once.
+  - We can allow features to be instantiated multiple times with different dependencies.
+  - We can share dependencies between feature modules.
