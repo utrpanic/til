@@ -12,3 +12,30 @@
 - `MainActor`를 이용해 main thread에서 돌도록 강제할 수는 있지만... 이런걸 쓰면 테스트 작성에 문제가 생기진 않을까?
 - 실제로 동작하는 thread와 상관없이, task 간에 계층이 존재한다.
 - 최상위 task를 cancel하면 하위 task로 전파된다. `task(_:)` view modifier 하위의 task들은 해당 view가 사라지면 연쇄적으로 cancel된다.
+
+# 2. [Getting Started With async/await](https://www.raywenderlich.com/books/modern-concurrency-in-swift/v1.0/chapters/2-getting-started-with-async-await)
+- Pre-async/await asynchrony. 
+  - `completion` 호출 또는 에러 처리를 모두 개발자가 보장해야하고. 
+  - Memory management. Weak capture 처리도 필요.
+- Swift splits up your code into logical units called partial tasks, or partials.
+- Computed property도 `async` 키워드 사용 가능.
+- 순차적으로 호출해야한다면 `await`로 충분하지만, 동시에 호출해도 되는 상황이라면...? 
+- Structured concurrency. Await them all together. Sequence나 tuple로 grouping 가능.
+```Swift
+do {
+  async let files = try model.availableFiles()
+  async let status = try model.status()
+  let (filesResult, statusResult) = try await (files, status)
+  self.files = filesResult
+  self.status = statusResult
+} catch {
+  lastErrorMessage = error.localizedDescription
+}
+```
+- `Task` is a type that represents a top-level asynchronous task.
+- `Task(priority:operation)`: Inherits defaults from the current synchronous context
+- `Task.detached(priority:operation)`: Not inherits defaults from the current synchronous context
+- 실행은 분명 task가 생성된 actor에서 되지만, resume은 어느 스레드에서도 실행될 수 있다. 그래서 `MainActor`가 필요해지는 것.
+```
+Remember, you learned that every use of await is a suspension point, and your code might resume on a different thread. The first piece of your code runs on the main thread because the task initially runs on the main actor. But after the first await, your code can execute on any thread.
+```
