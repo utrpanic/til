@@ -39,3 +39,9 @@ do {
 ```
 Remember, you learned that every use of await is a suspension point, and your code might resume on a different thread. The first piece of your code runs on the main thread because the task initially runs on the main actor. But after the first await, your code can execute on any thread.
 ```
+
+# 3. [AsyncSequence & Intermediate Task](https://www.raywenderlich.com/books/modern-concurrency-in-swift/v1.0/chapters/3-asyncsequence-intermediate-task)
+- `AsyncSequence`. Swift standard library의 `Sequence`와 유사.
+- `while` 문에서 사용하려면 `AsyncIterator`를 만들어야 함.
+- SwiftUI의 `Environment`처럼 자신과 child task에게 값을 bind할 수 있는 `@TaskLocal` property. 남용하면 코드 읽기가 어려워진다.
+- `Combine`의 `values` property. 간단하게 `AsyncSequence`를 얻어낼 수 있다. `Future`의 경우는 `value`.
