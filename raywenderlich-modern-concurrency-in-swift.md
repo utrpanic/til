@@ -45,3 +45,7 @@ Remember, you learned that every use of await is a suspension point, and your co
 - `while` 문에서 사용하려면 `AsyncIterator`를 만들어야 함.
 - SwiftUI의 `Environment`처럼 자신과 child task에게 값을 bind할 수 있는 `@TaskLocal` property. 남용하면 코드 읽기가 어려워진다.
 - `Combine`의 `values` property. 간단하게 `AsyncSequence`를 얻어낼 수 있다. `Future`의 경우는 `value`.
+
+# 4. [Custom Asynchronous Sequences With AsyncStream](https://www.raywenderlich.com/books/modern-concurrency-in-swift/v1.0/chapters/4-custom-asynchronous-sequences-with-asyncstream)
+- `AsyncStream`을 통해 간단하게 asynchronous sequence를 만들어낼 수 있다.
+- `continuation.yield()`가 호출될 때마다 값을 방출. Sequence의 종료는 `continuation.finish()`를 호출해야한다.
