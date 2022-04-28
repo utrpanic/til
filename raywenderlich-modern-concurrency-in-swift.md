@@ -49,3 +49,7 @@ Remember, you learned that every use of await is a suspension point, and your co
 # 4. [Custom Asynchronous Sequences With AsyncStream](https://www.raywenderlich.com/books/modern-concurrency-in-swift/v1.0/chapters/4-custom-asynchronous-sequences-with-asyncstream)
 - `AsyncStream`을 통해 간단하게 asynchronous sequence를 만들어낼 수 있다.
 - `continuation.yield()`가 호출될 때마다 값을 방출. Sequence의 종료는 `continuation.finish()`를 호출해야한다.
+
+# 5. [Intermediate async/await & CheckedContinuation](https://www.raywenderlich.com/books/modern-concurrency-in-swift/v1.0/chapters/5-intermediate-async-await-checkedcontinuation)
+- Completion/Delegate 스타일의 코드를 `CheckedContinuation`을 이용해 모던하게 만들기.
+- Continuation은 반드시 모든 code path에서 `resume(...)`을 반드시 한 번 호출해야 함. 함수의 return 같은 느낌. 호출이 누락되면 IDE가 경고.
