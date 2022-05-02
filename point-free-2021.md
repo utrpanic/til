@@ -44,3 +44,9 @@ struct AnalyticsClient {
 - Exhaustivity, Failability, Immediacy 모두 테스트를 위한 개선이었지만, 실제로 그 효과는 테스트에 국한되지 않는다.
 - Immediate scheduler를 이용해 SwiftUI preview를 개선하고.
 - (전반적으로 이해가 잘... 건너뛴 에피소드를 살펴보고 다시 보기.)
+
+# [Episode #171 Modularization: Part 1](https://www.pointfree.co/episodes/ep171-modularization-part-1)
+- 단일 앱을 SPM을 이용해 모듈화 하는 과정.
+- Model이나 Helper 같이 외부 의존성이 적은 모듈을 먼저 추출.
+- 그 후에 FeatureModule 모듈 추출.
+- `It seems that Xcode and SPM pick up transitive dependencies.` 잘못된 디자인이 아닌가 계속 생각했는데, 이런 언급을 보니 transitive dependency란 개념이 원래 있는 건지도.
