@@ -50,3 +50,10 @@ struct AnalyticsClient {
 - Model이나 Helper 같이 외부 의존성이 적은 모듈을 먼저 추출.
 - 그 후에 FeatureModule 모듈 추출.
 - `It seems that Xcode and SPM pick up transitive dependencies.` 잘못된 디자인이 아닌가 계속 생각했는데, 이런 언급을 보니 transitive dependency란 개념이 원래 있는 건지도.
+
+# [Episode #172 Modularization: Part 2](https://www.pointfree.co/episodes/ep172-modularization-part-2)
+- Xcode preview의 단점으로...
+  - Simulator에서는 되지만 preview에서는 안되는 것들이 많고.(slow animation, application lifecycle 등.)
+  - 코드를 수정하면 preview가 바로 업데이트 되는 등, 오래 유지되지 않고.
+  - Debugger를 연결할 수 없다.
+- Horizontal vs. vertical modularity. 이미 우리가 해온 것들.
