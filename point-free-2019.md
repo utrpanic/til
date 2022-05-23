@@ -271,7 +271,7 @@ public func print<Target>(_ items: Any..., separator: String = " ", terminator: 
 - Edge case 처리를 위한 로직은 계속 불어나고, 구현된 코드 중에 어느 것도 외부에서 reuse할 수 없다.
 - Build small, reusable parsers!
 
-# [Episode #57 What Is a Parser?: Part 2](https://www.pointfree.co/episodes/ep57-what-is-a-parser-part-2)
+# [Episode #57 What Is a Parser?: Part 2](https://www.pointfree.co/episodes/ep57-what-is-a-parser-part-2) `+1`
 - Parser란 무엇인가. 결국 String을 받아서 특정 타입을 리턴하는 것.
 - Deep-link를 route enum으로 바꾼다거나, command line tool의 argument를 enum으로 바꾸기도.
 ```Swift
@@ -293,6 +293,8 @@ let int = Parser<Int> { str in
 }
 ```
 - 그리고 Substring의 신묘한 힘. startIndex를 사용함으로써 문자열 복사를 피할 수도 있다.
+- 예를 들어, `Substring.removeFirst(_:)`는 String과 달리 문자열을 새로 만들지 않는다.
+- Every Swift collection has an underlying `SubSequence` type.
 ```Swift
 struct Parser<A> {
   let run: (inout Substring) -> A?
