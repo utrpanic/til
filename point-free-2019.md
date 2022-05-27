@@ -337,7 +337,7 @@ func parseLatLong(_ coordString: String) -> Coordinate? {
 ```
 - 감탄. 또 감탄.
 
-# [Episode #59 Composable Parsing: Map](https://www.pointfree.co/episodes/ep59-composable-parsing-map)
+# [Episode #59 Composable Parsing: Map](https://www.pointfree.co/episodes/ep59-composable-parsing-map) `+1`
 - Parser의 map을 구현하면.
 ```Swift
 extension Parser {
