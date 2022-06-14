@@ -1,3 +1,11 @@
+## [UIKit으로 만들어진 토스 디자인 시스템, SwiftUI에서 쓸 수 있을까?](https://www.youtube.com/watch?v=q0CX-0k2l0g)
+### 강준구님
+- TDS. 
+- UICollecitonViewCell의 경우. CellItemModelType protocol, FlowSizeable protocol을 model이 conform. 
+- CollectionViewAdapter. Model의 `hash()`가 변경되면 cell이 업데이트됨.
+- Component를 이용해 UIView를 추상화해 사용하고 있는데, Component가 SwiftUI.View를 conform하면!!!
+- Design Syntax Tree. Server Driven UI?
+
 ## [iOS앱을 매주 배포 한다고?](https://www.youtube.com/watch?v=GhcJ-KDFLrU)
 ### 김준모님
 - iOS 앱을 매주 배포.
