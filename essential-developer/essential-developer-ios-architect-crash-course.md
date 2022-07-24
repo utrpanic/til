@@ -7,3 +7,9 @@ https://www.essentialdeveloper.com/ios-architect-crash-course
 - How I developed a methodology for evenyone - from anywhere - to become true Senior iOS Developers
 - 백엔드 경력을 가진 시니어 앱 개발자가 코드 베이스를 확인하고 1주만에 그만둔 이야기.
 - 아무래 그래도 이걸로 35분을?
+
+# Lecture 2
+- What every Senior iOS Dev should know: Principle & Patterns Applied
+- How to solve the anti-patterns shown in the previous lecture...
+- To deliver high-quality apps on time following good principles...
+
