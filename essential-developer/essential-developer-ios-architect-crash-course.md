@@ -12,4 +12,5 @@ https://www.essentialdeveloper.com/ios-architect-crash-course
 - What every Senior iOS Dev should know: Principle & Patterns Applied
 - How to solve the anti-patterns shown in the previous lecture...
 - To deliver high-quality apps on time following good principles...
-
+- ItemViewModel을 정의함으로써, Open-Closed principle, Liskov Substitution principle을 어기고 있는 코드를 제거.
+- Navigation 코드를 UIViewController의 extension으로 빼서 의존성 끊기.
