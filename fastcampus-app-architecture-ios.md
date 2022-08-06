@@ -1,4 +1,4 @@
-# [슈퍼앱 운영을 위한 확장성 높은 앱 아키텍처 구축](https://fastcampus.co.kr/dev_red_rsj)
+# [슈퍼앱 운영을 위한 확장성 높은 앱 아키텍처 구축 by 노수진](https://fastcampus.co.kr/dev_red_rsj)
 
 ## 0. Intro
 
