@@ -42,3 +42,20 @@
 - 피드백을 통해 TDR(Technical Design Document) 등으로 정제.
 - 인사 평가에서 그대로 첨부자료(Artifact)로 사용됨.
 - 두 번 설계 하라! 적어도 2개 이상의 설계를 제안해야 함. 똑똑한 사람들에게는 더욱 어려움. '인내할 것'.
+
+## Part 2. 테스트 구현
+
+### 1. 좋은 아키텍처를 위한 올바른 테스트
+- 테스트에 대한 기본적인 원칙들. 
+- 아키텍처를 수정할 때마다 많은 변경이 수반되고. 확신을 갖고 수정할 수 있는지.
+- 인터페이스의 분리. 필요없는 의존성의 제거.
+- 협업을 촉진한다. 의도를 보여주니까. 의도를 벗어나면 테스트가 실패할테니까.
+- 테스팅 피라미드. Unit Test 70%, Integration Test 20%, End to end Test 10%.
+- Firebase test lab이라던가. 편리한 툴이 있어서 End to end Test가 너무 많아지는 것은 anti pattern.
+- Android의 경우. Local이냐 아니냐. 
+  - Local Test. Robolectric 같은 걸로 Context를 주입받을 수도 있고.
+  - Instrumented Test. Espresso 같은 라이브러리를 사용.
+- 무엇을 테스트해야하는가. 가장 어려운 부분.
+  - 의미있는 테스트가 되어야 함. Edge cases는 좋은 예.
+- 실제 구현체를 쓰거나, fake를 쓰거나, mock/spy/stub. 이 순서대로 시도.
+- Mock을 쓰면 가장 좋은 것은 isolation. Realism이 떨어질 수 있음. Mock 구현 자체에 버그가 있을 수 있고.
