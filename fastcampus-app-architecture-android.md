@@ -59,3 +59,15 @@
   - 의미있는 테스트가 되어야 함. Edge cases는 좋은 예.
 - 실제 구현체를 쓰거나, fake를 쓰거나, mock/spy/stub. 이 순서대로 시도.
 - Mock을 쓰면 가장 좋은 것은 isolation. Realism이 떨어질 수 있음. Mock 구현 자체에 버그가 있을 수 있고.
+
+### 2. Google은 어떻게 테스트하는가
+- 2005년. 무려 80% 이상의 PR이 버그로 인해 롤백되었음.
+- 장애가 발생하면?
+  - 해당 PR을 통째로 롤백. (PR이 충분히 작고 분리되어 있어야 함.)
+  - 버그에 대한 테스트 작성.
+  - 테스트를 통과 시킬 수 있도록 수정.
+- 테스트. Beyonce Rule. If you liked it, then you should put a test on it.
+- 정확성(Correctness). 명확성(Clarity). (연관되지 않은 변경 사항에 대한)안정성(Resilience).
+- 유용성(Helpfulness). 
+- 외부 의존성 처리의 원칙. 가능하면 실제 코드를 사용. Mock 보다는 fake를 사용.
+- Snapshot Test. 깨지기 쉬운 테스트가 될 가능성이 농후하므로, 목적 설정이 아주 중요. View 부품의 단위들에 대한 스냅샷. 화면 전체에 대한 스냅샷 테스트를 하는 것은 아님.
