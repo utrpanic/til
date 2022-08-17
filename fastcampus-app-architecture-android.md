@@ -71,3 +71,9 @@
 - 유용성(Helpfulness). 
 - 외부 의존성 처리의 원칙. 가능하면 실제 코드를 사용. Mock 보다는 fake를 사용.
 - Snapshot Test. 깨지기 쉬운 테스트가 될 가능성이 농후하므로, 목적 설정이 아주 중요. View 부품의 단위들에 대한 스냅샷. 화면 전체에 대한 스냅샷 테스트를 하는 것은 아님.
+
+### 3. Google의 테스팅 Best Practices 1
+- 일단 대원칙은 '테스트 불변성(Unchanging Test)'.
+1. Test via Public APIs. 테스트에서 사용하기 위해 access level을 변경해선 안됨.
+2. Test State, Not Interactions.
+3. Make Your Tests Complete and Concise. 테스트하고자 하는 것을 정확히 알 수 있는 정보를 모두 갖고 있어야 한다. 그 외의 것들은 최대한 감춰야한다. (이게 지금 우리에게 필요해!)
