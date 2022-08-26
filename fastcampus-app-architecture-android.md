@@ -21,7 +21,7 @@
 ### 2. 좋은 아키텍처를 위한 원칙 - SOLID 원칙
 - 중간 규모? 클래스끼리 모여있는 모듈 구조.
 - 중간 규모의 소프트웨어 구조가 좋은 설계 요구 사항을 만족시키는 것. 그것이 SOLID의 목표.
-- 단일 책임 원칙. 책임이란 특정 업무나 일이 아니라... Facade 패턴으로...?
+- 단일 책임 원칙. 책임이란 특정 업무나 일이 아니라... Facade 패턴으로...? 행동을 유발하는 actor가 하나.
 - 인터페이스 의존의 원칙. 자신이 사용하지 않는 것에 의존하면 안된다.
 - 개방-폐쇄 원칙. 클래스/모듈 사이의 의존 관계에서도 유효한 원칙.
 - 리스코프 치환 원칙. 바바라 리스코프. 그치만... 상속보다 조합.
@@ -77,3 +77,11 @@
 1. Test via Public APIs. 테스트에서 사용하기 위해 access level을 변경해선 안됨.
 2. Test State, Not Interactions.
 3. Make Your Tests Complete and Concise. 테스트하고자 하는 것을 정확히 알 수 있는 정보를 모두 갖고 있어야 한다. 그 외의 것들은 최대한 감춰야한다. (이게 지금 우리에게 필요해!)
+
+### 4. Google의 테스팅 Best Practices 2
+4. Test Behaviors, Not Methods. Method와 테스트 케이스의 비율은 1:n.
+5. Structure tests to emphasize behaviors. GIVEN / WHEN / THEN. When / Then 은 반복되는 케이스도 있음.
+6. Don't Put Login in Tests. 그 로직이 버그를 가질 수도 있으니까.
+7. DAMP(Descriptive And Meaningful Phrases), Not DRY. 반복 코드를 함수로 만든 것이 지금까지의 원칙을 해쳐선 안된다.
+8. No Shared Value. Mutable 객체의 경우, 더욱 위험.
+9. Shared Setup. Setup에서는 진짜 default에 해당하는 것만.
