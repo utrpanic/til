@@ -85,3 +85,18 @@
 7. DAMP(Descriptive And Meaningful Phrases), Not DRY. 반복 코드를 함수로 만든 것이 지금까지의 원칙을 해쳐선 안된다.
 8. No Shared Value. Mutable 객체의 경우, 더욱 위험.
 9. Shared Setup. Setup에서는 진짜 default에 해당하는 것만.
+
+## Part 3. UI 계층
+
+### 1. MVx의 대원칙
+- 어떤 경우든 Model은 분리되어야 한다.
+- 뷰의 역할을 할 수 있는 한 분리시켜야 한다.
+- Android에서 발생할 수 있는 특수한 상황. (Context라던가 생명주기 등)
+- Controller. 어떤 View를 보여줄 것인가. 에러는 어떻게 표현할 것인가.
+- Android에서 MVC에 대해 좋은 이야기는 못 들어본 것 같다. User event 외에도 Controller가 처리할 것이 너무 많음.
+- UI와 로직을 분리하기도 어렵고. 생명주기 내에서 Controller는 어떻게 변화해야하는가.
+- 그러다보면 fat activity, fat fragment... Unit test 작성도 까다로워짐.
+- 해결책은?
+  - View를 분화. View 마다 ViewController를 제공.
+  - Activity/Fragment는 ViewController에게 여러 위임하는 역할. Life cycle 관련 처리도 위임.
+- 그래도 Context가 계속 문제. 그래서 뷰와 컨트롤러를 완전히 분리해야 한다. non-MVC가 필요하다!
