@@ -100,3 +100,9 @@
   - View를 분화. View 마다 ViewController를 제공.
   - Activity/Fragment는 ViewController에게 여러 위임하는 역할. Life cycle 관련 처리도 위임.
 - 그래도 Context가 계속 문제. 그래서 뷰와 컨트롤러를 완전히 분리해야 한다. non-MVC가 필요하다!
+
+### 2. MVP, 그리고 non-MVC에서 공통적으로 고려해야할 것들
+- Model-View-Presenter. 뷰는 비즈니스 로직에 관련된 부분에 관여할 수 없도록 분리. Presenter로 넘김.
+- 수동적인 뷰(Passive View): View는 완전한 Humble Object여야 한다. 최대한 dumb 하게.
+- Fat Activity/Fragment를 방지해주고. 테스트 가능성도 증대. Presenter가 Context를 사용하지 않기 때문에.
+- MVP. 심플하지만, 잘못 구현하기도 쉽다. 또한, Presenter와 View의 상호 참조 문제도.
