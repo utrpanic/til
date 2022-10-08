@@ -107,6 +107,16 @@
 - Fat Activity/Fragment를 방지해주고. 테스트 가능성도 증대. Presenter가 Context를 사용하지 않기 때문에.
 - MVP. 심플하지만, 잘못 구현하기도 쉽다. 또한, Presenter와 View의 상호 참조 문제도.
 
+### 3. MVVM
+- 단방향 데이터 흐름. State Holder는 뷰 방향으로의 의존성을 전혀 갖지 않는다.
+- ViewModel은 그 자체로 독립적인(self-contained) 시스템.
+- 안드로이드는 Data binding을 통해서. Layout에서 코드와 맵핑할 수 있음.
+- Data binding이 없으면 순환 이벤트 흐름이 생김. View에서 이벤트를 받았는데, ViewModel을 업데이트하고 그걸 다시 View가 갱신하는.
+- 단점은? 학습 곡선. Reactive 라던가. Fat ViewModel. Navigation은?
+- ViewModel은 AAC(Android Architecture Component)에서 지원.
+- 생명주기 내에서 ViewModel이 보존됨. 예를 들어 화면 회전이 일어날 경우, fragment가 해제되고 재생성된다고 해도 ViewModel은 유지되는.
+- AAC ViewModel 사용 시 발생할 수 있는 anti pattern들이 있음.
+- ViewModel 생성자에서 초기화 이상의 일을 하는 것은 anti pattern. init 함수 같은 것을 별도로 만드는 것도 좋지 않음. 게으른(lazy) 초기화를 사용해야 함.
 ## Part 6. 멀티 모듈 (Modular Architecture)
 
 ### 1. 모듈을 나누기 위한 기본 지식
