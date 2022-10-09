@@ -117,6 +117,12 @@
 - 생명주기 내에서 ViewModel이 보존됨. 예를 들어 화면 회전이 일어날 경우, fragment가 해제되고 재생성된다고 해도 ViewModel은 유지되는.
 - AAC ViewModel 사용 시 발생할 수 있는 anti pattern들이 있음.
 - ViewModel 생성자에서 초기화 이상의 일을 하는 것은 anti pattern. init 함수 같은 것을 별도로 만드는 것도 좋지 않음. 게으른(lazy) 초기화를 사용해야 함.
+
+### 4. MVI-Flux
+- 앱 전체의 이벤트를 하나의 State Machine을 이용한다면 어떨까?
+- Model-View-Intent. 가장 널리 사용되던 구현체는 Redux.
+- 웹 쪽에서는 다른 대안이 많이 나와 있음.
+- Single source of truth. Activity life cycle 같은 것도 고려하지 않아도 되고.
 ## Part 6. 멀티 모듈 (Modular Architecture)
 
 ### 1. 모듈을 나누기 위한 기본 지식
