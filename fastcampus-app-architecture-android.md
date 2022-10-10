@@ -123,6 +123,15 @@
 - Model-View-Intent. 가장 널리 사용되던 구현체는 Redux.
 - 웹 쪽에서는 다른 대안이 많이 나와 있음.
 - Single source of truth. Activity life cycle 같은 것도 고려하지 않아도 되고.
+
+### 5. 라이브코드: 기본적인 뷰모델을 구현해보자 1
+
+### 6. 라이브코드: 기본적인 뷰모델을 구현해보자 2
+
+### 7. 코드 클리닉: 뷰모델에서 하기 쉬운 실수를 고쳐보자
+- ViewModel의 생성자 내에서 초기화 외의 일을 하지 말 것.
+- `Result` 타입을 정의해서 사용. 상태로 Success, Error 외에 Loading도 있음.
+
 ## Part 6. 멀티 모듈 (Modular Architecture)
 
 ### 1. 모듈을 나누기 위한 기본 지식
