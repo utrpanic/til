@@ -168,6 +168,13 @@
 - 데이터 레이어. 구글에서 제공하고 있는 데이터 가이드라인?에도 내용이 많음.
 - 리포지토리(Repository) 패턴. 도메인 계층에서 필요한 기능만 제공.
 
+### 5. 라이브코드: 데이터 계층의 구현 실습
+- 영속성이 필요한 데이터가 있다고 했을 때(앱 재실행 시에도 유지되어야 하는 데이터).
+- Repository를 정의하고... 보통 context가 필요하고...
+- `AndroidViewModel`은 application context를 기본적으로 갖고 있기 때문에, 주입하면 되겠지만...
+- Repository를 view model의 멤버변수로 주입. 
+- Repository를 view model이 멤버로 갖는 게 괜찮은 디자인인건가? Repository가 get/set 인터페이스만 제공하는 셈이니 괜찮은 건가? set은 또 async인데?
+
 ## Part 6. 멀티 모듈 (Modular Architecture)
 
 ### 1. 모듈을 나누기 위한 기본 지식
