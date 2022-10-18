@@ -175,6 +175,15 @@
 - Repository를 view model의 멤버변수로 주입. 
 - Repository를 view model이 멤버로 갖는 게 괜찮은 디자인인건가? Repository가 get/set 인터페이스만 제공하는 셈이니 괜찮은 건가? set은 또 async인데?
 
+## Part 5. 의존성 주입 (Dependency Injection)
+
+### 1. 의존성 주입이란 무엇인가
+- 의존성 주입이란 '객체 인스턴스의 생성을 직접하지 않고 (다른 곳에서 만들어져서) 필요한 곳에 전달되도록 코드를 조직화하는 방법'.
+  - 코드를 재사용 가능하게 한다.
+  - 클라이언트는 interface로만 객체를 알고 있으면 되므로, 보다 나은 설계를 가능하게 한다.
+- ServiceLocator 패턴. 이건 의존성 주입 방식은 아니고... 중간 규모 이하라면 사용해볼만 하다고.
+- App의 스타트업 타입을 줄이기 위해서는... onCreate에서 많은 객체들이 초기화되는 상황을 피하기 위해 lazy 처리가 필요.
+
 ## Part 6. 멀티 모듈 (Modular Architecture)
 
 ### 1. 모듈을 나누기 위한 기본 지식
