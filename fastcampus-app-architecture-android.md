@@ -184,6 +184,12 @@
 - ServiceLocator 패턴. 이건 의존성 주입 방식은 아니고... 중간 규모 이하라면 사용해볼만 하다고.
 - App의 스타트업 타입을 줄이기 위해서는... onCreate에서 많은 객체들이 초기화되는 상황을 피하기 위해 lazy 처리가 필요.
 
+### 2. Dagger의 기초와 중요개념
+- 코드 생성 기반의 의존성 주입 프레임워크. 안드로이드 전용은 아님.
+- onCreate에서 `Component.inject(this)`?
+- 그리고 생성자 주입 또는 필드 주입.
+- Dagger는 DAG.비순환그래프.
+
 ## Part 6. 멀티 모듈 (Modular Architecture)
 
 ### 1. 모듈을 나누기 위한 기본 지식
