@@ -190,6 +190,10 @@
 - 그리고 생성자 주입 또는 필드 주입.
 - Dagger는 DAG.비순환그래프.
 
+### 3. Dagger Hilt
+- Dagger API를 Android에서 설치하고 설정하고 테스트하는 과정을 쉽게 해주는 오픈소스 래퍼 라이브러리.
+- (음 글쎄... Android 개발자가 아니라 따라가질 못하겠네.)
+
 ## Part 6. 멀티 모듈 (Modular Architecture)
 
 ### 1. 모듈을 나누기 위한 기본 지식
