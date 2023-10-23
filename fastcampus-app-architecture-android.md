@@ -199,6 +199,10 @@
 - 설정이 너무 힘들면, mock의 유혹이 시작되고...
 - Hilt를 이용해 손쉽게 생성하고...?
 
+### 5. 무섭지 않아요! Dagger 고급편
+- Scopes. `Singleton`, `ActivityScoped`, `ViewScoped` 등 같은 인스턴스가 언제까지 유지되는지에 대한 지정도 가능.
+- Provider를 사용한다면 매번 인스턴스 생성.
+
 ## Part 6. 멀티 모듈 (Modular Architecture)
 
 ### 1. 모듈을 나누기 위한 기본 지식
