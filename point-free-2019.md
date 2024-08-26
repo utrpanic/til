@@ -532,11 +532,11 @@ func oneOf<A>(_ ps: [Parser<A>]) -> Parser<A> {
 - New line parsing `separatedBy`에 `literal("\n")`으로 간단히 처리.
 - 알고리즘 문제 풀 때, input parsing에 한 번 사용해볼 것.
 
-# [Episode #65 SwiftUI and State Management: Part 1](https://www.pointfree.co/episodes/ep65-swiftui-and-state-management-part-1)
-- 드디어 SwiftUI라니...
+# [Episode #65 SwiftUI and State Management: Part 1](https://www.pointfree.co/episodes/ep65-swiftui-and-state-management-part-1) `+1`
 - 문제점들. Make applications more understandable and testable, such as pushing side effects to the boundaries, using pure functions as much as possible, and putting an emphasis on functions and composition above all other abstractions.
-- `@State`는 멋지지만, 다른 view로 변경사항을 전파하려면 추가적인 작업 필요하다.
-- `@State`로 정의된 property를 child view에 `@ObjectBinding`로 전달.
+- Large, complex applications. 한 화면에서 변경한 state가 다른 화면에 바로 반영되어야 한다던가.
+- SwiftUI 초기라 그런지, 주로 `State`에 대한 기초적인 설명.
+- `BindableObject`는 `ObservableObject`에서 로 대체됨. Modern SwiftUI에서는 Combine이 모두 감춰짐.
 
 # [Episode #66 SwiftUI and State Management: Part 2](https://www.pointfree.co/episodes/ep66-swiftui-and-state-management-part-2)
 - 별다른 내용 없이 SwiftUI 이야기 계속.
