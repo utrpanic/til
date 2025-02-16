@@ -532,45 +532,48 @@ func oneOf<A>(_ ps: [Parser<A>]) -> Parser<A> {
 - New line parsing `separatedBy`에 `literal("\n")`으로 간단히 처리.
 - 알고리즘 문제 풀 때, input parsing에 한 번 사용해볼 것.
 
-# [Episode #65 SwiftUI and State Management: Part 1](https://www.pointfree.co/episodes/ep65-swiftui-and-state-management-part-1) `+1`
+# [Episode #65 SwiftUI and State Management: Part 1](https://www.pointfree.co/episodes/ep65-swiftui-and-state-management-part-1) `+2`
 - 문제점들. Make applications more understandable and testable, such as pushing side effects to the boundaries, using pure functions as much as possible, and putting an emphasis on functions and composition above all other abstractions.
 - Large, complex applications. 한 화면에서 변경한 state가 다른 화면에 바로 반영되어야 한다던가.
-- SwiftUI 초기라 그런지, 주로 `State`에 대한 기초적인 설명.
 - `BindableObject`는 `ObservableObject`에서 로 대체됨. Modern SwiftUI에서는 Combine이 모두 감춰짐.
+- 최상위에서 `@State` property를 계속 `Binding`으로 내려보내면 안될까? 이 때는 안됐나?
 
-# [Episode #66 SwiftUI and State Management: Part 2](https://www.pointfree.co/episodes/ep66-swiftui-and-state-management-part-2)
-- 별다른 내용 없이 SwiftUI 이야기 계속.
+# [Episode #66 SwiftUI and State Management: Part 2](https://www.pointfree.co/episodes/ep66-swiftui-and-state-management-part-2) `+1`
 - $을 통해서 주입한 값은 내부에서 변경도 가동. `alert()`, `sheet()` 등.
 
-# [Episode #67 SwiftUI and State Management: Part 3](https://www.pointfree.co/episodes/ep67-swiftui-and-state-management-part-3)
+# [Episode #67 SwiftUI and State Management: Part 3](https://www.pointfree.co/episodes/ep67-swiftui-and-state-management-part-3) `+1`
 - SwiftUI의 좋은 점.
-  - 선언적 UI. `body`에서만 View를 기술할 수 있다는 점.
-  - Local state를 위한 `@State`.
-  - Multiple screens를 위한 `@ObjectBinding`.
-  - 무엇보다도 구조에 대한 strong opinion.
+  - Declarative UI. View가 일종의 pure function이 되었다.
+  - Local state를 위한 `@State`, state share를 위한 `@Binding`.
+  - 무엇보다도 구조에 대한 Apple의 strong opinion. SwiftUI에서는 다른 방법으로 state를 다룰 방법이 없다.
 - SwiftUI에 더 요구되는 점.
-  - Apple has yet to give us a solution for truly modeling our global app state in a scaleable way. 하지만 `@Published`가 추가되면서 나아졌다.
+  - Apple has yet to give us a solution for truly modeling our global app state in a scaleable way.
   - State mutation 코드가 view 구현부 내에 여기저기 흩어져있다.
   - alert()에서 사용되는 것처럼 2-way binding도 마찬가지. hidden mutation.
   - 지금으로서는 mutation을 둘 곳에 대한 team guideline 같은 걸로 해결해야 한다.
   - Side effect를 다루는 방식에 대해서도 Apple은 특별한 가이드를 주지 않았다.
-  - State management isn't composable. 하지만 `@Binding`이 추가되면서 sub-state를 read-only로 표현할 수 있게 되었다.
-  - SwiftUI isn't testable.
+  - State management isn't sub-state composable.
+  - There is no story for testing for SwiftUI.
 
-# [Episode #68 Composable State Management: Reducers](https://www.pointfree.co/episodes/ep68-composable-state-management-reducers)
+# [Episode #68 Composable State Management: Reducers](https://www.pointfree.co/episodes/ep68-composable-state-management-reducers) `+1`
 - `class`로 선언된 global state. `@Published`를 property 마다 써줘야하는 부분도 개선 포인트.
 - State를 `struct`로 변경하고, `ObservableObject`로 wrapping하기.
 - State 자체는 SwiftUI나 Combine에 의존하지 않게 된 것도 장점.
+- State mutation 구문이 View에 여기저기 퍼져 있는 문제. Store에 reducer를 추가함으로써, mutation을 한 곳에 모을 수 있음.
+- 하지만 `AppReducer`가 모든 스크린의 mutation을 담당할 수는 없는 일.
 ```Swift
-final class Store<Value>: ObservableObject {
+final class Store<Value, Action>: ObservableObject {
+  let reducer: (input Value, Action) -> Void
   @Published var value: Value
-  init(initialValue: Value) {
+  init(
+    initialValue: Value,
+    reducer: @escaping (inout Value, Action) -> Void
+  ) {
     self.value = value
+    self.reducer = reducer
   }
 }
 ```
-- State mutation 구문이 View에 여기저기 퍼져 있는 문제.
-- State에 reducer를 구현함으로써 처리. 다만 `AppReducer`가 모든 스크린의 mutation을 담당할 수는 없는 일.
 
 # [Episode #69 Composable State Management: State Pullbacks](https://www.pointfree.co/episodes/ep69-composable-state-management-state-pullbacks)
 - `appReducer`를 어떻게 더 나누고 조합할 것인가.
