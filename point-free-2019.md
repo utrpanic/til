@@ -575,7 +575,7 @@ final class Store<Value, Action>: ObservableObject {
 }
 ```
 
-# [Episode #69 Composable State Management: State Pullbacks](https://www.pointfree.co/episodes/ep69-composable-state-management-state-pullbacks)
+# [Episode #69 Composable State Management: State Pullbacks](https://www.pointfree.co/episodes/ep69-composable-state-management-state-pullbacks) `+1`
 - `appReducer`를 어떻게 더 나누고 조합할 것인가.
 ```Swift 
 func combine<Value, Action>(
@@ -593,8 +593,9 @@ let appReducer = combine(
   favoritePrimesReducer
 )
 ```
-- 하지만 여전히 reducer들이 불필요하게 global state를 다 알아야한다.
-- Pullback을 대체 뭐라고 이해해야할까.
+- 하지만 여전히 각 reducer들이 불필요하게 `AppState` 전체를 알아야한다.
+- Pullback: A form of composition that reverses the direction of function arrows.
+- Operation pullback: Transforming predicates on small, specific data into predicates on large, general data.
 ```Swift
 func pullback<LocalValue, GlobalValue, Action>(
   _ reducer: @escaping (inout LocalValue, Action) -> Void,
@@ -611,7 +612,7 @@ let appReducer = combine(
 )
 ```
 
-# [Episode #70 Composable State Management: Action Pullbacks](https://www.pointfree.co/episodes/ep70-composable-state-management-action-pullbacks)
+# [Episode #70 Composable State Management: Action Pullbacks](https://www.pointfree.co/episodes/ep70-composable-state-management-action-pullbacks) `+1`
 - AppAction은 여전히 global action이다. State 처럼 pullback을 구현할 수 있을까.
 - enum property를 구현한다면 key path를 이용한 동일한 접근이 가능해진다.
 ```Swift
@@ -632,31 +633,28 @@ let _appReducer: (inout AppState, AppAction) -> Void = combine(
 )
 let appReducer = pullback(_appReducer, value: \.self, action: \.self)
 ```
-- `higher-order ***`란 무엇인가. `Gen`을 input으로 받아 `Gen`을 리턴하고. Reducer를 input으로 받아 reducer를 리턴하는.
+- `higher-order constructions`. High-order function이 function을 파라미터로 받아 function을 리턴하는 것처럼. `Gen`을 input으로 받아 `Gen`을 리턴하고. 
+- `higher-order reducer`. Reducer를 input으로 받아 reducer를 리턴하는.
 
-# [Episode #71 Composable State Management: Higher-Order Reducers](https://www.pointfree.co/episodes/ep71-composable-state-management-higher-order-reducers)
-- 그것은 바로 higher-order constructions.
-- `combine`과 `pullback`이 higher-order reducer.
+# [Episode #71 Composable State Management: Higher-Order Reducers](https://www.pointfree.co/episodes/ep71-composable-state-management-higher-order-reducers) `+1`
+- `higher-order reducer`. Reducer를 받아서 원하는 작업을 끼워넣고, 다시 reducer를 리턴.
+- 각 feature reducer가 activity feed를 몰라도 되도록. 자기 일만 관심가질 수 있도록.
 ```Swift
 func activityFeed(
   _ reducer: @escaping (inout AppState, AppAction) -> Void
 ) -> (inout AppState, AppAction) -> Void {
-
   return { state, action in
     switch action {
     case .counter:
       break
-
     case .primeModal(.removeFavoritePrimeTapped):
       value.activityFeed.append(
         .init(timestamp: Date(), type: .removedFavoritePrime(value.count))
       )
-
     case .primeModal(.addFavoritePrime):
       value.activityFeed.append(
         .init(timestamp: Date(), type: .saveFavoritePrimeTapped(value.count))
       )
-
     case let .favoritePrimes(.deleteFavoritePrimes(indexSet)):
       for index in indexSet {
         value.activityFeed.append(
@@ -664,7 +662,6 @@ func activityFeed(
         )
       }
     }
-
     reducer(&state, action)
   }
 }
@@ -692,9 +689,9 @@ func logging<Value, Action>(
 ContentView(
   store: Store(
     value: AppState(),
-    reducer: with(
+    reducer: with( // import Overture
       appReducer,
-      compose( // import Overture
+      compose(
         logger,
         activityFeed
       )
@@ -702,11 +699,9 @@ ContentView(
   )
 )
 ```
-- View styling, randomness, snapshot testing, parsing 같은 아이디어를 반복해서 구현 중.
-- Atomic primitive를 구현하고 그를 조합해서 복잡한 기능을 구현해내는 것.
-- 이 시리즈를 시작할 때 지목한 5개의 문제점 중 2개를 풀어보았다. (그리고... Modular architecture에서 어떻게 할 것인지. Side effects를 어떻게 다룰 것인지. 어떻게 Testable하게 만들 것인지.)
+- View styling, randomness, snapshot testing, parsing 같은 아이디어를 반복해서 구현 중. Atomic primitive를 구현하고 그를 조합해서 복잡한 기능을 구현해내는 것.
 
-# [Episode #72 Modular State Management: Reducers](https://www.pointfree.co/episodes/ep72-modular-state-management-reducers)
+# [Episode #72 Modular State Management: Reducers](https://www.pointfree.co/episodes/ep72-modular-state-management-reducers) `+1`
 - 5개의 문제점. 원문 그대로.
   - Create complex app state models, ideally using simple value types.
   - Have a consistent way to mutate the app state instead of just littering our views with mutation code.
@@ -714,7 +709,6 @@ ContentView(
   - Have a well-defined mechanism for executing side effects and feeding the results back into our application.
   - Have a story for testing our application with minimal setup and effort.
 - Modularity란 무엇인가. 단절시키는 것. 필요한 것만 사용하는 것.
-- `primeModalReducer`는 AppState를 참조하고 있기 때문에, 모듈로 이동시키기만 해서는 안된다.
 ```Swift
 extension AppState {
   var primeModal: PrimeModalState {
@@ -737,10 +731,10 @@ let appReducer = combine(
   ...
 }
 ```
+- 하지만 여전히 Store가 모든 것을 들고 있고, 모든 View가 이를 사용한다. 그렇다면...
 
-# [Episode #73 Modular State Management: View State](https://www.pointfree.co/episodes/ep73-modular-state-management-view-state)
+# [Episode #73 Modular State Management: View State](https://www.pointfree.co/episodes/ep73-modular-state-management-view-state) `+1`
 - AppState도 AppAction도 분리했지만, View는 아직 그러지 못했다.
-- 코드는 이해했는데, 설명이 잘 이해되지 않는 에피소드;;;
 ```Swift
 public final class Store<Value, Action>: ObservableObject {
   private let reducer: (inout Value, Action) -> Void
@@ -759,6 +753,7 @@ public final class Store<Value, Action>: ObservableObject {
   // ((Value) -> LocalValue) -> ((Store<Value, _>) -> Store<LocalValue, _>
   // ((A) -> B) -> ((Store<A, _>) -> Store<B, _>
   // map: ((A) -> B) -> ((F<A>) -> F<B>
+  // Function signature는 map과 동일하지만, 값이 sync되는 것이 너무 다르다. 그래서 다른 이름이 필요.
 
   func view<LocalValue>(
     _ f: @escaping (Value) -> LocalValue
@@ -782,10 +777,15 @@ IsPrimeModalView(
 ```
 - 여튼! LocalStore의 mutation이 GlobalStore로 전달되고, 다시 다른 LocalStore로 퍼져나가는.
 
-# [Episode #74 Modular State Management: View Actions](https://www.pointfree.co/episodes/ep74-modular-state-management-view-actions)
+# [Episode #74 Modular State Management: View Actions](https://www.pointfree.co/episodes/ep74-modular-state-management-view-actions) `+1`
 - Store.view()의 Action을 LocalAction으로 바꿀 수 있으면, View를 아예 모듈로 보내는 것이 가능해짐.
 - Action에 대해서도 LocalValue와 동일한 접근이 가능하고... 둘을 한꺼번에 하는 것도 자연스럽다.
 ```Swift
+// ((LocalAction) -> Action) -> ((Store<_, Action>) -> Store<_, LocalAction>)
+// ((B) -> A) -> ((Store<A, _>) -> Store<B, _>)
+// pullback: ((A) -> B) -> (F<B>) -> F<A>)
+// Function signature는 pullback과 동일하지만, Store가 reference type이라 값이 sync되는 부분이 다르다.
+
 public func view<LocalValue, LocalAction>(
   value toLocalValue: @escaping (Value) -> LocalValue,
   action toGlobalAction: @escaping (LocalAction) -> Action
