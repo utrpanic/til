@@ -805,70 +805,66 @@ public func view<LocalValue, LocalAction>(
 ```
 - 여기까지 되고 나면 각 View는 LocalValue와 LocalAction만 사용하기 때문에, 모듈화가 가능해진다.
 
-# [Episode #75 Modular State Management: The Point](https://www.pointfree.co/episodes/ep75-modular-state-management-the-point)
-- Module이 제대로 분리되어 있다면 Playground를 이용해 각 모듈의 View를 앱 실행 없이 확인할 수 있다.
+# [Episode #75 Modular State Management: The Point](https://www.pointfree.co/episodes/ep75-modular-state-management-the-point) `+1`
+- Module이 제대로 분리되어 있다면 Playground/Preview를 이용해 각 모듈의 View를 앱 실행 없이 확인할 수 있다.
 ```Swift
 import ComposableArchitecture
-import FavoritePrimes
+import PrimeModal
 import SwiftUI
 import PlaygroundSupport
 PlaygroundPage.current.liveView = UIHostingController(
-  rootView: FavoritePrimesView(
-    store: Store<[Int], FavoritePrimesAction>(
-      initialValue: [2, 3, 5, 7, 11],
-      reducer: favoritePrimesReducer
+  rootView: IsPrimeModalView(
+    store: Store<PrimeModalState, PrimeModalAction>(
+      initialValue: (0, []),
+      reducer: primeModalReducer
     )
   )
 )
 ```
-- CounterView의 경우, 대응하는 reducer가 아직 없기 때문에...
-- 코드를 좀 더 살펴볼 것. 
 - https://github.com/pointfreeco/episode-code-samples/tree/main/0075-modular-state-management-wtp
-- Exercise가 흥미로움. 우리는 모든 mutation이 store와 reducer를 통하길 바라지만, 2-way binding은 그에 적합하지 않음.
 
-# [Episode #76 Effectful State Management: Synchronous Effects](https://www.pointfree.co/episodes/ep76-effectful-state-management-synchronous-effects)
+# [Episode #76 Effectful State Management: Synchronous Effects](https://www.pointfree.co/episodes/ep76-effectful-state-management-synchronous-effects) `+1`
 - This means that side-effects are nothing more than hidden inputs or outputs of a function.
-- 결국... argument로 전달받거나 return하지 않는 무언가를 변경한다면 그것이 side-effects.
+- 결국... parameter로 전달받거나 return 하는 것 외에 일어나는 접근/변경이 side-effects. 그러한 함수는 impure function.
 - 함수 내의 print() 호출도 역시 side-effects.
-- Side-effects란 무엇인가...
 ```Swift
 public typealias Effect = () -> Void
+public typealias Reducer<Value, Action> = (inout Value, Action) -> Effect
 ```
-- Side-effects를 유발하는 구현을 `Effect`타입으로 return하도록 바꾼다면...
-- 그건 누가 호출할거지?
+- Impure function을 pure function으로 유지하면서 `Effect`를 실제로 실행하는 것은 caller에게 넘기는 것.
 
-# [Episode #77 Effectful State Management: Unidirectional Effects](https://www.pointfree.co/episodes/ep77-effectful-state-management-unidirectional-effects)
-- Push effects to the boundary of a function.
+# [Episode #77 Effectful State Management: Unidirectional Effects](https://www.pointfree.co/episodes/ep77-effectful-state-management-unidirectional-effects) `+1`
+
 - Saving의 경우 실행하면 그만이지만(fire-and-forget operation), loading 같은 경우에는 결과를 이용해서 다음 작업을 해야한다.
-- Synchronous한 경우 먼저 해결.
-- Effect의 정의를 바꿔서, return된 Action을 caller가 send하도록 한다.
+- Reducer에서 일어난 side-effects에 따른 다음 동작을 store에 전달할 방법이 필요. 
+- Effect의 정의를 바꿔서, Action return하면 그를 다시 `send(action)`하는 방식.
 ```Swift
 public typealias Effect<Action> = () -> Action?
-public typealias Reducer<Value, Action> = (inout Value, Action) -> Effect<Action>
+public typealias Reducer<Value, Action> = (inout Value, Action) -> [Effect<Action>]
+public func send(_ action: Action) {
+  let effects = self.reducer(&self.value, action)
+  effects.forEach { effect in
+    if let action = effect() {
+      self.send(action)
+    }
+  }
+}
 ```
-- 무엇이 Unidirectional인가. Mutation을 하고 싶다면 Action을 정의한 후, store에서만 수행하도록 해야한다.
 
-# [Episode #78 Effectful State Management: Asynchronous Effects](https://www.pointfree.co/episodes/ep78-effectful-state-management-asynchronous-effects)
-- Async side-effects를 위해 Effect의 정의를 다시 바꾼다.
+# [Episode #78 Effectful State Management: Asynchronous Effects](https://www.pointfree.co/episodes/ep78-effectful-state-management-asynchronous-effects) `+1`
+- Synchronous effects는 다음 effects를 block 할 것. Async로 동작해야 한다.
 ```Swift
 typealias Effect<Action> = (@escaping (Action) -> Void) -> Void
+// Swift concurrency를 쓴다면... 이걸로 될까?
+// typealias Effect<Action> = (Action) async -> Void
 ```
-- 그리고 Unidirectional data flow를 위해, 2-way binding도 사용하지 않는다.
-- Value를 Binding으로 감싸던가, Binding.constant()를 사용.
-```Swift
-.alert(
-  item: Binding(
-    get: { self.store.value.alertNthPrime },
-    set: { _ in }
-  )
-) { alert in
-```
+- 정상적인 UI rendering을 위해서는 state 변경이 main thread에서 일어나도록 보장해야 한다.
+- 그리고 unidirectional data flow를 위해, 2-way binding은 사용하지 않는다. 모든 mutation은 store를 통하도록.
 ```Swift
 .alert(
   item: Binding.constant(self.store.value.alertNthPrime)
 ) { alert in
 ```
-- 이런 게 있는 줄도 모르고!!!
 
 # [Episode #79 Effectful State Management: The Point](https://www.pointfree.co/episodes/ep79-effectful-state-management-the-point)
 - 단순히 code reshuffling한 것은 아닌가. What's the point?
