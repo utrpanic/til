@@ -866,24 +866,19 @@ typealias Effect<Action> = (@escaping (Action) -> Void) -> Void
 ) { alert in
 ```
 
-# [Episode #79 Effectful State Management: The Point](https://www.pointfree.co/episodes/ep79-effectful-state-management-the-point)
+# [Episode #79 Effectful State Management: The Point](https://www.pointfree.co/episodes/ep79-effectful-state-management-the-point) `+1`
 - 단순히 code reshuffling한 것은 아닌가. What's the point?
 - Effect를 typealias가 아닌 struct로 구현해보자.
 ```Swift
 public struct Effect<A> {
   public let run: (@escaping (A) -> Void) -> Void
-
   public init(run: @escaping (@escaping (A) -> Void) -> Void) {
     self.run = run
   }
-
   public func map<B>(_ f: @escaping (A) -> B) -> Effect<B> {
     return Effect<B> { callback in self.run { a in callback(f(a)) }
   }
 }
-```
-- Thread도 처리해보자. 어디서 많이 본 인터페이스...
-```Swift
 extension Effect {
   func receive(on queue: DispatchQueue) -> Effect {
     return Effect { callback in
@@ -894,33 +889,39 @@ extension Effect {
   }
 }
 ```
+- Swift concurrency로 재작성 해보자. 
+- https://github.com/utrpanic/today-what-else/tree/main/point-free/0079-prime-time-2
 
-# [Episode #80 The Combine Framework and Effects: Part 1](https://www.pointfree.co/episodes/ep80-the-combine-framework-and-effects-part-1)
+# [Episode #80 The Combine Framework and Effects: Part 1](https://www.pointfree.co/episodes/ep80-the-combine-framework-and-effects-part-1) `+1`
 - `Effect`가 가리키는 것은 무엇인가. 바로 reactive streams.
 - Combine, ReactiveSwift, RxSwift 무엇이든 `Effect`를 대체할 수 있다.
+- The work is done only when requested.
+- `Publisher`는 `Effect` type, `Subscriber`는 `run`을 실행했을 때.
+- `Future`는 생성과 동시에 실행됨(eagerness). `Effect`처럼 laziness를 원한다면 `Deferred`가 필요.
+- 게다가 `Future`는 값을 방출하면 stream이 종료됨. `Effect`와 다르다.
+- 여러 개의 값을 방출해야하는 경우라면 어떤가. `Effect`는 callback을 계속 호출하고, `Combine`은 `Subject`를 사용.
+
+# [Episode #81 The Combine Framework and Effects: Part 2](https://www.pointfree.co/episodes/ep81-the-combine-framework-and-effects-part-2) `+1`
+- `Effect`가 `Publisher`를 conform 하면?
+- 왜 `Effect`를 `AnyPublisher`로 대체하지 않고, wrapping하도록 구현하는가.
+- Helper를 추가적으로 구현할 수 있다는 장점.
 ```Swift
-public struct Effect<A> {
-  public let run: (@escaping (A) -> Void) -> Void
-  public func map<B>(_ f: @escaping (A) -> B) -> Effect<B> {
-    return Effect<B> { callback in self.run { a in callback(f(a)) } }
+extension Publisher where Failure == Never {
+  public func eraseToEffect() -> Effect<Output> {
+    Effect(publisher: self.eraseToAnyPublisher())
   }
 }
-```
-- The work is done only when requested.
-- Publisher는 `Effect` type, subscriber는 `run`을 실행했을 때.
-- `Future`는 생성과 동시에 실행됨. `Effect`처럼 laziness를 원한다면 `Deferred`가 필요.
-- 게다가 `Future`는 값을 방출하면 stream이 종료됨. `Effect`와 다르다.
-- 여러 개의 값을 방출해야하는 경우라면 어떤가. `Effect`는 callback을 계속 호출하고, Combine은 Subject를 사용.
-
-# [Episode #81 The Combine Framework and Effects: Part 2](https://www.pointfree.co/episodes/ep81-the-combine-framework-and-effects-part-2)
-- `Effect`가 `Publisher`를 conform 하면?
-- 왜 아예 `Effect`를 `AnyPublisher`로 대체하지 않고, wrapping하도록 구현하는가. Helper를 추가적으로 구현할 수 있다는 장점이 있다.
-```Swift
 extension Effect {
   public static func fireAndForget(work: @escaping () -> Void) -> Effect {
     return Deferred { () -> Empty<Output, Never> in
       work()
       return Empty(completeImmediately: true)
+    }
+    .eraseToEffect()
+  }
+  public static func sync(work: @escaping () -> Output?) -> Effect {
+    return Deferred {
+      Just(work())
     }
     .eraseToEffect()
   }
