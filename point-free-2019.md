@@ -928,11 +928,13 @@ extension Effect {
 }
 ```
 
-# [Episode #82 Testable State Management: Reducers](https://www.pointfree.co/episodes/ep82-testable-state-management-reducers)
-- Ruby나 JavaScript 커뮤니티에 비해 testing culture가 강하지 않은데, 그 이유들로...
+# [Episode #82 Testable State Management: Reducers](https://www.pointfree.co/episodes/ep82-testable-state-management-reducers) `+1`
+- Ruby나 JavaScript 커뮤니티에 비해 iOS 커뮤니티는 testing culture가 강하지 않은데, 그 이유들로...
   - type system 덕분에 많은 것들을 컴파일 타임에 잡아낼 수 있기 때문에.
   - UIKit이 test하기에 쉽지 않아서.
-- Reducer들에 대한 테스트들은 작성할 수 있지만, 그 결과값인 Effect는 여전히 테스트가 쉽지 않다.
+- `Reducer`들에 대한 테스트들은 작성할 수 있지만, 그 결과값인 Effect는 여전히 테스트가 쉽지 않다.
+- API 호출 부분이 주입이 안된 것 같은데, 테스트가 어떻게 돌아가는거지? Response도 `Reducer`에 `Action`으로 넣어주니까?
+  - `Reducer`는 `Effect`를 return만 하고 `Effect`를 실행하는 건 `Store`라서. 
 
 # [Episode #83 Testable State Management: Effects](https://www.pointfree.co/episodes/ep83-testable-state-management-effects)
 - Effect는 원래 테스트하기 쉽지 않다. 
