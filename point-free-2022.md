@@ -16,3 +16,6 @@
 - `@Sendable` closure. 모든 parameter가 `Sendable`이어야 하고, capture도 `Sendable`만 가능. Explicit capture를 하면..?
 - Async 동작이지만 코드 상으로는 top to bottom으로 읽을 수 있도록. `@escaping`도 불필요해질 수 있음.
 - `actor`. Read도 write도 async.
+
+## [#194 Concurrency's Future: Structured and Unstructured](https://www.pointfree.co/episodes/ep194-concurrency-s-future-structured-and-unstructured)
+- 
